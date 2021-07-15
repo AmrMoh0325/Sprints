@@ -256,7 +256,7 @@ enuErrorStatus_t UART_ReceiveString(uint8_t* pu8String, uint8_t u8bufferMaxSize)
 }
 
 /************************************************************************************
-* Parameters (in): uint8_t* pu8String, uint8_t u8bufferMaxSize
+* Parameters (in): uint8_t* pu8String
 * Parameters (out): enuErrorStatus_t
 * Return value: 1=SUCCESS or 0=FAIL
 * Description: A function to send a string using uart
