@@ -1,0 +1,726 @@
+
+AVR_Drivers.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         0000038a  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000020  00800060  0000038a  000003fe  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .comment      00000030  00000000  00000000  0000041e  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000450  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000070  00000000  00000000  0000048c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000bda  00000000  00000000  000004fc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000724  00000000  00000000  000010d6  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   00000503  00000000  00000000  000017fa  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000088  00000000  00000000  00001d00  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    000003d8  00000000  00000000  00001d88  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    000003d8  00000000  00000000  00002160  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000038  00000000  00000000  00002538  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+   8:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+   c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  10:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  14:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  18:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  1c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  20:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  24:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  28:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  2c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  30:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  34:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  38:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  3c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  40:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  44:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  48:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  4c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  50:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	10 e0       	ldi	r17, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	ea e8       	ldi	r30, 0x8A	; 138
+  68:	f3 e0       	ldi	r31, 0x03	; 3
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+  70:	a0 38       	cpi	r26, 0x80	; 128
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
+  76:	0e 94 41 00 	call	0x82	; 0x82 <main>
+  7a:	0c 94 c3 01 	jmp	0x386	; 0x386 <_exit>
+
+0000007e <__bad_interrupt>:
+  7e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000082 <main>:
+#define BTN2_PRESSED 1
+
+
+//Testing Application
+int main(void)
+{
+  82:	cf 93       	push	r28
+  84:	df 93       	push	r29
+  86:	00 d0       	rcall	.+0      	; 0x88 <main+0x6>
+  88:	cd b7       	in	r28, 0x3d	; 61
+  8a:	de b7       	in	r29, 0x3e	; 62
+   uint8_t u8state=0,u8var1=0,u8var2=0;
+  8c:	19 82       	std	Y+1, r1	; 0x01
+  8e:	1a 82       	std	Y+2, r1	; 0x02
+   //initialize according to the DIO_Cfg file
+   u8state=DIO_Init();
+  90:	0e 94 82 00 	call	0x104	; 0x104 <DIO_Init>
+   
+   //if process failed, exit
+   if(u8state==0)    return 0;
+  94:	88 23       	and	r24, r24
+  96:	79 f1       	breq	.+94     	; 0xf6 <main+0x74>
+
+   while (1) 
+   {
+      //read values of both button
+      u8state=DIO_Read(Button1,&u8var1);
+  98:	be 01       	movw	r22, r28
+  9a:	6f 5f       	subi	r22, 0xFF	; 255
+  9c:	7f 4f       	sbci	r23, 0xFF	; 255
+  9e:	80 e0       	ldi	r24, 0x00	; 0
+  a0:	0e 94 22 01 	call	0x244	; 0x244 <DIO_Read>
+      u8state=DIO_Read(Button2,&u8var2);
+  a4:	be 01       	movw	r22, r28
+  a6:	6e 5f       	subi	r22, 0xFE	; 254
+  a8:	7f 4f       	sbci	r23, 0xFF	; 255
+  aa:	8a e0       	ldi	r24, 0x0A	; 10
+  ac:	0e 94 22 01 	call	0x244	; 0x244 <DIO_Read>
+      
+      //if successful
+      if(u8state)
+  b0:	88 23       	and	r24, r24
+  b2:	91 f3       	breq	.-28     	; 0x98 <main+0x16>
+      {
+         //if button 1 is pressed
+         if (u8var1 == BTN1_PRESSED)
+  b4:	89 81       	ldd	r24, Y+1	; 0x01
+  b6:	81 11       	cpse	r24, r1
+  b8:	0d c0       	rjmp	.+26     	; 0xd4 <main+0x52>
+         {
+            //toggle led 1
+            DIO_Toggle(LED1);
+  ba:	8c e1       	ldi	r24, 0x1C	; 28
+  bc:	0e 94 75 01 	call	0x2ea	; 0x2ea <DIO_Toggle>
+            //loop on button 1 until it is released
+            while(u8var1 == BTN1_PRESSED)
+  c0:	06 c0       	rjmp	.+12     	; 0xce <main+0x4c>
+            {
+               //keep reading the button value
+               DIO_Read(Button1,&u8var1);
+  c2:	be 01       	movw	r22, r28
+  c4:	6f 5f       	subi	r22, 0xFF	; 255
+  c6:	7f 4f       	sbci	r23, 0xFF	; 255
+  c8:	80 e0       	ldi	r24, 0x00	; 0
+  ca:	0e 94 22 01 	call	0x244	; 0x244 <DIO_Read>
+         if (u8var1 == BTN1_PRESSED)
+         {
+            //toggle led 1
+            DIO_Toggle(LED1);
+            //loop on button 1 until it is released
+            while(u8var1 == BTN1_PRESSED)
+  ce:	89 81       	ldd	r24, Y+1	; 0x01
+  d0:	88 23       	and	r24, r24
+  d2:	b9 f3       	breq	.-18     	; 0xc2 <main+0x40>
+               //keep reading the button value
+               DIO_Read(Button1,&u8var1);
+            }
+         } 
+         //if button 2 is pressed
+         if (u8var2 == BTN2_PRESSED)
+  d4:	8a 81       	ldd	r24, Y+2	; 0x02
+  d6:	81 30       	cpi	r24, 0x01	; 1
+  d8:	f9 f6       	brne	.-66     	; 0x98 <main+0x16>
+         {
+            //toggle led 2
+            DIO_Toggle(LED2);
+  da:	87 e1       	ldi	r24, 0x17	; 23
+  dc:	0e 94 75 01 	call	0x2ea	; 0x2ea <DIO_Toggle>
+            //loop on button 2 until it is released
+            while(u8var2 == BTN2_PRESSED)
+  e0:	06 c0       	rjmp	.+12     	; 0xee <main+0x6c>
+            {
+               //keep reading the button value
+               DIO_Read(Button2,&u8var2);
+  e2:	be 01       	movw	r22, r28
+  e4:	6e 5f       	subi	r22, 0xFE	; 254
+  e6:	7f 4f       	sbci	r23, 0xFF	; 255
+  e8:	8a e0       	ldi	r24, 0x0A	; 10
+  ea:	0e 94 22 01 	call	0x244	; 0x244 <DIO_Read>
+         if (u8var2 == BTN2_PRESSED)
+         {
+            //toggle led 2
+            DIO_Toggle(LED2);
+            //loop on button 2 until it is released
+            while(u8var2 == BTN2_PRESSED)
+  ee:	8a 81       	ldd	r24, Y+2	; 0x02
+  f0:	81 30       	cpi	r24, 0x01	; 1
+  f2:	b9 f3       	breq	.-18     	; 0xe2 <main+0x60>
+  f4:	d1 cf       	rjmp	.-94     	; 0x98 <main+0x16>
+               DIO_Read(Button2,&u8var2);
+            }
+         }
+     }
+   }
+}
+  f6:	80 e0       	ldi	r24, 0x00	; 0
+  f8:	90 e0       	ldi	r25, 0x00	; 0
+  fa:	0f 90       	pop	r0
+  fc:	0f 90       	pop	r0
+  fe:	df 91       	pop	r29
+ 100:	cf 91       	pop	r28
+ 102:	08 95       	ret
+
+00000104 <DIO_Init>:
+         break;
+      }
+   }
+   //return success status
+   return SUCCESS;
+}
+ 104:	80 e0       	ldi	r24, 0x00	; 0
+ 106:	97 c0       	rjmp	.+302    	; 0x236 <DIO_Init+0x132>
+ 108:	98 2f       	mov	r25, r24
+ 10a:	96 95       	lsr	r25
+ 10c:	96 95       	lsr	r25
+ 10e:	96 95       	lsr	r25
+ 110:	28 2f       	mov	r18, r24
+ 112:	27 70       	andi	r18, 0x07	; 7
+ 114:	94 30       	cpi	r25, 0x04	; 4
+ 116:	08 f0       	brcs	.+2      	; 0x11a <DIO_Init+0x16>
+ 118:	93 c0       	rjmp	.+294    	; 0x240 <DIO_Init+0x13c>
+ 11a:	91 30       	cpi	r25, 0x01	; 1
+ 11c:	49 f1       	breq	.+82     	; 0x170 <DIO_Init+0x6c>
+ 11e:	38 f0       	brcs	.+14     	; 0x12e <DIO_Init+0x2a>
+ 120:	92 30       	cpi	r25, 0x02	; 2
+ 122:	09 f4       	brne	.+2      	; 0x126 <DIO_Init+0x22>
+ 124:	46 c0       	rjmp	.+140    	; 0x1b2 <DIO_Init+0xae>
+ 126:	93 30       	cpi	r25, 0x03	; 3
+ 128:	09 f4       	brne	.+2      	; 0x12c <DIO_Init+0x28>
+ 12a:	64 c0       	rjmp	.+200    	; 0x1f4 <DIO_Init+0xf0>
+ 12c:	83 c0       	rjmp	.+262    	; 0x234 <DIO_Init+0x130>
+ 12e:	6a b3       	in	r22, 0x1a	; 26
+ 130:	41 e0       	ldi	r20, 0x01	; 1
+ 132:	50 e0       	ldi	r21, 0x00	; 0
+ 134:	fa 01       	movw	r30, r20
+ 136:	02 c0       	rjmp	.+4      	; 0x13c <DIO_Init+0x38>
+ 138:	ee 0f       	add	r30, r30
+ 13a:	ff 1f       	adc	r31, r31
+ 13c:	2a 95       	dec	r18
+ 13e:	e2 f7       	brpl	.-8      	; 0x138 <DIO_Init+0x34>
+ 140:	9f 01       	movw	r18, r30
+ 142:	9e 2f       	mov	r25, r30
+ 144:	90 95       	com	r25
+ 146:	46 2f       	mov	r20, r22
+ 148:	49 23       	and	r20, r25
+ 14a:	4a bb       	out	0x1a, r20	; 26
+ 14c:	4b b3       	in	r20, 0x1b	; 27
+ 14e:	94 23       	and	r25, r20
+ 150:	9b bb       	out	0x1b, r25	; 27
+ 152:	e8 2f       	mov	r30, r24
+ 154:	f0 e0       	ldi	r31, 0x00	; 0
+ 156:	e0 5a       	subi	r30, 0xA0	; 160
+ 158:	ff 4f       	sbci	r31, 0xFF	; 255
+ 15a:	90 81       	ld	r25, Z
+ 15c:	91 11       	cpse	r25, r1
+ 15e:	04 c0       	rjmp	.+8      	; 0x168 <DIO_Init+0x64>
+ 160:	9a b3       	in	r25, 0x1a	; 26
+ 162:	29 2b       	or	r18, r25
+ 164:	2a bb       	out	0x1a, r18	; 26
+ 166:	66 c0       	rjmp	.+204    	; 0x234 <DIO_Init+0x130>
+ 168:	9b b3       	in	r25, 0x1b	; 27
+ 16a:	29 2b       	or	r18, r25
+ 16c:	2b bb       	out	0x1b, r18	; 27
+ 16e:	62 c0       	rjmp	.+196    	; 0x234 <DIO_Init+0x130>
+ 170:	67 b3       	in	r22, 0x17	; 23
+ 172:	41 e0       	ldi	r20, 0x01	; 1
+ 174:	50 e0       	ldi	r21, 0x00	; 0
+ 176:	fa 01       	movw	r30, r20
+ 178:	02 c0       	rjmp	.+4      	; 0x17e <DIO_Init+0x7a>
+ 17a:	ee 0f       	add	r30, r30
+ 17c:	ff 1f       	adc	r31, r31
+ 17e:	2a 95       	dec	r18
+ 180:	e2 f7       	brpl	.-8      	; 0x17a <DIO_Init+0x76>
+ 182:	9f 01       	movw	r18, r30
+ 184:	9e 2f       	mov	r25, r30
+ 186:	90 95       	com	r25
+ 188:	46 2f       	mov	r20, r22
+ 18a:	49 23       	and	r20, r25
+ 18c:	47 bb       	out	0x17, r20	; 23
+ 18e:	48 b3       	in	r20, 0x18	; 24
+ 190:	94 23       	and	r25, r20
+ 192:	98 bb       	out	0x18, r25	; 24
+ 194:	e8 2f       	mov	r30, r24
+ 196:	f0 e0       	ldi	r31, 0x00	; 0
+ 198:	e0 5a       	subi	r30, 0xA0	; 160
+ 19a:	ff 4f       	sbci	r31, 0xFF	; 255
+ 19c:	90 81       	ld	r25, Z
+ 19e:	91 11       	cpse	r25, r1
+ 1a0:	04 c0       	rjmp	.+8      	; 0x1aa <DIO_Init+0xa6>
+ 1a2:	97 b3       	in	r25, 0x17	; 23
+ 1a4:	29 2b       	or	r18, r25
+ 1a6:	27 bb       	out	0x17, r18	; 23
+ 1a8:	45 c0       	rjmp	.+138    	; 0x234 <DIO_Init+0x130>
+ 1aa:	98 b3       	in	r25, 0x18	; 24
+ 1ac:	29 2b       	or	r18, r25
+ 1ae:	28 bb       	out	0x18, r18	; 24
+ 1b0:	41 c0       	rjmp	.+130    	; 0x234 <DIO_Init+0x130>
+ 1b2:	64 b3       	in	r22, 0x14	; 20
+ 1b4:	41 e0       	ldi	r20, 0x01	; 1
+ 1b6:	50 e0       	ldi	r21, 0x00	; 0
+ 1b8:	fa 01       	movw	r30, r20
+ 1ba:	02 c0       	rjmp	.+4      	; 0x1c0 <DIO_Init+0xbc>
+ 1bc:	ee 0f       	add	r30, r30
+ 1be:	ff 1f       	adc	r31, r31
+ 1c0:	2a 95       	dec	r18
+ 1c2:	e2 f7       	brpl	.-8      	; 0x1bc <DIO_Init+0xb8>
+ 1c4:	9f 01       	movw	r18, r30
+ 1c6:	9e 2f       	mov	r25, r30
+ 1c8:	90 95       	com	r25
+ 1ca:	46 2f       	mov	r20, r22
+ 1cc:	49 23       	and	r20, r25
+ 1ce:	44 bb       	out	0x14, r20	; 20
+ 1d0:	45 b3       	in	r20, 0x15	; 21
+ 1d2:	94 23       	and	r25, r20
+ 1d4:	95 bb       	out	0x15, r25	; 21
+ 1d6:	e8 2f       	mov	r30, r24
+ 1d8:	f0 e0       	ldi	r31, 0x00	; 0
+ 1da:	e0 5a       	subi	r30, 0xA0	; 160
+ 1dc:	ff 4f       	sbci	r31, 0xFF	; 255
+ 1de:	90 81       	ld	r25, Z
+ 1e0:	91 11       	cpse	r25, r1
+ 1e2:	04 c0       	rjmp	.+8      	; 0x1ec <DIO_Init+0xe8>
+ 1e4:	94 b3       	in	r25, 0x14	; 20
+ 1e6:	29 2b       	or	r18, r25
+ 1e8:	24 bb       	out	0x14, r18	; 20
+ 1ea:	24 c0       	rjmp	.+72     	; 0x234 <DIO_Init+0x130>
+ 1ec:	95 b3       	in	r25, 0x15	; 21
+ 1ee:	29 2b       	or	r18, r25
+ 1f0:	25 bb       	out	0x15, r18	; 21
+ 1f2:	20 c0       	rjmp	.+64     	; 0x234 <DIO_Init+0x130>
+ 1f4:	61 b3       	in	r22, 0x11	; 17
+ 1f6:	41 e0       	ldi	r20, 0x01	; 1
+ 1f8:	50 e0       	ldi	r21, 0x00	; 0
+ 1fa:	fa 01       	movw	r30, r20
+ 1fc:	02 c0       	rjmp	.+4      	; 0x202 <DIO_Init+0xfe>
+ 1fe:	ee 0f       	add	r30, r30
+ 200:	ff 1f       	adc	r31, r31
+ 202:	2a 95       	dec	r18
+ 204:	e2 f7       	brpl	.-8      	; 0x1fe <DIO_Init+0xfa>
+ 206:	9f 01       	movw	r18, r30
+ 208:	9e 2f       	mov	r25, r30
+ 20a:	90 95       	com	r25
+ 20c:	46 2f       	mov	r20, r22
+ 20e:	49 23       	and	r20, r25
+ 210:	41 bb       	out	0x11, r20	; 17
+ 212:	42 b3       	in	r20, 0x12	; 18
+ 214:	94 23       	and	r25, r20
+ 216:	92 bb       	out	0x12, r25	; 18
+ 218:	e8 2f       	mov	r30, r24
+ 21a:	f0 e0       	ldi	r31, 0x00	; 0
+ 21c:	e0 5a       	subi	r30, 0xA0	; 160
+ 21e:	ff 4f       	sbci	r31, 0xFF	; 255
+ 220:	90 81       	ld	r25, Z
+ 222:	91 11       	cpse	r25, r1
+ 224:	04 c0       	rjmp	.+8      	; 0x22e <DIO_Init+0x12a>
+ 226:	91 b3       	in	r25, 0x11	; 17
+ 228:	29 2b       	or	r18, r25
+ 22a:	21 bb       	out	0x11, r18	; 17
+ 22c:	03 c0       	rjmp	.+6      	; 0x234 <DIO_Init+0x130>
+ 22e:	92 b3       	in	r25, 0x12	; 18
+ 230:	29 2b       	or	r18, r25
+ 232:	22 bb       	out	0x12, r18	; 18
+ 234:	8f 5f       	subi	r24, 0xFF	; 255
+ 236:	80 32       	cpi	r24, 0x20	; 32
+ 238:	08 f4       	brcc	.+2      	; 0x23c <DIO_Init+0x138>
+ 23a:	66 cf       	rjmp	.-308    	; 0x108 <DIO_Init+0x4>
+ 23c:	81 e0       	ldi	r24, 0x01	; 1
+ 23e:	08 95       	ret
+ 240:	80 e0       	ldi	r24, 0x00	; 0
+ 242:	08 95       	ret
+
+00000244 <DIO_Read>:
+************************************************************************************/
+enuErrorStatus_t DIO_Read(enuDIOPinNo_t PinId, uint8_t* pu8Data)
+{
+   uint8_t u8port,u8pin;
+   //calculate the port and pin number of the selected pin
+   u8port=PinId / DIO_PINS_NO;
+ 244:	98 2f       	mov	r25, r24
+ 246:	96 95       	lsr	r25
+ 248:	96 95       	lsr	r25
+ 24a:	96 95       	lsr	r25
+   u8pin =PinId % DIO_PINS_NO;
+ 24c:	28 2f       	mov	r18, r24
+ 24e:	27 70       	andi	r18, 0x07	; 7
+   //if port number is invalid or the pin is set as output or the result holder's address is NULL
+   if(u8port >= DIO_PORT_NO || DIOConfigParameters[PinId] == OUTPUT  || pu8Data == NULLPTR)
+ 250:	94 30       	cpi	r25, 0x04	; 4
+ 252:	08 f0       	brcs	.+2      	; 0x256 <DIO_Read+0x12>
+ 254:	42 c0       	rjmp	.+132    	; 0x2da <DIO_Read+0x96>
+ 256:	e8 2f       	mov	r30, r24
+ 258:	f0 e0       	ldi	r31, 0x00	; 0
+ 25a:	e0 5a       	subi	r30, 0xA0	; 160
+ 25c:	ff 4f       	sbci	r31, 0xFF	; 255
+ 25e:	80 81       	ld	r24, Z
+ 260:	88 23       	and	r24, r24
+ 262:	e9 f1       	breq	.+122    	; 0x2de <DIO_Read+0x9a>
+ 264:	61 15       	cp	r22, r1
+ 266:	71 05       	cpc	r23, r1
+ 268:	e1 f1       	breq	.+120    	; 0x2e2 <DIO_Read+0x9e>
+      return ERROR;
+   }
+   else
+   {
+      //select the calculated port 
+      switch(u8port)
+ 26a:	91 30       	cpi	r25, 0x01	; 1
+ 26c:	91 f0       	breq	.+36     	; 0x292 <DIO_Read+0x4e>
+ 26e:	28 f0       	brcs	.+10     	; 0x27a <DIO_Read+0x36>
+ 270:	92 30       	cpi	r25, 0x02	; 2
+ 272:	d9 f0       	breq	.+54     	; 0x2aa <DIO_Read+0x66>
+ 274:	93 30       	cpi	r25, 0x03	; 3
+ 276:	29 f1       	breq	.+74     	; 0x2c2 <DIO_Read+0x7e>
+ 278:	36 c0       	rjmp	.+108    	; 0x2e6 <DIO_Read+0xa2>
+      {
+         case M_PORTA:
+            //get the state of the pin in the selected port and store it in the provided value holder
+            *pu8Data=GET_BIT(PINA_R,u8pin);
+ 27a:	89 b3       	in	r24, 0x19	; 25
+ 27c:	90 e0       	ldi	r25, 0x00	; 0
+ 27e:	02 c0       	rjmp	.+4      	; 0x284 <DIO_Read+0x40>
+ 280:	95 95       	asr	r25
+ 282:	87 95       	ror	r24
+ 284:	2a 95       	dec	r18
+ 286:	e2 f7       	brpl	.-8      	; 0x280 <DIO_Read+0x3c>
+ 288:	81 70       	andi	r24, 0x01	; 1
+ 28a:	fb 01       	movw	r30, r22
+ 28c:	80 83       	st	Z, r24
+            *pu8Data=GET_BIT(PIND_R,u8pin);
+         break;
+      }
+   }
+   //return success state
+   return SUCCESS;
+ 28e:	81 e0       	ldi	r24, 0x01	; 1
+      switch(u8port)
+      {
+         case M_PORTA:
+            //get the state of the pin in the selected port and store it in the provided value holder
+            *pu8Data=GET_BIT(PINA_R,u8pin);
+         break;
+ 290:	08 95       	ret
+           
+         case M_PORTB:
+            //get the state of the pin in the selected port and store it in the provided value holder
+            *pu8Data=GET_BIT(PINB_R,u8pin);
+ 292:	86 b3       	in	r24, 0x16	; 22
+ 294:	90 e0       	ldi	r25, 0x00	; 0
+ 296:	02 c0       	rjmp	.+4      	; 0x29c <DIO_Read+0x58>
+ 298:	95 95       	asr	r25
+ 29a:	87 95       	ror	r24
+ 29c:	2a 95       	dec	r18
+ 29e:	e2 f7       	brpl	.-8      	; 0x298 <DIO_Read+0x54>
+ 2a0:	81 70       	andi	r24, 0x01	; 1
+ 2a2:	fb 01       	movw	r30, r22
+ 2a4:	80 83       	st	Z, r24
+            *pu8Data=GET_BIT(PIND_R,u8pin);
+         break;
+      }
+   }
+   //return success state
+   return SUCCESS;
+ 2a6:	81 e0       	ldi	r24, 0x01	; 1
+         break;
+           
+         case M_PORTB:
+            //get the state of the pin in the selected port and store it in the provided value holder
+            *pu8Data=GET_BIT(PINB_R,u8pin);
+         break;
+ 2a8:	08 95       	ret
+
+         case M_PORTC:
+            //get the state of the pin in the selected port and store it in the provided value holder
+            *pu8Data=GET_BIT(PINC_R,u8pin);
+ 2aa:	83 b3       	in	r24, 0x13	; 19
+ 2ac:	90 e0       	ldi	r25, 0x00	; 0
+ 2ae:	02 c0       	rjmp	.+4      	; 0x2b4 <DIO_Read+0x70>
+ 2b0:	95 95       	asr	r25
+ 2b2:	87 95       	ror	r24
+ 2b4:	2a 95       	dec	r18
+ 2b6:	e2 f7       	brpl	.-8      	; 0x2b0 <DIO_Read+0x6c>
+ 2b8:	81 70       	andi	r24, 0x01	; 1
+ 2ba:	fb 01       	movw	r30, r22
+ 2bc:	80 83       	st	Z, r24
+            *pu8Data=GET_BIT(PIND_R,u8pin);
+         break;
+      }
+   }
+   //return success state
+   return SUCCESS;
+ 2be:	81 e0       	ldi	r24, 0x01	; 1
+         break;
+
+         case M_PORTC:
+            //get the state of the pin in the selected port and store it in the provided value holder
+            *pu8Data=GET_BIT(PINC_R,u8pin);
+         break;
+ 2c0:	08 95       	ret
+
+         case M_PORTD:
+            //get the state of the pin in the selected port and store it in the provided value holder
+            *pu8Data=GET_BIT(PIND_R,u8pin);
+ 2c2:	80 b3       	in	r24, 0x10	; 16
+ 2c4:	90 e0       	ldi	r25, 0x00	; 0
+ 2c6:	02 c0       	rjmp	.+4      	; 0x2cc <DIO_Read+0x88>
+ 2c8:	95 95       	asr	r25
+ 2ca:	87 95       	ror	r24
+ 2cc:	2a 95       	dec	r18
+ 2ce:	e2 f7       	brpl	.-8      	; 0x2c8 <DIO_Read+0x84>
+ 2d0:	81 70       	andi	r24, 0x01	; 1
+ 2d2:	fb 01       	movw	r30, r22
+ 2d4:	80 83       	st	Z, r24
+         break;
+      }
+   }
+   //return success state
+   return SUCCESS;
+ 2d6:	81 e0       	ldi	r24, 0x01	; 1
+         break;
+
+         case M_PORTD:
+            //get the state of the pin in the selected port and store it in the provided value holder
+            *pu8Data=GET_BIT(PIND_R,u8pin);
+         break;
+ 2d8:	08 95       	ret
+   u8pin =PinId % DIO_PINS_NO;
+   //if port number is invalid or the pin is set as output or the result holder's address is NULL
+   if(u8port >= DIO_PORT_NO || DIOConfigParameters[PinId] == OUTPUT  || pu8Data == NULLPTR)
+   {
+      //return error status
+      return ERROR;
+ 2da:	80 e0       	ldi	r24, 0x00	; 0
+ 2dc:	08 95       	ret
+ 2de:	80 e0       	ldi	r24, 0x00	; 0
+ 2e0:	08 95       	ret
+ 2e2:	80 e0       	ldi	r24, 0x00	; 0
+ 2e4:	08 95       	ret
+            *pu8Data=GET_BIT(PIND_R,u8pin);
+         break;
+      }
+   }
+   //return success state
+   return SUCCESS;
+ 2e6:	81 e0       	ldi	r24, 0x01	; 1
+}
+ 2e8:	08 95       	ret
+
+000002ea <DIO_Toggle>:
+************************************************************************************/
+enuErrorStatus_t DIO_Toggle(enuDIOPinNo_t PinId)
+{
+   uint8_t u8port,u8pin;
+   //calculate the port and pin number of the selected object
+   u8port=PinId / DIO_PINS_NO;
+ 2ea:	98 2f       	mov	r25, r24
+ 2ec:	96 95       	lsr	r25
+ 2ee:	96 95       	lsr	r25
+ 2f0:	96 95       	lsr	r25
+   u8pin =PinId % DIO_PINS_NO;
+ 2f2:	28 2f       	mov	r18, r24
+ 2f4:	27 70       	andi	r18, 0x07	; 7
+   
+   //if port number is invalid or the pin is set as input
+   if(u8port >= DIO_PORT_NO || DIOConfigParameters[PinId] != OUTPUT)
+ 2f6:	94 30       	cpi	r25, 0x04	; 4
+ 2f8:	08 f0       	brcs	.+2      	; 0x2fc <DIO_Toggle+0x12>
+ 2fa:	3f c0       	rjmp	.+126    	; 0x37a <DIO_Toggle+0x90>
+ 2fc:	e8 2f       	mov	r30, r24
+ 2fe:	f0 e0       	ldi	r31, 0x00	; 0
+ 300:	e0 5a       	subi	r30, 0xA0	; 160
+ 302:	ff 4f       	sbci	r31, 0xFF	; 255
+ 304:	80 81       	ld	r24, Z
+ 306:	81 11       	cpse	r24, r1
+ 308:	3a c0       	rjmp	.+116    	; 0x37e <DIO_Toggle+0x94>
+      return ERROR;
+   }
+   else
+   {
+      //select the calculated port 
+      switch(u8port)
+ 30a:	91 30       	cpi	r25, 0x01	; 1
+ 30c:	91 f0       	breq	.+36     	; 0x332 <DIO_Toggle+0x48>
+ 30e:	28 f0       	brcs	.+10     	; 0x31a <DIO_Toggle+0x30>
+ 310:	92 30       	cpi	r25, 0x02	; 2
+ 312:	d9 f0       	breq	.+54     	; 0x34a <DIO_Toggle+0x60>
+ 314:	93 30       	cpi	r25, 0x03	; 3
+ 316:	29 f1       	breq	.+74     	; 0x362 <DIO_Toggle+0x78>
+ 318:	34 c0       	rjmp	.+104    	; 0x382 <DIO_Toggle+0x98>
+      {
+         case M_PORTA:
+            //toggle the current value of the pin in the PORTx Register
+            TOG_BIT(PORTA_R,u8pin);
+ 31a:	3b b3       	in	r19, 0x1b	; 27
+ 31c:	81 e0       	ldi	r24, 0x01	; 1
+ 31e:	90 e0       	ldi	r25, 0x00	; 0
+ 320:	02 c0       	rjmp	.+4      	; 0x326 <DIO_Toggle+0x3c>
+ 322:	88 0f       	add	r24, r24
+ 324:	99 1f       	adc	r25, r25
+ 326:	2a 95       	dec	r18
+ 328:	e2 f7       	brpl	.-8      	; 0x322 <DIO_Toggle+0x38>
+ 32a:	83 27       	eor	r24, r19
+ 32c:	8b bb       	out	0x1b, r24	; 27
+            TOG_BIT(PORTD_R,u8pin);
+         break;
+      }
+   }
+   //return success status
+   return SUCCESS;
+ 32e:	81 e0       	ldi	r24, 0x01	; 1
+      switch(u8port)
+      {
+         case M_PORTA:
+            //toggle the current value of the pin in the PORTx Register
+            TOG_BIT(PORTA_R,u8pin);
+         break;
+ 330:	08 95       	ret
+
+         case M_PORTB:
+            //toggle the current value of the pin in the PORTx Register
+            TOG_BIT(PORTB_R,u8pin);
+ 332:	38 b3       	in	r19, 0x18	; 24
+ 334:	81 e0       	ldi	r24, 0x01	; 1
+ 336:	90 e0       	ldi	r25, 0x00	; 0
+ 338:	02 c0       	rjmp	.+4      	; 0x33e <DIO_Toggle+0x54>
+ 33a:	88 0f       	add	r24, r24
+ 33c:	99 1f       	adc	r25, r25
+ 33e:	2a 95       	dec	r18
+ 340:	e2 f7       	brpl	.-8      	; 0x33a <DIO_Toggle+0x50>
+ 342:	83 27       	eor	r24, r19
+ 344:	88 bb       	out	0x18, r24	; 24
+            TOG_BIT(PORTD_R,u8pin);
+         break;
+      }
+   }
+   //return success status
+   return SUCCESS;
+ 346:	81 e0       	ldi	r24, 0x01	; 1
+         break;
+
+         case M_PORTB:
+            //toggle the current value of the pin in the PORTx Register
+            TOG_BIT(PORTB_R,u8pin);
+         break;
+ 348:	08 95       	ret
+
+         case M_PORTC:
+            //toggle the current value of the pin in the PORTx Register
+            TOG_BIT(PORTC_R,u8pin);
+ 34a:	35 b3       	in	r19, 0x15	; 21
+ 34c:	81 e0       	ldi	r24, 0x01	; 1
+ 34e:	90 e0       	ldi	r25, 0x00	; 0
+ 350:	02 c0       	rjmp	.+4      	; 0x356 <DIO_Toggle+0x6c>
+ 352:	88 0f       	add	r24, r24
+ 354:	99 1f       	adc	r25, r25
+ 356:	2a 95       	dec	r18
+ 358:	e2 f7       	brpl	.-8      	; 0x352 <DIO_Toggle+0x68>
+ 35a:	83 27       	eor	r24, r19
+ 35c:	85 bb       	out	0x15, r24	; 21
+            TOG_BIT(PORTD_R,u8pin);
+         break;
+      }
+   }
+   //return success status
+   return SUCCESS;
+ 35e:	81 e0       	ldi	r24, 0x01	; 1
+         break;
+
+         case M_PORTC:
+            //toggle the current value of the pin in the PORTx Register
+            TOG_BIT(PORTC_R,u8pin);
+         break;
+ 360:	08 95       	ret
+
+         case M_PORTD:
+            //toggle the current value of the pin in the PORTx Register
+            TOG_BIT(PORTD_R,u8pin);
+ 362:	32 b3       	in	r19, 0x12	; 18
+ 364:	81 e0       	ldi	r24, 0x01	; 1
+ 366:	90 e0       	ldi	r25, 0x00	; 0
+ 368:	02 c0       	rjmp	.+4      	; 0x36e <DIO_Toggle+0x84>
+ 36a:	88 0f       	add	r24, r24
+ 36c:	99 1f       	adc	r25, r25
+ 36e:	2a 95       	dec	r18
+ 370:	e2 f7       	brpl	.-8      	; 0x36a <DIO_Toggle+0x80>
+ 372:	83 27       	eor	r24, r19
+ 374:	82 bb       	out	0x12, r24	; 18
+         break;
+      }
+   }
+   //return success status
+   return SUCCESS;
+ 376:	81 e0       	ldi	r24, 0x01	; 1
+         break;
+
+         case M_PORTD:
+            //toggle the current value of the pin in the PORTx Register
+            TOG_BIT(PORTD_R,u8pin);
+         break;
+ 378:	08 95       	ret
+   
+   //if port number is invalid or the pin is set as input
+   if(u8port >= DIO_PORT_NO || DIOConfigParameters[PinId] != OUTPUT)
+   {
+      //return error status
+      return ERROR;
+ 37a:	80 e0       	ldi	r24, 0x00	; 0
+ 37c:	08 95       	ret
+ 37e:	80 e0       	ldi	r24, 0x00	; 0
+ 380:	08 95       	ret
+            TOG_BIT(PORTD_R,u8pin);
+         break;
+      }
+   }
+   //return success status
+   return SUCCESS;
+ 382:	81 e0       	ldi	r24, 0x01	; 1
+}
+ 384:	08 95       	ret
+
+00000386 <_exit>:
+ 386:	f8 94       	cli
+
+00000388 <__stop_program>:
+ 388:	ff cf       	rjmp	.-2      	; 0x388 <__stop_program>
