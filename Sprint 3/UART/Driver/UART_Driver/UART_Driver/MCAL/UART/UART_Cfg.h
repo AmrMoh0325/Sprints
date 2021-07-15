@@ -1,4 +1,10 @@
-
+/*****************************************************************************
+* Task: UART Driver
+* File Name: UART_Cfg.h
+* Description: Configuration file for atmega32 UART driver 
+* Author: Amr Mohamed
+* Date: 14/7/2021
+******************************************************************************/
 
 #ifndef __UART_CFG__
 #define __UART_CFG__

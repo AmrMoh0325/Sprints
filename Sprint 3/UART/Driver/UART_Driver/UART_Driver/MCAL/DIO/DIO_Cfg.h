@@ -1,19 +1,20 @@
-/*
- * DIOP_Cfg.h
- *
- * Created: 7/9/2021 9:43:21 AM
- *  Author: Amrth
- */ 
+/*****************************************************************************
+* Task: DIO Driver
+* File Name: DIO_Cfg.h
+* Description: Configuration file for atmega32 UART driver
+* Author: Amr Mohamed
+* Date: 8/7/2021
+******************************************************************************/
 
 
-#ifndef DIOP_CFG_H_
-#define DIOP_CFG_H_
+#ifndef __DIO_CFG__
+#define __DIO_CFG__
 
 
-#define DIO_GROUPS_NO							2u
+#define DIO_GROUPS_NO							3u
 
 //names of the connected devices in the same order as in the array
-typedef enum{Button,LED}enuPinConfig_t;
+typedef enum{Green,Yellow,Red}enuPinConfig_t;
 
 
-#endif /* DIOP_CFG_H_ */
+#endif /* __DIO_CFG__ */

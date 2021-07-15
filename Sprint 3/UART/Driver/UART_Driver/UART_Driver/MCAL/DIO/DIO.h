@@ -1,5 +1,5 @@
 /*****************************************************************************
-* Task: AVR_DRIVERS
+* Task: DIO Driver
 * File Name: DIO.h
 * Description: File for DIO.c prototypes
 * Author: Amr Mohamed

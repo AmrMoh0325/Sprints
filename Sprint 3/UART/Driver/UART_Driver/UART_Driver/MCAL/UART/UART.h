@@ -1,9 +1,10 @@
-/*
- * UART.h
- *
- * Created: 7/14/2021 5:04:47 AM
- *  Author: Amrth
- */ 
+/*****************************************************************************
+* Task: UART Driver
+* File Name: UART.h
+* Description: header file for atmega32 UART driver
+* Author: Amr Mohamed
+* Date: 14/7/2021
+******************************************************************************/
 
 
 #ifndef __UART__
