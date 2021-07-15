@@ -1,0 +1,280 @@
+
+UART_Driver.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         0000012c  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00800060  00800060  00000180  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .comment      00000030  00000000  00000000  00000180  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000001b0  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000070  00000000  00000000  000001ec  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   0000084c  00000000  00000000  0000025c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000698  00000000  00000000  00000aa8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   000003d2  00000000  00000000  00001140  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  000000f8  00000000  00000000  00001514  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    000003ae  00000000  00000000  0000160c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    00000317  00000000  00000000  000019ba  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000050  00000000  00000000  00001cd1  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+   8:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+   c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  10:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  14:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  18:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  1c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  20:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  24:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  28:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  2c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  30:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  34:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  38:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  3c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  40:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  44:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  48:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  4c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  50:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	10 e0       	ldi	r17, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	ec e2       	ldi	r30, 0x2C	; 44
+  68:	f1 e0       	ldi	r31, 0x01	; 1
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+  70:	a0 36       	cpi	r26, 0x60	; 96
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
+  76:	0e 94 41 00 	call	0x82	; 0x82 <main>
+  7a:	0c 94 94 00 	jmp	0x128	; 0x128 <_exit>
+
+0000007e <__bad_interrupt>:
+  7e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000082 <main>:
+#include "Utils.h"
+#include "UART/UART.h"
+
+
+int main(void)
+{
+  82:	cf 93       	push	r28
+  84:	df 93       	push	r29
+  86:	00 d0       	rcall	.+0      	; 0x88 <main+0x6>
+  88:	cd b7       	in	r28, 0x3d	; 61
+  8a:	de b7       	in	r29, 0x3e	; 62
+   uint16_t Data='A';
+  8c:	81 e4       	ldi	r24, 0x41	; 65
+  8e:	90 e0       	ldi	r25, 0x00	; 0
+  90:	9a 83       	std	Y+2, r25	; 0x02
+  92:	89 83       	std	Y+1, r24	; 0x01
+   UART_Init();
+  94:	0e 94 55 00 	call	0xaa	; 0xaa <UART_Init>
+    /* Replace with your application code */
+    while (1) 
+    {
+       UART_SendData(Data); 
+  98:	89 81       	ldd	r24, Y+1	; 0x01
+  9a:	9a 81       	ldd	r25, Y+2	; 0x02
+  9c:	0e 94 8f 00 	call	0x11e	; 0x11e <UART_SendData>
+       UART_ReceiveData(&Data);
+  a0:	ce 01       	movw	r24, r28
+  a2:	01 96       	adiw	r24, 0x01	; 1
+  a4:	0e 94 7f 00 	call	0xfe	; 0xfe <UART_ReceiveData>
+  a8:	f7 cf       	rjmp	.-18     	; 0x98 <main+0x16>
+
+000000aa <UART_Init>:
+* Parameters (out): enuErrorStatus_t
+* Return value: 1=SUCCESS or 0=FAIL
+* Description: A function to initialize UART peripheral according to the configuration
+************************************************************************************/
+enuErrorStatus_t UART_Init(void)
+{
+  aa:	cf 93       	push	r28
+  ac:	df 93       	push	r29
+  ae:	1f 92       	push	r1
+  b0:	cd b7       	in	r28, 0x3d	; 61
+  b2:	de b7       	in	r29, 0x3e	; 62
+   volatile uint8_t UCSRC_Copy=0;
+  b4:	19 82       	std	Y+1, r1	; 0x01
+   /*set baudrate */
+   uint16_t UBRR_val=0;
+   UBRR_val=UBRR_CALC(UART_BAUDRATE);
+   UBRRH_R = (uint8_t)(UBRR_val>>8);
+  b6:	10 bc       	out	0x20, r1	; 32
+   UBRRL_R = (uint8_t)UBRR_val;
+  b8:	83 e3       	ldi	r24, 0x33	; 51
+  ba:	89 b9       	out	0x09, r24	; 9
+   
+   /* enable TX */
+   SET_BIT(UCSRB_R,TXEN_B);
+  bc:	8a b1       	in	r24, 0x0a	; 10
+  be:	88 60       	ori	r24, 0x08	; 8
+  c0:	8a b9       	out	0x0a, r24	; 10
+   /* enable RX */
+   SET_BIT(UCSRB_R,RXEN_B);
+  c2:	8a b1       	in	r24, 0x0a	; 10
+  c4:	80 61       	ori	r24, 0x10	; 16
+  c6:	8a b9       	out	0x0a, r24	; 10
+         SET_BIT(UCSRC_Copy,UCSZ1_B);
+         CLR_BIT(UCSRB_R,UCSZ2_B);
+         break;
+      case 8:
+         //SET_BIT(UCSRC_R,URSEL_B);
+         SET_BIT(UCSRC_Copy,UCSZ0_B);
+  c8:	89 81       	ldd	r24, Y+1	; 0x01
+  ca:	82 60       	ori	r24, 0x02	; 2
+  cc:	89 83       	std	Y+1, r24	; 0x01
+         SET_BIT(UCSRC_Copy,UCSZ1_B);
+  ce:	89 81       	ldd	r24, Y+1	; 0x01
+  d0:	84 60       	ori	r24, 0x04	; 4
+  d2:	89 83       	std	Y+1, r24	; 0x01
+         CLR_BIT(UCSRB_R,UCSZ2_B);
+  d4:	8a b1       	in	r24, 0x0a	; 10
+  d6:	8b 7f       	andi	r24, 0xFB	; 251
+  d8:	8a b9       	out	0x0a, r24	; 10
+      case 1:
+         SET_BIT(UCSRC_Copy,UPM1_B);
+         SET_BIT(UCSRC_Copy,UPM0_B);
+         break;
+      case 2:
+         SET_BIT(UCSRC_Copy,UPM1_B);
+  da:	89 81       	ldd	r24, Y+1	; 0x01
+  dc:	80 62       	ori	r24, 0x20	; 32
+  de:	89 83       	std	Y+1, r24	; 0x01
+   else
+   {
+      return ERROR;
+   }
+   //enable access to UCSRC register
+   SET_BIT(UCSRC_R,URSEL_B);
+  e0:	80 b5       	in	r24, 0x20	; 32
+  e2:	80 68       	ori	r24, 0x80	; 128
+  e4:	80 bd       	out	0x20, r24	; 32
+   //store the buffer value into UCSRC buffer to achieve atomic access
+   UCSRC_R |=UCSRC_Copy;
+  e6:	99 81       	ldd	r25, Y+1	; 0x01
+  e8:	80 b5       	in	r24, 0x20	; 32
+  ea:	89 2b       	or	r24, r25
+  ec:	80 bd       	out	0x20, r24	; 32
+   //enable access to UDDRH register
+   CLR_BIT(UCSRC_R,URSEL_B);
+  ee:	80 b5       	in	r24, 0x20	; 32
+  f0:	8f 77       	andi	r24, 0x7F	; 127
+  f2:	80 bd       	out	0x20, r24	; 32
+   
+   return SUCCESS;
+}
+  f4:	81 e0       	ldi	r24, 0x01	; 1
+  f6:	0f 90       	pop	r0
+  f8:	df 91       	pop	r29
+  fa:	cf 91       	pop	r28
+  fc:	08 95       	ret
+
+000000fe <UART_ReceiveData>:
+* Description: A function to recieve a value from uart module and store it in the provided variable
+************************************************************************************/
+enuErrorStatus_t UART_ReceiveData(uint16_t* pu16Data)
+{
+   //if sent pointer does not hold a valid address
+   if (pu16Data == NULLPTR)
+  fe:	00 97       	sbiw	r24, 0x00	; 0
+ 100:	61 f0       	breq	.+24     	; 0x11a <UART_ReceiveData+0x1c>
+   {
+      //return an error
+      return ERROR;
+   }
+   //clear the sent buffer
+   *pu16Data=0;
+ 102:	fc 01       	movw	r30, r24
+ 104:	11 82       	std	Z+1, r1	; 0x01
+ 106:	10 82       	st	Z, r1
+   //wait for the previous operations to complete
+   while (!GET_BIT(UCSRA_R,RXC_B));
+ 108:	5f 9b       	sbis	0x0b, 7	; 11
+ 10a:	fe cf       	rjmp	.-4      	; 0x108 <UART_ReceiveData+0xa>
+      *pu16Data = (((uint16_t)(GET_BIT(UCSRB_R,RXB8_B)<<8)) | UDR_R);
+   }
+   else
+   {
+      //else only store UDR value
+      *pu16Data = UDR_R;
+ 10c:	2c b1       	in	r18, 0x0c	; 12
+ 10e:	30 e0       	ldi	r19, 0x00	; 0
+ 110:	fc 01       	movw	r30, r24
+ 112:	31 83       	std	Z+1, r19	; 0x01
+ 114:	20 83       	st	Z, r18
+   }
+   //return a success
+   return SUCCESS;
+ 116:	81 e0       	ldi	r24, 0x01	; 1
+ 118:	08 95       	ret
+{
+   //if sent pointer does not hold a valid address
+   if (pu16Data == NULLPTR)
+   {
+      //return an error
+      return ERROR;
+ 11a:	80 e0       	ldi	r24, 0x00	; 0
+      //else only store UDR value
+      *pu16Data = UDR_R;
+   }
+   //return a success
+   return SUCCESS;
+}
+ 11c:	08 95       	ret
+
+0000011e <UART_SendData>:
+* Description: A function to send the provided value using uart
+************************************************************************************/
+enuErrorStatus_t UART_SendData(uint16_t u16Data)
+{ 
+   //wait for previous operation to complete
+   while (!GET_BIT(UCSRA_R,UDRE_B));
+ 11e:	5d 9b       	sbis	0x0b, 5	; 11
+ 120:	fe cf       	rjmp	.-4      	; 0x11e <UART_SendData>
+      //write 9th bit first
+      if (GET_BIT(u16Data,8))      SET_BIT(UCSRB_R,TXB8_B);
+      else                         CLR_BIT(UCSRB_R,TXB8_B);
+   }
+   //then set UDR value
+   UDR_R=(uint8_t)u16Data;
+ 122:	8c b9       	out	0x0c, r24	; 12
+   return SUCCESS;
+}
+ 124:	81 e0       	ldi	r24, 0x01	; 1
+ 126:	08 95       	ret
+
+00000128 <_exit>:
+ 128:	f8 94       	cli
+
+0000012a <__stop_program>:
+ 12a:	ff cf       	rjmp	.-2      	; 0x12a <__stop_program>

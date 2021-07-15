@@ -1,0 +1,524 @@
+<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+ <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+  <Author>Amr Mouhamed</Author>
+  <LastAuthor>Amr Mouhamed</LastAuthor>
+  <LastPrinted>2021-06-29T00:48:47Z</LastPrinted>
+  <Created>2021-06-28T22:49:22Z</Created>
+  <LastSaved>2021-06-29T00:49:56Z</LastSaved>
+  <Version>16.00</Version>
+ </DocumentProperties>
+ <OfficeDocumentSettings xmlns="urn:schemas-microsoft-com:office:office">
+  <AllowPNG/>
+ </OfficeDocumentSettings>
+ <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
+  <WindowHeight>12315</WindowHeight>
+  <WindowWidth>28800</WindowWidth>
+  <WindowTopX>32767</WindowTopX>
+  <WindowTopY>32767</WindowTopY>
+  <ProtectStructure>False</ProtectStructure>
+  <ProtectWindows>False</ProtectWindows>
+ </ExcelWorkbook>
+ <Styles>
+  <Style ss:ID="Default" ss:Name="Normal">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="11" ss:Color="#000000"/>
+   <Interior/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="m2110011819712">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Borders>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="2"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="2"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="2"/>
+   </Borders>
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="20" ss:Color="#FFFFFF"/>
+   <Interior ss:Color="#595959" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m2110011819732">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="2"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Interior ss:Color="#BFBFBF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m2110011819752">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Interior ss:Color="#BFBFBF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m2110011819772">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Interior ss:Color="#BFBFBF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m2110011819792">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Interior ss:Color="#BFBFBF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m2110011819812">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Borders>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="2"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Interior ss:Color="#BFBFBF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m2110011819832">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="2"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="2"/>
+   </Borders>
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="20" ss:Color="#595959"/>
+   <Interior ss:Color="#D9D9D9" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m2109948362880">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Borders>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="2"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="2"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="2"/>
+   </Borders>
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="20" ss:Color="#FFFFFF"/>
+   <Interior ss:Color="#595959" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m2109948362900">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="2"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="2"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="2"/>
+   </Borders>
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="20" ss:Color="#FFFFFF"/>
+   <Interior ss:Color="#595959" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m2109948362920">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Borders>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="2"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Interior ss:Color="#BFBFBF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m2109948362940">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Borders>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Interior ss:Color="#BFBFBF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m2109948362960">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Borders>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Interior ss:Color="#BFBFBF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m2109948362980">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Borders>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Interior ss:Color="#BFBFBF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m2109948363000">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Borders>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="2"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Interior ss:Color="#BFBFBF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s67">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+  </Style>
+  <Style ss:ID="s83">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Interior ss:Color="#BFBFBF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s97">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="2"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Interior ss:Color="#BFBFBF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s98">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="2"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Interior ss:Color="#BFBFBF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s99">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Borders>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="2"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="s100">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Borders/>
+  </Style>
+  <Style ss:ID="s101">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders/>
+  </Style>
+  <Style ss:ID="s102">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Borders>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="2"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="s103">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="2"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="s104">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="2"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="2"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="s105">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="2"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="s106">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="2"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="s107">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="2"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="2"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="s108">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="2"/>
+   </Borders>
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="9" ss:Color="#000000"/>
+  </Style>
+  <Style ss:ID="s109">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders/>
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Color="#000000"/>
+  </Style>
+  <Style ss:ID="s110">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="2"/>
+   </Borders>
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Color="#000000"/>
+  </Style>
+  <Style ss:ID="s111">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="2"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="2"/>
+   </Borders>
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Color="#000000"/>
+  </Style>
+  <Style ss:ID="s112">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="2"/>
+   </Borders>
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Color="#000000"/>
+  </Style>
+  <Style ss:ID="s119">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="2"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="2"/>
+   </Borders>
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="9" ss:Color="#000000"/>
+  </Style>
+  <Style ss:ID="s120">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="2"/>
+   </Borders>
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Color="#000000"/>
+  </Style>
+  <Style ss:ID="s121">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="2"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="s124">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="2"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="2"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="s131">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="2"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="2"/>
+   </Borders>
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Color="#000000"/>
+  </Style>
+  <Style ss:ID="s134">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="2"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="2"/>
+   </Borders>
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Color="#000000"/>
+  </Style>
+ </Styles>
+ <Worksheet ss:Name="Sheet1">
+  <Table ss:ExpandedColumnCount="10" ss:ExpandedRowCount="38" x:FullColumns="1"
+   x:FullRows="1" ss:DefaultRowHeight="15">
+   <Column ss:AutoFitWidth="0" ss:Width="113.25"/>
+   <Column ss:AutoFitWidth="0" ss:Width="91.5"/>
+   <Column ss:AutoFitWidth="0" ss:Width="89.25"/>
+   <Column ss:AutoFitWidth="0" ss:Width="88.5"/>
+   <Column ss:AutoFitWidth="0" ss:Width="96"/>
+   <Column ss:Index="10" ss:AutoFitWidth="0" ss:Width="83.25"/>
+   <Row ss:Height="15.75"/>
+   <Row>
+    <Cell ss:MergeAcross="4" ss:MergeDown="2" ss:StyleID="m2109948362880"><Data
+      ss:Type="String">PBS</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0"/>
+   <Row ss:Index="5">
+    <Cell ss:MergeDown="1" ss:StyleID="s97"><Data ss:Type="String">Hardware</Data></Cell>
+    <Cell ss:MergeDown="1" ss:StyleID="s83"><Data ss:Type="String">Software</Data></Cell>
+    <Cell ss:MergeDown="1" ss:StyleID="s83"><Data ss:Type="String">Process</Data></Cell>
+    <Cell ss:MergeDown="1" ss:StyleID="s83"><Data ss:Type="String">Mobile Application</Data></Cell>
+    <Cell ss:MergeDown="1" ss:StyleID="s98"><Data ss:Type="String">Training</Data></Cell>
+   </Row>
+   <Row ss:Index="7" ss:Height="30">
+    <Cell ss:StyleID="s99"><Data ss:Type="String">PCs / Laptops</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">Antivirus</Data></Cell>
+    <Cell ss:StyleID="s101"><Data ss:Type="String">Partner/shop process</Data></Cell>
+    <Cell ss:StyleID="s101"><Data ss:Type="String">Partner/shop interface</Data></Cell>
+    <Cell ss:StyleID="s102"><Data ss:Type="String">Tools Training </Data></Cell>
+   </Row>
+   <Row ss:Height="30">
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Servers</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">notepad++</Data></Cell>
+    <Cell ss:StyleID="s101"><Data ss:Type="String">User process</Data></Cell>
+    <Cell ss:StyleID="s101"><Data ss:Type="String">User interface</Data></Cell>
+    <Cell ss:StyleID="s103"><Data ss:Type="String">Development Training</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="30.75">
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Routers</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">Programming IDE</Data></Cell>
+    <Cell ss:StyleID="s101"><Data ss:Type="String">Maintenance process</Data></Cell>
+    <Cell ss:StyleID="s101"><Data ss:Type="String">Maintenance Interface</Data></Cell>
+    <Cell ss:StyleID="s103"><Data ss:Type="String">Process Training for Shops</Data></Cell>
+   </Row>
+   <Row ss:Height="30">
+    <Cell ss:StyleID="s99"><Data ss:Type="String">UPS</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">Testing Platform</Data></Cell>
+    <Cell ss:StyleID="s100"/>
+    <Cell ss:StyleID="s100"/>
+    <Cell ss:StyleID="s103"><Data ss:Type="String">Maintenance Training</Data></Cell>
+   </Row>
+   <Row ss:Height="30.75">
+    <Cell ss:StyleID="s104"><Data ss:Type="String">Testing Hardware</Data></Cell>
+    <Cell ss:StyleID="s105"><Data ss:Type="String">Configuration management tool</Data></Cell>
+    <Cell ss:StyleID="s106"/>
+    <Cell ss:StyleID="s106"/>
+    <Cell ss:StyleID="s107"/>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s67"/>
+    <Cell ss:Index="3" ss:StyleID="s67"/>
+    <Cell ss:StyleID="s67"/>
+    <Cell ss:StyleID="s67"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="5" ss:StyleID="s67"/>
+   </Row>
+   <Row ss:Height="15.75"/>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="4" ss:MergeDown="2" ss:StyleID="m2109948362900"><Data
+      ss:Type="String">WBS</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Span="1"/>
+   <Row ss:Index="18">
+    <Cell ss:MergeDown="1" ss:StyleID="m2109948362920"><Data ss:Type="String">Hardware</Data></Cell>
+    <Cell ss:MergeDown="1" ss:StyleID="m2109948362940"><Data ss:Type="String">Software</Data></Cell>
+    <Cell ss:MergeDown="1" ss:StyleID="m2109948362960"><Data ss:Type="String">Process</Data></Cell>
+    <Cell ss:MergeDown="1" ss:StyleID="m2109948362980"><Data ss:Type="String">Mobile Application</Data></Cell>
+    <Cell ss:MergeDown="1" ss:StyleID="m2109948363000"><Data ss:Type="String">Training</Data></Cell>
+   </Row>
+   <Row ss:Height="15.75"/>
+   <Row ss:AutoFitHeight="0" ss:Height="48.75">
+    <Cell ss:StyleID="s119"><Data ss:Type="String">&gt; Secure PCs/Laptops&#10;&gt;Maintain Devices</Data></Cell>
+    <Cell ss:StyleID="s120"><Data ss:Type="String">&gt; Contract with Antivirus supplier&#10;&gt; Install &amp; update A.V</Data></Cell>
+    <Cell ss:StyleID="s121"><Data ss:Type="String">&gt; Design Partner/shop process</Data></Cell>
+    <Cell ss:StyleID="s120"><Data ss:Type="String">&gt; Develop &amp; test app functions and logic</Data></Cell>
+    <Cell ss:StyleID="s131"><Data ss:Type="String">&gt; Prepare training material &amp; Software</Data></Cell>
+   </Row>
+   <Row ss:Height="45">
+    <Cell ss:StyleID="s108"><Data ss:Type="String">&gt; Secure Servers&#10;&gt;Maintain Servers</Data></Cell>
+    <Cell ss:StyleID="s109"><Data ss:Type="String">&gt; Install / update notepad++</Data></Cell>
+    <Cell ss:StyleID="s101"><Data ss:Type="String">&gt; Design user process</Data></Cell>
+    <Cell ss:StyleID="s101"><Data ss:Type="String">&gt; Develop &amp; test Partner/shop interface</Data></Cell>
+    <Cell ss:StyleID="s103"><Data ss:Type="String">&gt; Provide Tools Training </Data></Cell>
+   </Row>
+   <Row ss:Height="45">
+    <Cell ss:StyleID="s108"><Data ss:Type="String">&gt; Secure Routers&#10;&gt; Maintain Routers &#10;&gt; Update Routing S.W</Data></Cell>
+    <Cell ss:StyleID="s109"><Data ss:Type="String">&gt; Install / update programming IDE</Data></Cell>
+    <Cell ss:StyleID="s101"><Data ss:Type="String">&gt; Design Maintenance process</Data></Cell>
+    <Cell ss:StyleID="s101"><Data ss:Type="String">&gt; Develop &amp; test User interface</Data></Cell>
+    <Cell ss:StyleID="s103"><Data ss:Type="String">&gt; Provide Development Training</Data></Cell>
+   </Row>
+   <Row ss:Height="45">
+    <Cell ss:StyleID="s110"><Data ss:Type="String">&gt; Select suitable UPS&#10;&gt;Secure UPS units</Data></Cell>
+    <Cell ss:StyleID="s109"><Data ss:Type="String">&gt; Install / update Testing platform</Data></Cell>
+    <Cell ss:StyleID="s100"/>
+    <Cell ss:StyleID="s101"><Data ss:Type="String">&gt; Develop &amp; test Maintenance Interface</Data></Cell>
+    <Cell ss:StyleID="s103"><Data ss:Type="String">&gt; Provide Process Training for Shops</Data></Cell>
+   </Row>
+   <Row ss:Height="45.75">
+    <Cell ss:StyleID="s111"><Data ss:Type="String">&gt; Secure Testing Hardware</Data></Cell>
+    <Cell ss:StyleID="s112"><Data ss:Type="String">&gt; install &amp; setup Configuration management tool</Data></Cell>
+    <Cell ss:StyleID="s106"/>
+    <Cell ss:StyleID="s106"/>
+    <Cell ss:StyleID="s124"><Data ss:Type="String">&gt; Provide Maintenance Training</Data></Cell>
+   </Row>
+   <Row ss:Index="27" ss:Height="15.75"/>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="4" ss:MergeDown="2" ss:StyleID="m2110011819712"><Data
+      ss:Type="String">OBS</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Span="1"/>
+   <Row ss:Index="31" ss:Height="26.25">
+    <Cell ss:MergeAcross="4" ss:StyleID="m2110011819832"><Data ss:Type="String">Project Manager</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:MergeDown="1" ss:StyleID="m2110011819732"><Data ss:Type="String">Hardware Technical team</Data></Cell>
+    <Cell ss:MergeDown="1" ss:StyleID="m2110011819752"><Data ss:Type="String">Software Technical team</Data></Cell>
+    <Cell ss:MergeDown="1" ss:StyleID="m2110011819772"><Data ss:Type="String">Process Design Team</Data></Cell>
+    <Cell ss:MergeDown="1" ss:StyleID="m2110011819792"><Data ss:Type="String">Mobile Application Team</Data></Cell>
+    <Cell ss:MergeDown="1" ss:StyleID="m2110011819812"><Data ss:Type="String">Training team</Data></Cell>
+   </Row>
+   <Row ss:Height="15.75"/>
+   <Row ss:Height="38.25">
+    <Cell ss:StyleID="s134"><Data ss:Type="String">System Engineer 1</Data></Cell>
+    <Cell ss:StyleID="s121"><Data ss:Type="String">System Engineer 2</Data></Cell>
+    <Cell ss:StyleID="s121"><Data ss:Type="String">System Architect</Data></Cell>
+    <Cell ss:StyleID="s120"><Data ss:Type="String">Development &amp; Testing team leaders</Data></Cell>
+    <Cell ss:StyleID="s131"><Data ss:Type="String">Training manager</Data></Cell>
+   </Row>
+   <Row ss:Height="30">
+    <Cell ss:StyleID="s110"><Data ss:Type="String">System Technician 1</Data></Cell>
+    <Cell ss:StyleID="s109"><Data ss:Type="String">Software Technician 1</Data></Cell>
+    <Cell ss:StyleID="s101"><Data ss:Type="String">Development Team Lead</Data></Cell>
+    <Cell ss:StyleID="s101"><Data ss:Type="String">S.W Developer 1</Data></Cell>
+    <Cell ss:StyleID="s103"><Data ss:Type="String">Tool Trainer </Data></Cell>
+   </Row>
+   <Row ss:Height="30">
+    <Cell ss:StyleID="s110"><Data ss:Type="String">System Technician 2</Data></Cell>
+    <Cell ss:StyleID="s109"><Data ss:Type="String">Software Technician 2</Data></Cell>
+    <Cell ss:StyleID="s101"><Data ss:Type="String">Testing Team Lead</Data></Cell>
+    <Cell ss:StyleID="s101"><Data ss:Type="String">S.W Developer 2</Data></Cell>
+    <Cell ss:StyleID="s103"><Data ss:Type="String">Development trainer </Data></Cell>
+   </Row>
+   <Row ss:Height="30">
+    <Cell ss:StyleID="s110"><Data ss:Type="String">Server Technician </Data></Cell>
+    <Cell ss:StyleID="s109"><Data ss:Type="String">Software Technician 3</Data></Cell>
+    <Cell ss:StyleID="s101"><Data ss:Type="String">UX Design engineer</Data></Cell>
+    <Cell ss:StyleID="s101"><Data ss:Type="String">S.W Tester 1</Data></Cell>
+    <Cell ss:StyleID="s103"><Data ss:Type="String">Testing trainer </Data></Cell>
+   </Row>
+   <Row ss:Height="30.75">
+    <Cell ss:StyleID="s111"><Data ss:Type="String">UPS Technician </Data></Cell>
+    <Cell ss:StyleID="s112"><Data ss:Type="String">S.W verification Technician</Data></Cell>
+    <Cell ss:StyleID="s105"/>
+    <Cell ss:StyleID="s106"><Data ss:Type="String">S.W Tester 2</Data></Cell>
+    <Cell ss:StyleID="s124"><Data ss:Type="String">Maintenance Trainer</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageSetup>
+    <Layout x:Orientation="Landscape"/>
+    <Header x:Margin="0.3"/>
+    <Footer x:Margin="0.3"/>
+    <PageMargins x:Bottom="0.75" x:Left="0.7" x:Right="0.7" x:Top="0.75"/>
+   </PageSetup>
+   <Print>
+    <ValidPrinterInfo/>
+    <HorizontalResolution>600</HorizontalResolution>
+    <VerticalResolution>600</VerticalResolution>
+   </Print>
+   <Zoom>175</Zoom>
+   <Selected/>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+     <ActiveRow>22</ActiveRow>
+     <ActiveCol>9</ActiveCol>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+</Workbook>

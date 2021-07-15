@@ -1,0 +1,38 @@
+# depslib dependency file v1.0
+1625616645 source:d:\sprints\sprint 2\stack\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Data_Types.h"
+	"linked_list.h"
+	<string.h>
+
+1625616645 d:\sprints\sprint 2\stack\data_types.h
+
+1625616645 d:\sprints\sprint 2\stack\linked_list.h
+	<stdio.h>
+	<stdlib.h>
+	<stdio.h>
+	<stdlib.h>
+	"Data_Types.h"
+
+1625616645 source:d:\sprints\sprint 2\stack\linked_list.c
+	"linked_list.h"
+
+1625616645 source:d:\sprints\sprint 2\stack\stack.c
+	"stack.h"
+
+1625616645 d:\sprints\sprint 2\stack\stack.h
+	<stdio.h>
+	<stdlib.h>
+	"Data_Types.h"
+	"linked_list.h"
+
+1625616645 source:d:\sprints\sprint 2\stack\testcases.c
+	"TestCases.h"
+
+1625616645 d:\sprints\sprint 2\stack\testcases.h
+	<stdio.h>
+	<stdlib.h>
+	"Data_Types.h"
+	"stack.h"
+

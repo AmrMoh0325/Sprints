@@ -1,0 +1,26 @@
+# depslib dependency file v1.0
+1625618040 source:d:\sprints\sprint 2\algorithms\algorithms.c
+	"Algorithms.h"
+
+1625618129 d:\sprints\sprint 2\algorithms\algorithms.h
+	<stdio.h>
+	<stdlib.h>
+	"Data_Types.h"
+
+1625423902 d:\sprints\sprint 2\algorithms\data_types.h
+
+1625616199 source:d:\sprints\sprint 2\algorithms\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Algorithms.h"
+	"TestCases.h"
+
+1625450027 source:d:\sprints\sprint 2\algorithms\testcases.c
+	"TestCases.h"
+
+1625450106 d:\sprints\sprint 2\algorithms\testcases.h
+	<stdio.h>
+	<stdlib.h>
+	"Data_Types.h"
+	"Algorithms.h"
+
