@@ -12,3 +12,11 @@ int multiply (int x, int y)
 {
 	return x*y;
 }
+
+
+
+//temp feature
+int temp(int x)
+{
+	return x*x;
+}
