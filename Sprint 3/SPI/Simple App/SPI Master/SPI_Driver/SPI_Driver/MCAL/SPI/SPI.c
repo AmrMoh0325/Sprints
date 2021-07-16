@@ -25,7 +25,7 @@ enuErrorStatus_t SPI_SendData(uint8_t u8Data)
    return SUCCESS;
 }
 
-enuErrorStatus_t SPI_RecieveData(uint8_t *pu8Data)
+enuErrorStatus_t SPI_ReceiveData(uint8_t *pu8Data)
 {
    DIO_Write(SPI_SS0,LOW);
    SPDR_R= *pu8Data;
@@ -54,7 +54,7 @@ enuErrorStatus_t SPI_SendData(uint8_t u8Data)
    return SUCCESS;
 }
 
-enuErrorStatus_t SPI_RecieveData(uint8_t *pu8Data)
+enuErrorStatus_t SPI_ReceiveData(uint8_t *pu8Data)
 {
    while (!GET_BIT(SPSR_R,SPIF_B));
    *pu8Data=SPDR_R;
@@ -79,14 +79,14 @@ enuErrorStatus_t SPI_RecieveData(uint8_t *pu8Data)
      return SUCCESS;
  }
  
- enuErrorStatus_t SPI_RecieveString(uint8_t *pu8Data,uint8_t u8bufferMaxSize)
+ enuErrorStatus_t SPI_ReceiveString(uint8_t *pu8Data,uint8_t u8bufferMaxSize)
  {
     uint8_t u8i;
     //traverse the string
     for (u8i=0; u8i<u8bufferMaxSize-1;u8i++)
     {
        //receive each character stored in the UDR and store it in the appropriate place in the string
-       SPI_RecieveData((pu8Data+u8i));
+       SPI_ReceiveData((pu8Data+u8i));
        //if termination characters are detected end the communication
        if (*(pu8Data+u8i)=='\r'  ||  *(pu8Data+u8i)=='\n')
        {

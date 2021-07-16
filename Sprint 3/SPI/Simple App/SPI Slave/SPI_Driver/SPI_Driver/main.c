@@ -14,7 +14,7 @@ int main(void)
     PORTC_R=0;
     while (1) 
     {
-       SPI_RecieveData(&Data);
+       SPI_ReceiveData(&Data);
        PORTC_R=Data;
     }
 }

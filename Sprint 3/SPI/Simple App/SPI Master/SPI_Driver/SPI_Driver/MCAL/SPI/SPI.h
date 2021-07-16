@@ -22,18 +22,18 @@
 
 enuErrorStatus_t SPI_Init(void);
 enuErrorStatus_t SPI_SendData(uint8_t u8Data);
-enuErrorStatus_t SPI_RecieveData(uint8_t *pu8Data);
+enuErrorStatus_t SPI_ReceiveData(uint8_t *pu8Data);
 
 #elif (SPI_CONFIG == SLAVE)
 
 enuErrorStatus_t SPI_Init(void);
 enuErrorStatus_t SPI_SendData(uint8_t u8Data);
-enuErrorStatus_t SPI_RecieveData(uint8_t *pu8Data);
+enuErrorStatus_t SPI_ReceiveData(uint8_t *pu8Data);
 
 #endif
 
 enuErrorStatus_t SPI_SendString(uint8_t *pu8Data);
-enuErrorStatus_t SPI_RecieveString(uint8_t *pu8Data,uint8_t u8bufferMaxSize);
+enuErrorStatus_t SPI_ReceiveString(uint8_t *pu8Data,uint8_t u8bufferMaxSize);
 
 
 enuErrorStatus_t SPI_Enable_Interrupt(void);
