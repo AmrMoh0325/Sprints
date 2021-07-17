@@ -385,14 +385,15 @@ enuErrorStatus_t	LED_OFF(enuPinConfig_t LED)
 
 000001b8 <main>:
 
-
-
+/* API IMPLEMENTATION -------------------------------------------------- */
 int main(void)
 {
+   //call initialization function
    Traffic_Init();
  1b8:	0e 94 68 00 	call	0xd0	; 0xd0 <Traffic_Init>
    while (1) 
    {
+      //update the state of the system depending on user input
       Traffic_Update();
  1bc:	0e 94 78 00 	call	0xf0	; 0xf0 <Traffic_Update>
  1c0:	fd cf       	rjmp	.-6      	; 0x1bc <main+0x4>
