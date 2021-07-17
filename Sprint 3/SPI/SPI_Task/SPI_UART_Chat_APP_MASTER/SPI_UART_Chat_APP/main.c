@@ -1,24 +1,21 @@
-/*
- * SPI_UART_Chat_APP.c
- *
- * Created: 7/16/2021 8:20:07 PM
- * Author : Amrth
- */ 
+/*****************************************************************************
+* Task: Chat Application 
+* File Name: main.c
+* Description: main file
+* Author: Amr Mohamed
+* Date: 16/7/2021
+******************************************************************************/
 
-#include "DataTypes.h"
-#include "MCAL/SPI/SPI.h"
-#include "MCAL/UART/UART.h"
+ /*- INCLUDES --------------------------------------------------*/
+ #include "APP/Chat_APP/APP.h"
 
+/*- APIs IMPLEMENTATION-----------------------------------*/
 int main(void)
 {
-   uint8_t Send_Buffer[255]={0};
-   UART_Init();
-   SPI_Init();
-    /* Replace with your application code */
-    while (1) 
-    {
-       UART_ReceiveString(Send_Buffer,255);
-       SPI_SendString(Send_Buffer);
-    }
+   APP_Init_Master();
+   while (1) 
+   {
+      APP_Update_Master();
+   }
 }
 

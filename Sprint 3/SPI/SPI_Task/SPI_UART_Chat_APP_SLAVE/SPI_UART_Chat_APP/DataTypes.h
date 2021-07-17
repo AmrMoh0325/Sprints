@@ -9,6 +9,7 @@
 #ifndef __DATA_TYPES__
 #define __DATA_TYPES__
 
+/*- TYPE DEFINITIONS --------------------------------------------------*/
 /********************** General Data Types **************************/
 typedef unsigned char           uint8_t;
 typedef signed char             sint8_t;
@@ -19,7 +20,7 @@ typedef signed long int         sint32_t;
 typedef unsigned long long int  uint64_t;
 typedef signed long long int    sint64_t;
 
-
+/*- MACROS --------------------------------------------------*/
 #define NULLPTR                 ((void *) 0)
 
 #define HIGH                     1
@@ -27,7 +28,7 @@ typedef signed long long int    sint64_t;
 #define TRUE                     1
 #define FALSE                    0
 
-
+/*- ENUMS --------------------------------------------------*/
 typedef enum{
    ERROR,
    SUCCESS

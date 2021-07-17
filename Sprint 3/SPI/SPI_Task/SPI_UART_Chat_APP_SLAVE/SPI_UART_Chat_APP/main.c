@@ -5,20 +5,14 @@
  * Author : Amrth
  */ 
 
-#include "DataTypes.h"
-#include "MCAL/SPI/SPI.h"
-#include "MCAL/UART/UART.h"
+#include "APP/Chat_APP/APP.h"
 
 int main(void)
 {
-   uint8_t Send_Buffer[255]={0};
-   UART_Init();
-   SPI_Init();
-    /* Replace with your application code */
-    while (1) 
-    {
-       SPI_ReceiveString(Send_Buffer,255);
-       UART_SendString(Send_Buffer);
-    }
+   APP_Init_Slave();
+   while (1) 
+   {
+      APP_Update_Slave();
+   }
 }
 

@@ -10,12 +10,13 @@
 #ifndef __UART__
 #define __UART__
 
+ /*- INCLUDES --------------------------------------------------*/
 #include "DataTypes.h"
 #include "MCAL/Register.h"
 #include "Utils.h"
 #include "MCAL/UART/UART_Cfg.h"
 
-
+/*- APIs PROTOTYPES-----------------------------------*/
 /************************************************************************************
 * Parameters (in): void
 * Parameters (out): enuErrorStatus_t
@@ -64,7 +65,6 @@ enuErrorStatus_t UART_SendDataNoBLOCK(uint16_t u16Data);
 ************************************************************************************/
 enuErrorStatus_t UART_ReceiveString(uint8_t* pu8String, uint8_t u8bufferMaxSize);
 
-
 /************************************************************************************
 * Parameters (in): uint8_t* pu8String
 * Parameters (out): enuErrorStatus_t
@@ -73,16 +73,56 @@ enuErrorStatus_t UART_ReceiveString(uint8_t* pu8String, uint8_t u8bufferMaxSize)
 ************************************************************************************/
 enuErrorStatus_t UART_SendString(uint8_t* pu8String);
 
+/**************************************** PREPARED APIs FOR FUTURE USE ******************************************/
 
-/*
+/************************************************************************************
+* Parameters (in): void
+* Parameters (out): enuErrorStatus_t
+* Return value: 1=SUCCESS or 0=FAIL
+* Description: A function to enable uart interrupt for TX complete
+************************************************************************************/
 enuErrorStatus_t UART_TX_Enable_Interrupt(void);
+
+/************************************************************************************
+* Parameters (in): void
+* Parameters (out): enuErrorStatus_t
+* Return value: 1=SUCCESS or 0=FAIL
+* Description: A function to disable uart interrupt for TX complete
+************************************************************************************/
 enuErrorStatus_t UART_TX_Disable_Interrupt(void);
+
+/************************************************************************************
+* Parameters (in): void(*local_fptr)(void)
+* Parameters (out): enuErrorStatus_t
+* Return value: 1=SUCCESS or 0=FAIL
+* Description: A function to setup callback function for TX complete interrupt
+************************************************************************************/
 enuErrorStatus_t UART_TX_SetCallBack(void(*local_fptr)(void));
 
+/************************************************************************************
+* Parameters (in): void
+* Parameters (out): enuErrorStatus_t
+* Return value: 1=SUCCESS or 0=FAIL
+* Description: A function to enable uart interrupt for RX complete
+************************************************************************************/
 enuErrorStatus_t UART_RX_Enable_Interrupt(void);
+
+/************************************************************************************
+* Parameters (in): void
+* Parameters (out): enuErrorStatus_t
+* Return value: 1=SUCCESS or 0=FAIL
+* Description: A function to disable uart interrupt for RX complete
+************************************************************************************/
 enuErrorStatus_t UART_RX_Disable_Interrupt(void);
+
+/************************************************************************************
+* Parameters (in): void(*local_fptr)(void)
+* Parameters (out): enuErrorStatus_t
+* Return value: 1=SUCCESS or 0=FAIL
+* Description: A function to setup callback function for RX complete interrupt
+************************************************************************************/
 enuErrorStatus_t UART_RX_SetCallBack(void(*local_fptr)(void));
-*/
+
 
 
 #endif /* __UART__ */

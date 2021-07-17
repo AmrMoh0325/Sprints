@@ -8,7 +8,7 @@
 
 #ifndef __REGISTER__
 #define __REGISTER__
-
+/*- MACROS --------------------------------------------------*/
 #define  F_CPU    8000000UL
 
 /* DIO_Registers */

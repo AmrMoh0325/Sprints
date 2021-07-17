@@ -5,13 +5,13 @@
 * Author: Amr Mohamed
 * Date: 8/7/2021
 ******************************************************************************/
-//included files
+ /*- INCLUDES --------------------------------------------------*/
 #include "MCAL/Register.h"
 #include "Utils.h"
 #include "DataTypes.h"
 #include "MCAL/DIO/DIO.h"
 
-//Private macros used within the driver
+/*- MACROS --------------------------------------------------*/
 #define DIO_PORT_NO                       4u
 #define DIO_PINS_NO                       8u
 
@@ -22,7 +22,7 @@
 #define M_PORTD  3
 
 
-
+/*- APIs IMPLEMENTATION-----------------------------------*/
 /************************************************************************************
 * Parameters (in): void
 * Parameters (out): enuErrorStatus_t

@@ -6,12 +6,18 @@
 * Date: 14/7/2021
 ******************************************************************************/
 
-
+ /*- INCLUDES --------------------------------------------------*/
 #include "UART.h"
 
+/*- MACROS --------------------------------------------------*/
 //macro for calculating UBRR value
 #define UBRR_CALC(BAUD)       (((F_CPU)/(16UL*BAUD))-1)
 
+/*- GLOBAL VARIABLES --------------------------------------------------*/
+void (*RXC_Callback)(void)=NULLPTR;
+void (*TXC_Callback)(void)=NULLPTR;
+
+/*- APIs IMPLEMENTATION-----------------------------------*/
 /************************************************************************************
 * Parameters (in): void
 * Parameters (out): enuErrorStatus_t
@@ -275,4 +281,117 @@ enuErrorStatus_t UART_SendString(uint8_t* pu8String)
    UART_SendData('\n');
    
    return SUCCESS;
+}
+
+
+/**********************************************************************************************/
+
+
+/**************************************** PREPARED APIs FOR FUTURE USE ******************************************/
+
+/************************************************************************************
+* Parameters (in): void
+* Parameters (out): enuErrorStatus_t
+* Return value: 1=SUCCESS or 0=FAIL
+* Description: A function to enable uart interrupt for TX complete
+************************************************************************************/
+enuErrorStatus_t UART_TX_Enable_Interrupt(void)
+{
+   //set appropriate bit to enable interrupt
+   SET_BIT(UCSRB_R,TXCIE_B);
+   return SUCCESS;
+}
+
+/************************************************************************************
+* Parameters (in): void
+* Parameters (out): enuErrorStatus_t
+* Return value: 1=SUCCESS or 0=FAIL
+* Description: A function to disable uart interrupt for TX complete
+************************************************************************************/
+enuErrorStatus_t UART_TX_Disable_Interrupt(void)
+{
+   //clear appropriate bit to disable interrupt
+   CLR_BIT(UCSRB_R,TXCIE_B);
+   return SUCCESS;
+}
+
+/************************************************************************************
+* Parameters (in): void(*local_fptr)(void)
+* Parameters (out): enuErrorStatus_t
+* Return value: 1=SUCCESS or 0=FAIL
+* Description: A function to enable setup callback funtion for TX complete interrupt
+************************************************************************************/
+enuErrorStatus_t UART_TX_SetCallBack(void(*local_fptr)(void))
+{
+   //check if the sent pointer points to a valid position
+   if (local_fptr== NULLPTR)     return ERROR;
+   //if so, store the pointer address in the global pointer to function
+   TXC_Callback=local_fptr;
+   return SUCCESS;
+}
+
+/************************************************************************************
+* Parameters (in): void
+* Parameters (out): enuErrorStatus_t
+* Return value: 1=SUCCESS or 0=FAIL
+* Description: A function to enable uart interrupt for RX complete
+************************************************************************************/
+enuErrorStatus_t UART_RX_Enable_Interrupt(void)
+{
+   //set appropriate bit to enable interrupt
+   SET_BIT(UCSRB_R,RXCIE_B);
+   return SUCCESS;
+}
+
+/************************************************************************************
+* Parameters (in): void
+* Parameters (out): enuErrorStatus_t
+* Return value: 1=SUCCESS or 0=FAIL
+* Description: A function to disable uart interrupt for RX complete
+************************************************************************************/
+enuErrorStatus_t UART_RX_Disable_Interrupt(void)
+{
+   //clear appropriate bit to disable interrupt
+   CLR_BIT(UCSRB_R,RXCIE_B);
+   return SUCCESS;
+}
+
+/************************************************************************************
+* Parameters (in): void(*local_fptr)(void)
+* Parameters (out): enuErrorStatus_t
+* Return value: 1=SUCCESS or 0=FAIL
+* Description: A function to enable setup callback funtion for RX complete interrupt
+************************************************************************************/
+enuErrorStatus_t UART_RX_SetCallBack(void(*local_fptr)(void))
+{
+   //check if the sent pointer points to a valid position
+   if (local_fptr== NULLPTR)     return ERROR;
+   //if so, store the pointer address in the global pointer to function
+   RXC_Callback=local_fptr;
+   return SUCCESS;
+}
+
+
+
+
+/* ISRs----------------------------------------------------------*/
+
+ISR(UART_RX_vect)
+{
+   //if the global pointer to function points to a valid position
+   if (RXC_Callback!=NULLPTR)
+   {
+      //call the function
+      RXC_Callback();
+   }
+}
+
+ISR(UART_TX_vect)
+{
+   //if the global pointer to function points to a valid position
+   if (TXC_Callback!=NULLPTR)
+   {
+      //call the function
+      TXC_Callback();
+   }
 }

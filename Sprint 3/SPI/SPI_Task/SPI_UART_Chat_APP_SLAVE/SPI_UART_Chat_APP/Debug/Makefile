@@ -43,6 +43,7 @@ SUBDIRS :=  \
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
+../APP/Chat_APP/APP.c \
 ../main.c \
 ../MCAL/DIO/DIO.c \
 ../MCAL/DIO/DIO_Cfg.c \
@@ -57,6 +58,7 @@ ASM_SRCS +=
 
 
 OBJS +=  \
+APP/Chat_APP/APP.o \
 main.o \
 MCAL/DIO/DIO.o \
 MCAL/DIO/DIO_Cfg.o \
@@ -64,6 +66,7 @@ MCAL/SPI/SPI.o \
 MCAL/UART/UART.o
 
 OBJS_AS_ARGS +=  \
+APP/Chat_APP/APP.o \
 main.o \
 MCAL/DIO/DIO.o \
 MCAL/DIO/DIO_Cfg.o \
@@ -71,6 +74,7 @@ MCAL/SPI/SPI.o \
 MCAL/UART/UART.o
 
 C_DEPS +=  \
+APP/Chat_APP/APP.d \
 main.d \
 MCAL/DIO/DIO.d \
 MCAL/DIO/DIO_Cfg.d \
@@ -78,6 +82,7 @@ MCAL/SPI/SPI.d \
 MCAL/UART/UART.d
 
 C_DEPS_AS_ARGS +=  \
+APP/Chat_APP/APP.d \
 main.d \
 MCAL/DIO/DIO.d \
 MCAL/DIO/DIO_Cfg.d \
@@ -98,6 +103,13 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+APP/Chat_APP/APP.o: ../APP/Chat_APP/APP.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include" -I".."  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
 ./main.o: .././main.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0

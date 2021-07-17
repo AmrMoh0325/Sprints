@@ -9,6 +9,7 @@
 #ifndef __UART_CFG__
 #define __UART_CFG__
 
+/*- MACROS --------------------------------------------------*/
 #define UART_BAUDRATE         9600
 
 #define UART_DATA_BITS        8        /* 5, 6, 7, 8, or 9 */

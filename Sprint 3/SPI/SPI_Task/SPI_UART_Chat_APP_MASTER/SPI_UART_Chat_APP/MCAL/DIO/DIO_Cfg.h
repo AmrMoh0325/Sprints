@@ -10,11 +10,12 @@
 #ifndef __DIO_CFG__
 #define __DIO_CFG__
 
-
+ /*- MACROS --------------------------------------------------*/
 #define DIO_GROUPS_NO							4u
 
+/*- ENUMS --------------------------------------------------*/
 //names of the connected devices in the same order as in the array
-typedef enum{SPI_SS0,SPI_MOSI,SPI_MISO,SPI_SCK,test}enuPinConfig_t;
+typedef enum{SPI_SS0,SPI_MOSI,SPI_MISO,SPI_SCK}enuPinConfig_t;
 
 
 #endif /* __DIO_CFG__ */
