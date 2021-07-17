@@ -5,13 +5,13 @@
 * Author: Amr Mohamed
 * Date: 8/7/2021
 ******************************************************************************/
-//included files
-#include "Register.h"
+ /*- INCLUDES --------------------------------------------------*/
+#include "MCAL/Register.h"
 #include "Utils.h"
 #include "DataTypes.h"
-#include "DIO.h"
+#include "MCAL/DIO/DIO.h"
 
-//Private macros used within the driver 
+/*- MACROS --------------------------------------------------*/
 #define DIO_PORT_NO                       4u
 #define DIO_PINS_NO                       8u
 
@@ -22,7 +22,7 @@
 #define M_PORTD  3
 
 
-
+/*- APIs IMPLEMENTATION-----------------------------------*/
 /************************************************************************************
 * Parameters (in): void
 * Parameters (out): enuErrorStatus_t
@@ -51,89 +51,78 @@ enuErrorStatus_t DIO_Init(void)
       switch (u8port)
       {
          case M_PORTA:
-            //clear the pin bit in the DDRx and PORTx registers of each port  
-            CLR_BIT(DDRA_R,u8pin);
-            CLR_BIT(PORTA_R,u8pin);
-            //if the pin is set as output
-            if(astrDIOConfigParameters[u8i].enuPinDir)
-            {
-               //set its equivalent bit in the DDRx register
-               SET_BIT(DDRA_R,u8pin);
-            }
-            else
-            {
-               //if the pin is set as input, check if its pullup resistor will be used
-               if (astrDIOConfigParameters[u8i].enuPullupResEn);
-               {
-                  //if so, set it's equivalent bit in the PORTx register
-                  SET_BIT(PORTA_R,u8pin);
-               }
-            }
+         //clear the pin bit in the DDRx and PORTx registers of each port
+         CLR_BIT(DDRA_R,u8pin);
+         CLR_BIT(PORTA_R,u8pin);
+         //if the pin is set as output
+         if(astrDIOConfigParameters[u8i].enuPinDir)
+         {
+            //set its equivalent bit in the DDRx register
+            SET_BIT(DDRA_R,u8pin);
+         }
+
+         // check if the pins pullup resistor will be used
+         if (astrDIOConfigParameters[u8i].enuPullupResEn)
+         {
+            //if so, set it's equivalent bit in the PORTx register
+            SET_BIT(PORTA_R,u8pin);
+         }
          break;
 
          case M_PORTB:
-            //clear the pin bit in the DDRx and PORTx registers of each port  
-            CLR_BIT(DDRB_R,u8pin);
-            CLR_BIT(PORTB_R,u8pin);
-            //if the pin is set as output
-            if(astrDIOConfigParameters[u8i].enuPinDir)
-            {
-               //set its equivalent bit in the DDRx register
-               SET_BIT(DDRB_R,u8pin);
-            }
-            else
-            {
-               //if the pin is set as input, check if its pullup resistor will be used
-               if (astrDIOConfigParameters[u8i].enuPullupResEn);
-               {
-                  //if so, set it's equivalent bit in the PORTx register
-                  SET_BIT(PORTB_R,u8pin);
-               }
-            }
+         //clear the pin bit in the DDRx and PORTx registers of each port
+         CLR_BIT(DDRB_R,u8pin);
+         CLR_BIT(PORTB_R,u8pin);
+         //if the pin is set as output
+         if(astrDIOConfigParameters[u8i].enuPinDir)
+         {
+            //set its equivalent bit in the DDRx register
+            SET_BIT(DDRB_R,u8pin);
+         }
+         // check if the pins pullup resistor will be used
+         if (astrDIOConfigParameters[u8i].enuPullupResEn)
+         {
+            //if so, set it's equivalent bit in the PORTx register
+            SET_BIT(PORTB_R,u8pin);
+         }
          break;
 
          case M_PORTC:
-            //clear the pin bit in the DDRx and PORTx registers of each port  
-            CLR_BIT(DDRC_R,u8pin);
-            CLR_BIT(PORTC_R,u8pin);
-            //if the pin is set as output
-            if(astrDIOConfigParameters[u8i].enuPinDir)
-            {
-               //set its equivalent bit in the DDRx register
-               SET_BIT(DDRC_R,u8pin);
-            }
-            else
-            {
-               //if the pin is set as input, check if its pullup resistor will be used
-               if (astrDIOConfigParameters[u8i].enuPullupResEn);
-               {
-                  //if so, set it's equivalent bit in the PORTx register
-                  SET_BIT(PORTC_R,u8pin);
-               }
-            }
+         //clear the pin bit in the DDRx and PORTx registers of each port
+         CLR_BIT(DDRC_R,u8pin);
+         CLR_BIT(PORTC_R,u8pin);
+         //if the pin is set as output
+         if(astrDIOConfigParameters[u8i].enuPinDir)
+         {
+            //set its equivalent bit in the DDRx register
+            SET_BIT(DDRC_R,u8pin);
+         }
+         // check if the pins pullup resistor will be used
+         if (astrDIOConfigParameters[u8i].enuPullupResEn)
+         {
+            //if so, set it's equivalent bit in the PORTx register
+            SET_BIT(PORTC_R,u8pin);
+         }
          break;
 
          case M_PORTD:
-            //clear the pin bit in the DDRx and PORTx registers of each port  
-            CLR_BIT(DDRD_R,u8pin);
-            CLR_BIT(PORTD_R,u8pin);
-            //if the pin is set as output
-            if(astrDIOConfigParameters[u8i].enuPinDir)
-            {
-               //set its equivalent bit in the DDRx register
-               SET_BIT(DDRD_R,u8pin);
-            }
-            else
-            {
-               //if the pin is set as input, check if its pullup resistor will be used
-               if (astrDIOConfigParameters[u8i].enuPullupResEn);
-               {
-                  //if so, set it's equivalent bit in the PORTx register
-                  SET_BIT(PORTD_R,u8pin);
-               }
-            }
-         break;         
-      }    
+         //clear the pin bit in the DDRx and PORTx registers of each port
+         CLR_BIT(DDRD_R,u8pin);
+         CLR_BIT(PORTD_R,u8pin);
+         //if the pin is set as output
+         if(astrDIOConfigParameters[u8i].enuPinDir)
+         {
+            //set its equivalent bit in the DDRx register
+            SET_BIT(DDRD_R,u8pin);
+         }
+         // check if the pins pullup resistor will be used
+         if (astrDIOConfigParameters[u8i].enuPullupResEn)
+         {
+            //if so, set it's equivalent bit in the PORTx register
+            SET_BIT(PORTD_R,u8pin);
+         }
+         break;
+      }
    }
    //return success status
    return SUCCESS;
@@ -154,7 +143,7 @@ enuErrorStatus_t DIO_Write(uint8_t u8GroupId, uint8_t u8Data)
    u8port=astrDIOConfigParameters[u8GroupId].enuPinNo / DIO_PINS_NO;
    u8pin =astrDIOConfigParameters[u8GroupId].enuPinNo % DIO_PINS_NO;
    
-   //if port number is invalid or the pin is set as input 
+   //if port number is invalid or the pin is set as input
    if(u8port >= DIO_PORT_NO || astrDIOConfigParameters[u8GroupId].enuPinDir == INPUT)
    {
       //return error status
@@ -163,51 +152,51 @@ enuErrorStatus_t DIO_Write(uint8_t u8GroupId, uint8_t u8Data)
    
    else
    {
-      //select the calculated port 
+      //select the calculated port
       switch(u8port)
       {
          case M_PORTA:
-            //clear the pin's equivalent bit in the PORTx Register
-            CLR_BIT(PORTA_R,u8pin);
-            //if we want to apply 5V to the pin
-            if (u8Data)
-            {
-               //set the pin's equivalent bit in the PORTx Register
-               SET_BIT(PORTA_R,u8pin);
-            }
+         //clear the pin's equivalent bit in the PORTx Register
+         CLR_BIT(PORTA_R,u8pin);
+         //if we want to apply 5V to the pin
+         if (u8Data)
+         {
+            //set the pin's equivalent bit in the PORTx Register
+            SET_BIT(PORTA_R,u8pin);
+         }
          break;
 
          case M_PORTB:
-            //clear the pin's equivalent bit in the PORTx Register
-            CLR_BIT(PORTB_R,u8pin);
-            //if we want to apply 5V to the pin
-            if (u8Data)
-            {
-               //set the pin's equivalent bit in the PORTx Register
-               SET_BIT(PORTB_R,u8pin);
-            }
+         //clear the pin's equivalent bit in the PORTx Register
+         CLR_BIT(PORTB_R,u8pin);
+         //if we want to apply 5V to the pin
+         if (u8Data)
+         {
+            //set the pin's equivalent bit in the PORTx Register
+            SET_BIT(PORTB_R,u8pin);
+         }
          break;
 
          case M_PORTC:
-            //clear the pin's equivalent bit in the PORTx Register
-            CLR_BIT(PORTC_R,u8pin);
-            //if we want to apply 5V to the pin
-            if (u8Data)
-            {
-               //set the pin's equivalent bit in the PORTx Register
-               SET_BIT(PORTC_R,u8pin);
-            }
+         //clear the pin's equivalent bit in the PORTx Register
+         CLR_BIT(PORTC_R,u8pin);
+         //if we want to apply 5V to the pin
+         if (u8Data)
+         {
+            //set the pin's equivalent bit in the PORTx Register
+            SET_BIT(PORTC_R,u8pin);
+         }
          break;
 
          case M_PORTD:
-            //clear the pin's equivalent bit in the PORTx Register
-            CLR_BIT(PORTD_R,u8pin);
-            //if we want to apply 5V to the pin
-            if (u8Data)
-            {
-               //set the pin's equivalent bit in the PORTx Register
-               SET_BIT(PORTD_R,u8pin);
-            }
+         //clear the pin's equivalent bit in the PORTx Register
+         CLR_BIT(PORTD_R,u8pin);
+         //if we want to apply 5V to the pin
+         if (u8Data)
+         {
+            //set the pin's equivalent bit in the PORTx Register
+            SET_BIT(PORTD_R,u8pin);
+         }
          break;
       }
    }
@@ -236,27 +225,27 @@ enuErrorStatus_t DIO_Read(uint8_t u8GroupId, uint8_t* pu8Data)
    }
    else
    {
-      //select the calculated port 
+      //select the calculated port
       switch(u8port)
       {
          case M_PORTA:
-            //get the state of the pin in the selected port and store it in the provided value holder
-            *pu8Data=GET_BIT(PINA_R,u8pin);
+         //get the state of the pin in the selected port and store it in the provided value holder
+         *pu8Data=GET_BIT(PINA_R,u8pin);
          break;
-           
+         
          case M_PORTB:
-            //get the state of the pin in the selected port and store it in the provided value holder
-            *pu8Data=GET_BIT(PINB_R,u8pin);
+         //get the state of the pin in the selected port and store it in the provided value holder
+         *pu8Data=GET_BIT(PINB_R,u8pin);
          break;
 
          case M_PORTC:
-            //get the state of the pin in the selected port and store it in the provided value holder
-            *pu8Data=GET_BIT(PINC_R,u8pin);
+         //get the state of the pin in the selected port and store it in the provided value holder
+         *pu8Data=GET_BIT(PINC_R,u8pin);
          break;
 
          case M_PORTD:
-            //get the state of the pin in the selected port and store it in the provided value holder
-            *pu8Data=GET_BIT(PIND_R,u8pin);
+         //get the state of the pin in the selected port and store it in the provided value holder
+         *pu8Data=GET_BIT(PIND_R,u8pin);
          break;
       }
    }
@@ -285,27 +274,27 @@ enuErrorStatus_t DIO_Toggle(uint8_t u8GroupId)
    }
    else
    {
-      //select the calculated port 
+      //select the calculated port
       switch(u8port)
       {
          case M_PORTA:
-            //toggle the current value of the pin in the PORTx Register
-            TOG_BIT(PORTA_R,u8pin);
+         //toggle the current value of the pin in the PORTx Register
+         TOG_BIT(PORTA_R,u8pin);
          break;
 
          case M_PORTB:
-            //toggle the current value of the pin in the PORTx Register
-            TOG_BIT(PORTB_R,u8pin);
+         //toggle the current value of the pin in the PORTx Register
+         TOG_BIT(PORTB_R,u8pin);
          break;
 
          case M_PORTC:
-            //toggle the current value of the pin in the PORTx Register
-            TOG_BIT(PORTC_R,u8pin);
+         //toggle the current value of the pin in the PORTx Register
+         TOG_BIT(PORTC_R,u8pin);
          break;
 
          case M_PORTD:
-            //toggle the current value of the pin in the PORTx Register
-            TOG_BIT(PORTD_R,u8pin);
+         //toggle the current value of the pin in the PORTx Register
+         TOG_BIT(PORTD_R,u8pin);
          break;
       }
    }

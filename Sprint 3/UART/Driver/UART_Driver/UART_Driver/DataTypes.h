@@ -1,8 +1,15 @@
-
+/*****************************************************************************
+* Task: UART Driver
+* File Name: DataTypes.h
+* Description: header file for standard data types definitions
+* Author: Amr Mohamed
+* Date: 14/7/2021
+******************************************************************************/
 
 #ifndef __DATA_TYPES__
 #define __DATA_TYPES__
 
+/*- TYPE DEFINITIONS --------------------------------------------------*/
 /********************** General Data Types **************************/
 typedef unsigned char           uint8_t;
 typedef signed char             sint8_t;
@@ -13,11 +20,15 @@ typedef signed long int         sint32_t;
 typedef unsigned long long int  uint64_t;
 typedef signed long long int    sint64_t;
 
+/*- MACROS --------------------------------------------------*/
+#define NULLPTR                 ((void *) 0)
 
-#define NULLPTR                 ((void *) 0) 
+#define HIGH                     1
+#define LOW                      0
+#define TRUE                     1
+#define FALSE                    0
 
-
-
+/*- ENUMS --------------------------------------------------*/
 typedef enum{
    ERROR,
    SUCCESS

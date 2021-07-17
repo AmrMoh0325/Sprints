@@ -8,7 +8,7 @@
 
 #ifndef __REGISTER__
 #define __REGISTER__
-
+/*- MACROS --------------------------------------------------*/
 #define  F_CPU    8000000UL
 
 /* DIO_Registers */
@@ -55,7 +55,7 @@
 #define ICF1_B    5
 #define TOV2_B    6
 #define OCF2_B    7
- 
+
 #define TIMSK_R   (*(volatile unsigned char*)0x59)
 /* TIMSK */
 #define OCIE2_B   7
@@ -187,7 +187,7 @@
 #define    UCPOL_B        0
 
 
-/********************************************************************************************************/
+/*********************************************************************************************************/
 
 /* Interrupt vectors */
 /* External Interrupt Request 0 */
