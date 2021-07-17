@@ -11,7 +11,7 @@
 #define __DIO_CFG__
 
 
-#define DIO_GROUPS_NO							5u
+#define DIO_GROUPS_NO							4u
 
 //names of the connected devices in the same order as in the array
 typedef enum{SPI_SS0,SPI_MOSI,SPI_MISO,SPI_SCK,test}enuPinConfig_t;

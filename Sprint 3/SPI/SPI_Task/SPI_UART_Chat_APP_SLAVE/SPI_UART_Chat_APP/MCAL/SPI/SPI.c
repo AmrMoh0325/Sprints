@@ -63,37 +63,35 @@ enuErrorStatus_t SPI_ReceiveData(uint8_t *pu8Data)
 
 #endif
 
- enuErrorStatus_t SPI_SendString(uint8_t *pu8Data)
- {
-     uint8_t u8i;
-     //loop on the string
-     for (u8i=0;pu8Data[u8i];u8i++)
-     {
-        //send each character independently
-        SPI_SendData(*(pu8Data+u8i));
-     }
-     //send termination characters when done
-     SPI_SendData('\r');
-     SPI_SendData('\n');
-     
-     return SUCCESS;
- }
- 
- enuErrorStatus_t SPI_ReceiveString(uint8_t *pu8Data,uint8_t u8bufferMaxSize)
- {
-    uint8_t u8i;
-    //traverse the string
-    for (u8i=0; u8i<u8bufferMaxSize-1;u8i++)
-    {
-       //receive each character stored in the UDR and store it in the appropriate place in the string
-       SPI_ReceiveData((pu8Data+u8i));
-       //if termination characters are detected end the communication
-       if (*(pu8Data+u8i)=='\r'  ||  *(pu8Data+u8i)=='\n')
-       {
-          break;
-       }
-    }
-    //end the string with null
-    *(pu8Data+u8i)=0;
-    return SUCCESS;
- }
+enuErrorStatus_t SPI_SendString(uint8_t *pu8Data)
+{
+   uint8_t u8i;
+   //loop on the string
+   for (u8i=0;pu8Data[u8i];u8i++)
+   {
+      //send each character independently
+      SPI_SendData(*(pu8Data+u8i));
+   }
+   //send termination characters when done
+   SPI_SendData(0);
+   
+   return SUCCESS;
+}
+
+enuErrorStatus_t SPI_ReceiveString(uint8_t *pu8Data,uint8_t u8bufferMaxSize)
+{
+   uint8_t u8i;
+   //traverse the string
+   for (u8i=0; u8i<u8bufferMaxSize-1;u8i++)
+   {
+      //receive each character stored in the UDR and store it in the appropriate place in the string
+      SPI_ReceiveData((pu8Data+u8i));
+      //if termination characters are detected end the communication
+      if (*(pu8Data+u8i)==0)
+      {
+         break;
+      }
+   }
+   //end the string with null
+   return SUCCESS;
+}

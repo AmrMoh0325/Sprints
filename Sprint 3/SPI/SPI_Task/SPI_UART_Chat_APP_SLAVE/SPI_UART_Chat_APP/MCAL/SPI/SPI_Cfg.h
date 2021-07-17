@@ -13,7 +13,7 @@
 #define MASTER    1
 #define SLAVE     0
 
-#define SPI_CONFIG      MASTER
+#define SPI_CONFIG      SLAVE
 
 
 
