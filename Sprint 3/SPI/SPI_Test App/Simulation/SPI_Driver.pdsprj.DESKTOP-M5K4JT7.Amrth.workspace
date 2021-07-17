@@ -175,7 +175,7 @@
      <ITEM name="TopLineAddress">00000020</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="450" x="1333" flags="00008023" y="568" h="250" pid="0" iid="4">
+   <POPUP w="450" x="980" flags="00008023" y="779" h="250" pid="0" iid="4">
     <PROPERTIES>
      <ITEM name="HSplitter1Pos">100</ITEM>
      <ITEM name="VSplitter1Pos">238</ITEM>
