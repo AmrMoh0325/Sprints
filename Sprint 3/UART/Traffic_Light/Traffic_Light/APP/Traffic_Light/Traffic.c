@@ -6,10 +6,13 @@
 * Date: 15/7/2021
 ******************************************************************************/
 
+ /*- INCLUDES --------------------------------------------------*/
 #include "APP/Traffic_Light/Traffic.h"
 
+/*- GLOBAL VARIABLES --------------------------------------------------*/
 uint8_t UART_buffer[10]={0};
    
+/*- APIs IMPLEMENTATION-----------------------------------*/
 /************************************************************************************
 * Parameters (in): uint8_t *str1,uint8_t *str2
 * Parameters (out): sint8_t
@@ -19,8 +22,10 @@ uint8_t UART_buffer[10]={0};
 static sint8_t String_compare(uint8_t *str1,uint8_t *str2)
 {
    uint16_t u16i;
+   //Traverse both strings
    for(u16i=0;str1[u16i] || str2[u16i];u16i++)
    {
+	  // look for any difference 
       if      (str1[u16i] < str2[u16i])     return -1;
       else if (str1[u16i] > str2[u16i])     return 1;
    }

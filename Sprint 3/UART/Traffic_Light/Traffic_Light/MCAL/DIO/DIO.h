@@ -9,11 +9,12 @@
 #ifndef __DIO__
 #define __DIO__
 
-
+ /*- INCLUDES --------------------------------------------------*/
 #include "DataTypes.h"
 #include "Utils.h"
-#include "DIO_Cfg.h"
+#include "MCAL/DIO/DIO_Cfg.h"
 
+/*- ENUMS --------------------------------------------------*/
 typedef enum {INPUT, OUTPUT} enuDIOPinDir_t;
 typedef enum {NO_CONNECTION, PULL_UP_ENABLE} enuDIOPullupResEn_t;
 typedef enum {PA0, PA1, PA2, PA3, PA4, PA5, PA6, PA7,
@@ -22,7 +23,7 @@ typedef enum {PA0, PA1, PA2, PA3, PA4, PA5, PA6, PA7,
               PD0, PD1, PD2, PD3, PD4, PD5, PD6, PD7} enuDIOPinNo_t;
 
 
-
+/*- STRUCTS --------------------------------------------------*/
 typedef struct
 {
    /* Selecting the pin number in that specific port selected */
@@ -33,9 +34,11 @@ typedef struct
    enuDIOPullupResEn_t enuPullupResEn;
 } strDIOConfigType_t;
 
-
+/*- GLOBAL VARIABLES --------------------------------------------------*/
 extern const strDIOConfigType_t astrDIOConfigParameters[DIO_GROUPS_NO];
 
+
+/*- APIs PROTOTYPES-----------------------------------*/
 /************************************************************************************
 * Parameters (in): void
 * Parameters (out): enuErrorStatus_t

@@ -10,9 +10,10 @@
 #ifndef __DIO_CFG__
 #define __DIO_CFG__
 
-
+ /*- MACROS --------------------------------------------------*/
 #define DIO_GROUPS_NO							3u
 
+/*- ENUMS --------------------------------------------------*/
 //names of the connected devices in the same order as in the array
 typedef enum{Green,Yellow,Red}enuPinConfig_t;
 

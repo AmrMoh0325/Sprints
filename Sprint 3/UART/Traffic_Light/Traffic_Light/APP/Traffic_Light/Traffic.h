@@ -10,11 +10,13 @@
 #ifndef __TRAFFIC__
 #define __TRAFFIC__
 
+ /*- INCLUDES --------------------------------------------------*/
 #include "DataTypes.h"
 #include "MCAL/DIO/DIO.h"
 #include "MCAL/UART/UART.h"
 #include "ECUAL/LED/LED.h"
 
+/*- APIs PROTOTYPES-----------------------------------*/
 /************************************************************************************
 * Parameters (in): void
 * Parameters (out): enuErrorStatus_t
