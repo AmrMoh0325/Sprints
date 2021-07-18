@@ -16,7 +16,7 @@ Discarded input sections
  .data          0x00000000        0x0 MCAL/DIO/DIO.o
  .bss           0x00000000        0x0 MCAL/DIO/DIO.o
  .text.DIO_Read
-                0x00000000       0xbe MCAL/DIO/DIO.o
+                0x00000000       0xcc MCAL/DIO/DIO.o
  .text.DIO_Toggle
                 0x00000000       0xb4 MCAL/DIO/DIO.o
  .text          0x00000000        0x0 MCAL/DIO/DIO_Cfg.o
@@ -423,29 +423,29 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000      0xd8b
+.debug_info     0x00000000      0xd8f
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x4e6 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_info    0x000004e6       0xd3 main.o
- .debug_info    0x000005b9      0x370 MCAL/DIO/DIO.o
- .debug_info    0x00000929      0x1e7 MCAL/DIO/DIO_Cfg.o
- .debug_info    0x00000b10      0x27b MCAL/SPI/SPI.o
+ .debug_info    0x000005b9      0x374 MCAL/DIO/DIO.o
+ .debug_info    0x0000092d      0x1e7 MCAL/DIO/DIO_Cfg.o
+ .debug_info    0x00000b14      0x27b MCAL/SPI/SPI.o
 
-.debug_abbrev   0x00000000      0x822
+.debug_abbrev   0x00000000      0x813
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x4a3 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_abbrev  0x000004a3       0x9b main.o
- .debug_abbrev  0x0000053e      0x159 MCAL/DIO/DIO.o
- .debug_abbrev  0x00000697       0x9a MCAL/DIO/DIO_Cfg.o
- .debug_abbrev  0x00000731       0xf1 MCAL/SPI/SPI.o
+ .debug_abbrev  0x0000053e      0x14a MCAL/DIO/DIO.o
+ .debug_abbrev  0x00000688       0x9a MCAL/DIO/DIO_Cfg.o
+ .debug_abbrev  0x00000722       0xf1 MCAL/SPI/SPI.o
 
-.debug_line     0x00000000      0x66a
+.debug_line     0x00000000      0x676
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x116 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_line    0x00000116       0x88 main.o
- .debug_line    0x0000019e      0x303 MCAL/DIO/DIO.o
- .debug_line    0x000004a1       0x3c MCAL/DIO/DIO_Cfg.o
- .debug_line    0x000004dd      0x18d MCAL/SPI/SPI.o
+ .debug_line    0x0000019e      0x30f MCAL/DIO/DIO.o
+ .debug_line    0x000004ad       0x3c MCAL/DIO/DIO_Cfg.o
+ .debug_line    0x000004e9      0x18d MCAL/SPI/SPI.o
 
 .debug_frame    0x00000000      0x130
  *(.debug_frame)
@@ -465,11 +465,11 @@ END GROUP
  .debug_str     0x00000435       0x72 MCAL/SPI/SPI.o
                                 0x237 (size before relaxing)
 
-.debug_loc      0x00000000      0x5d7
+.debug_loc      0x00000000      0x62c
  *(.debug_loc)
  .debug_loc     0x00000000       0x48 main.o
- .debug_loc     0x00000048      0x35c MCAL/DIO/DIO.o
- .debug_loc     0x000003a4      0x233 MCAL/SPI/SPI.o
+ .debug_loc     0x00000048      0x3b1 MCAL/DIO/DIO.o
+ .debug_loc     0x000003f9      0x233 MCAL/SPI/SPI.o
 
 .debug_macinfo
  *(.debug_macinfo)

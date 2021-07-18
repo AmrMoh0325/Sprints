@@ -5,13 +5,13 @@
 * Author: Amr Mohamed
 * Date: 8/7/2021
 ******************************************************************************/
-//included files
+ /*- INCLUDES --------------------------------------------------*/
 #include "MCAL/Register.h"
 #include "Utils.h"
 #include "DataTypes.h"
 #include "MCAL/DIO/DIO.h"
 
-//Private macros used within the driver
+/*- MACROS --------------------------------------------------*/
 #define DIO_PORT_NO                       4u
 #define DIO_PINS_NO                       8u
 
@@ -22,7 +22,7 @@
 #define M_PORTD  3
 
 
-
+/*- APIs IMPLEMENTATION-----------------------------------*/
 /************************************************************************************
 * Parameters (in): void
 * Parameters (out): enuErrorStatus_t
@@ -213,6 +213,12 @@ enuErrorStatus_t DIO_Write(uint8_t u8GroupId, uint8_t u8Data)
 ************************************************************************************/
 enuErrorStatus_t DIO_Read(uint8_t u8GroupId, uint8_t* pu8Data)
 {
+   //check if sent pointer points to a valid location
+   if (pu8Data == NULLPTR)
+   {
+      //return an error
+      return ERROR;
+   }
    uint8_t u8port,u8pin;
    //calculate the port and pin number of the selected object
    u8port=astrDIOConfigParameters[u8GroupId].enuPinNo / DIO_PINS_NO;

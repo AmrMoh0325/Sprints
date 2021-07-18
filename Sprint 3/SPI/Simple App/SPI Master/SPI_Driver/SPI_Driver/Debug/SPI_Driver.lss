@@ -15,19 +15,19 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   5 .debug_aranges 00000168  00000000  00000000  00000c8c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00001474  00000000  00000000  00000df4  2**0
+  6 .debug_info   00001478  00000000  00000000  00000df4  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 000009ed  00000000  00000000  00002268  2**0
+  7 .debug_abbrev 000009de  00000000  00000000  0000226c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00000d1b  00000000  00000000  00002c55  2**0
+  8 .debug_line   00000d27  00000000  00000000  00002c4a  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  000003dc  00000000  00000000  00003970  2**2
+  9 .debug_frame  000003dc  00000000  00000000  00003974  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000a1e  00000000  00000000  00003d4c  2**0
+ 10 .debug_str    00000a1e  00000000  00000000  00003d50  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00000d0b  00000000  00000000  0000476a  2**0
+ 11 .debug_loc    00000d60  00000000  00000000  0000476e  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000110  00000000  00000000  00005475  2**0
+ 12 .debug_ranges 00000110  00000000  00000000  000054ce  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -132,12 +132,12 @@ int main(void)
   be:	0e 94 a6 02 	call	0x54c	; 0x54c <T0_OV_InterruptEnable>
     sei();
   c2:	78 94       	sei
-    T0_Start(100000,Simple_App);
+    T0_Start(1000000,Simple_App);
   c4:	09 e4       	ldi	r16, 0x49	; 73
   c6:	10 e0       	ldi	r17, 0x00	; 0
-  c8:	20 ea       	ldi	r18, 0xA0	; 160
-  ca:	36 e8       	ldi	r19, 0x86	; 134
-  cc:	41 e0       	ldi	r20, 0x01	; 1
+  c8:	20 e4       	ldi	r18, 0x40	; 64
+  ca:	32 e4       	ldi	r19, 0x42	; 66
+  cc:	4f e0       	ldi	r20, 0x0F	; 15
   ce:	50 e0       	ldi	r21, 0x00	; 0
   d0:	60 e0       	ldi	r22, 0x00	; 0
   d2:	70 e0       	ldi	r23, 0x00	; 0

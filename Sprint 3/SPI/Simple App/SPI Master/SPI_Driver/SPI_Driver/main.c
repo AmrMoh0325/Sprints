@@ -25,7 +25,7 @@ int main(void)
     T0_Init(TIMER0_NORMAL_MODE,TIMER0_SCALER_8);
     T0_OV_InterruptEnable();
     sei();
-    T0_Start(100000,Simple_App);
+    T0_Start(1000000,Simple_App);
     
     while (1) 
     {
