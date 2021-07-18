@@ -36,7 +36,7 @@ Discarded input sections
  .data          0x00000000        0x0 MCAL/DIO/DIO.o
  .bss           0x00000000        0x0 MCAL/DIO/DIO.o
  .text.DIO_Read
-                0x00000000       0xbe MCAL/DIO/DIO.o
+                0x00000000       0xcc MCAL/DIO/DIO.o
  .text          0x00000000        0x0 MCAL/DIO/DIO_Cfg.o
  .data          0x00000000        0x0 MCAL/DIO/DIO_Cfg.o
  .bss           0x00000000        0x0 MCAL/DIO/DIO_Cfg.o
@@ -694,32 +694,32 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x14ee
+.debug_info     0x00000000     0x14f2
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x4e6 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_info    0x000004e6      0x214 main.o
- .debug_info    0x000006fa      0x370 MCAL/DIO/DIO.o
- .debug_info    0x00000a6a      0x1e7 MCAL/DIO/DIO_Cfg.o
- .debug_info    0x00000c51      0x2fa MCAL/SPI/SPI.o
- .debug_info    0x00000f4b      0x5a3 MCAL/Timer/Timer.o
+ .debug_info    0x000006fa      0x374 MCAL/DIO/DIO.o
+ .debug_info    0x00000a6e      0x1e7 MCAL/DIO/DIO_Cfg.o
+ .debug_info    0x00000c55      0x2fa MCAL/SPI/SPI.o
+ .debug_info    0x00000f4f      0x5a3 MCAL/Timer/Timer.o
 
-.debug_abbrev   0x00000000      0xa37
+.debug_abbrev   0x00000000      0xa28
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x4a3 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_abbrev  0x000004a3       0xda main.o
- .debug_abbrev  0x0000057d      0x159 MCAL/DIO/DIO.o
- .debug_abbrev  0x000006d6       0x9a MCAL/DIO/DIO_Cfg.o
- .debug_abbrev  0x00000770      0x13b MCAL/SPI/SPI.o
- .debug_abbrev  0x000008ab      0x18c MCAL/Timer/Timer.o
+ .debug_abbrev  0x0000057d      0x14a MCAL/DIO/DIO.o
+ .debug_abbrev  0x000006c7       0x9a MCAL/DIO/DIO_Cfg.o
+ .debug_abbrev  0x00000761      0x13b MCAL/SPI/SPI.o
+ .debug_abbrev  0x0000089c      0x18c MCAL/Timer/Timer.o
 
-.debug_line     0x00000000      0xdc1
+.debug_line     0x00000000      0xdcd
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x116 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_line    0x00000116       0xdf main.o
- .debug_line    0x000001f5      0x303 MCAL/DIO/DIO.o
- .debug_line    0x000004f8       0x3c MCAL/DIO/DIO_Cfg.o
- .debug_line    0x00000534      0x233 MCAL/SPI/SPI.o
- .debug_line    0x00000767      0x65a MCAL/Timer/Timer.o
+ .debug_line    0x000001f5      0x30f MCAL/DIO/DIO.o
+ .debug_line    0x00000504       0x3c MCAL/DIO/DIO_Cfg.o
+ .debug_line    0x00000540      0x233 MCAL/SPI/SPI.o
+ .debug_line    0x00000773      0x65a MCAL/Timer/Timer.o
 
 .debug_frame    0x00000000      0x464
  *(.debug_frame)
@@ -742,11 +742,11 @@ END GROUP
  .debug_str     0x00000614      0x46b MCAL/Timer/Timer.o
                                 0x6f3 (size before relaxing)
 
-.debug_loc      0x00000000      0xe72
+.debug_loc      0x00000000      0xec7
  *(.debug_loc)
- .debug_loc     0x00000000      0x2d5 MCAL/DIO/DIO.o
- .debug_loc     0x000002d5      0x39a MCAL/SPI/SPI.o
- .debug_loc     0x0000066f      0x803 MCAL/Timer/Timer.o
+ .debug_loc     0x00000000      0x32a MCAL/DIO/DIO.o
+ .debug_loc     0x0000032a      0x39a MCAL/SPI/SPI.o
+ .debug_loc     0x000006c4      0x803 MCAL/Timer/Timer.o
 
 .debug_macinfo
  *(.debug_macinfo)
