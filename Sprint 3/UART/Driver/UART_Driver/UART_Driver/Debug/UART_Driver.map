@@ -22,16 +22,16 @@ Discarded input sections
  .text.DIO_Write
                 0x00000000      0x100 MCAL/DIO/DIO.o
  .text.DIO_Read
-                0x00000000       0xbe MCAL/DIO/DIO.o
+                0x00000000       0xcc MCAL/DIO/DIO.o
  .text.DIO_Toggle
                 0x00000000       0xb4 MCAL/DIO/DIO.o
- .debug_info    0x00000000      0x370 MCAL/DIO/DIO.o
- .debug_abbrev  0x00000000      0x159 MCAL/DIO/DIO.o
- .debug_loc     0x00000000      0x2d5 MCAL/DIO/DIO.o
+ .debug_info    0x00000000      0x374 MCAL/DIO/DIO.o
+ .debug_abbrev  0x00000000      0x14a MCAL/DIO/DIO.o
+ .debug_loc     0x00000000      0x32a MCAL/DIO/DIO.o
  .debug_aranges
                 0x00000000       0x38 MCAL/DIO/DIO.o
  .debug_ranges  0x00000000       0x28 MCAL/DIO/DIO.o
- .debug_line    0x00000000      0x303 MCAL/DIO/DIO.o
+ .debug_line    0x00000000      0x30f MCAL/DIO/DIO.o
  .debug_str     0x00000000      0x28f MCAL/DIO/DIO.o
  .comment       0x00000000       0x31 MCAL/DIO/DIO.o
  .debug_frame   0x00000000       0x54 MCAL/DIO/DIO.o
@@ -55,9 +55,9 @@ Discarded input sections
  .text.UART_SendDataNoBLOCK
                 0x00000000        0xe MCAL/UART/UART.o
  .text.UART_ReceiveString
-                0x00000000       0x56 MCAL/UART/UART.o
+                0x00000000       0x60 MCAL/UART/UART.o
  .text.UART_SendString
-                0x00000000       0x3a MCAL/UART/UART.o
+                0x00000000       0x42 MCAL/UART/UART.o
  .text.UART_TX_Enable_Interrupt
                 0x00000000        0xa MCAL/UART/UART.o
  .text.UART_TX_Disable_Interrupt
@@ -490,11 +490,11 @@ END GROUP
  .debug_abbrev  0x000004a3       0x9b main.o
  .debug_abbrev  0x0000053e      0x1a4 MCAL/UART/UART.o
 
-.debug_line     0x00000000      0x4be
+.debug_line     0x00000000      0x4d6
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x116 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_line    0x00000116       0x7f main.o
- .debug_line    0x00000195      0x329 MCAL/UART/UART.o
+ .debug_line    0x00000195      0x341 MCAL/UART/UART.o
 
 .debug_frame    0x00000000      0x208
  *(.debug_frame)
@@ -509,10 +509,10 @@ END GROUP
  .debug_str     0x000002fd      0x18d MCAL/UART/UART.o
                                 0x31f (size before relaxing)
 
-.debug_loc      0x00000000      0x544
+.debug_loc      0x00000000      0x557
  *(.debug_loc)
  .debug_loc     0x00000000       0x48 main.o
- .debug_loc     0x00000048      0x4fc MCAL/UART/UART.o
+ .debug_loc     0x00000048      0x50f MCAL/UART/UART.o
 
 .debug_macinfo
  *(.debug_macinfo)
