@@ -213,6 +213,12 @@ enuErrorStatus_t DIO_Write(uint8_t u8GroupId, uint8_t u8Data)
 ************************************************************************************/
 enuErrorStatus_t DIO_Read(uint8_t u8GroupId, uint8_t* pu8Data)
 {
+   //check if sent pointer points to a valid location
+   if (pu8Data == NULLPTR)
+   {
+      //return an error
+      return ERROR;
+   }
    uint8_t u8port,u8pin;
    //calculate the port and pin number of the selected object
    u8port=astrDIOConfigParameters[u8GroupId].enuPinNo / DIO_PINS_NO;
