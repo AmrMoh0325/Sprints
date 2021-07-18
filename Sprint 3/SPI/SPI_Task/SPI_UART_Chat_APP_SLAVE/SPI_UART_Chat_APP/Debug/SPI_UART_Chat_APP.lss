@@ -3,31 +3,31 @@ SPI_UART_Chat_APP.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         00000594  00000000  00000000  00000094  2**1
+  0 .text         0000047a  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         0000000c  00800060  00000594  00000628  2**0
+  1 .data         0000000c  00800060  0000047a  0000050e  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .bss          00000105  0080006c  0080006c  00000634  2**0
+  2 .bss          00000105  0080006c  0080006c  0000051a  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  00000634  2**0
+  3 .comment      00000030  00000000  00000000  0000051a  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000664  2**2
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  0000054c  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 00000188  00000000  00000000  000006a0  2**0
+  5 .debug_aranges 00000188  00000000  00000000  00000588  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   000012c5  00000000  00000000  00000828  2**0
+  6 .debug_info   0000123f  00000000  00000000  00000710  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00000a94  00000000  00000000  00001aed  2**0
+  7 .debug_abbrev 00000a78  00000000  00000000  0000194f  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00000abe  00000000  00000000  00002581  2**0
+  8 .debug_line   00000ab4  00000000  00000000  000023c7  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  000003b0  00000000  00000000  00003040  2**2
+  9 .debug_frame  0000039c  00000000  00000000  00002e7c  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    000006cd  00000000  00000000  000033f0  2**0
+ 10 .debug_str    000006ab  00000000  00000000  00003218  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00000bf2  00000000  00000000  00003abd  2**0
+ 11 .debug_loc    00000bfc  00000000  00000000  000038c3  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000120  00000000  00000000  000046af  2**0
+ 12 .debug_ranges 00000120  00000000  00000000  000044bf  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -45,10 +45,10 @@ Disassembly of section .text:
   24:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
   28:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
   2c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
-  30:	0c 94 01 02 	jmp	0x402	; 0x402 <__vector_12>
-  34:	0c 94 76 02 	jmp	0x4ec	; 0x4ec <__vector_13>
+  30:	0c 94 70 01 	jmp	0x2e0	; 0x2e0 <__vector_12>
+  34:	0c 94 e9 01 	jmp	0x3d2	; 0x3d2 <__vector_13>
   38:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
-  3c:	0c 94 9f 02 	jmp	0x53e	; 0x53e <__vector_15>
+  3c:	0c 94 12 02 	jmp	0x424	; 0x424 <__vector_15>
   40:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
   44:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
   48:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
@@ -67,8 +67,8 @@ Disassembly of section .text:
   60:	10 e0       	ldi	r17, 0x00	; 0
   62:	a0 e6       	ldi	r26, 0x60	; 96
   64:	b0 e0       	ldi	r27, 0x00	; 0
-  66:	e4 e9       	ldi	r30, 0x94	; 148
-  68:	f5 e0       	ldi	r31, 0x05	; 5
+  66:	ea e7       	ldi	r30, 0x7A	; 122
+  68:	f4 e0       	ldi	r31, 0x04	; 4
   6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
   6c:	05 90       	lpm	r0, Z+
   6e:	0d 92       	st	X+, r0
@@ -90,7 +90,7 @@ Disassembly of section .text:
   82:	b2 07       	cpc	r27, r18
   84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
   86:	0e 94 58 00 	call	0xb0	; 0xb0 <main>
-  8a:	0c 94 c8 02 	jmp	0x590	; 0x590 <_exit>
+  8a:	0c 94 3b 02 	jmp	0x476	; 0x476 <_exit>
 
 0000008e <__bad_interrupt>:
   8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -102,10 +102,10 @@ void APP_Init_Slave(void)
 {
    //initialize UART
    UART_Init();
-  92:	0e 94 2a 02 	call	0x454	; 0x454 <UART_Init>
+  92:	0e 94 99 01 	call	0x332	; 0x332 <UART_Init>
    //initialize SPI
    SPI_Init();
-  96:	0e 94 b2 01 	call	0x364	; 0x364 <SPI_Init>
+  96:	0e 94 32 01 	call	0x264	; 0x264 <SPI_Init>
   9a:	08 95       	ret
 
 0000009c <APP_Update_Slave>:
@@ -118,12 +118,12 @@ void APP_Update_Slave(void)
   9c:	6f ef       	ldi	r22, 0xFF	; 255
   9e:	8c e6       	ldi	r24, 0x6C	; 108
   a0:	90 e0       	ldi	r25, 0x00	; 0
-  a2:	0e 94 d5 01 	call	0x3aa	; 0x3aa <SPI_ReceiveString>
+  a2:	0e 94 44 01 	call	0x288	; 0x288 <SPI_ReceiveString>
    //when done, send that string to UART
    UART_SendString(Send_Buffer);
   a6:	8c e6       	ldi	r24, 0x6C	; 108
   a8:	90 e0       	ldi	r25, 0x00	; 0
-  aa:	0e 94 59 02 	call	0x4b2	; 0x4b2 <UART_SendString>
+  aa:	0e 94 c8 01 	call	0x390	; 0x390 <UART_SendString>
   ae:	08 95       	ret
 
 000000b0 <main>:
@@ -469,562 +469,326 @@ enuErrorStatus_t DIO_Init(void)
 }
  262:	08 95       	ret
 
-00000264 <DIO_Write>:
-************************************************************************************/
-enuErrorStatus_t DIO_Write(uint8_t u8GroupId, uint8_t u8Data)
-{
-   uint8_t u8port,u8pin;
-   //calculate the port and pin number of the selected object
-   u8port=astrDIOConfigParameters[u8GroupId].enuPinNo / DIO_PINS_NO;
- 264:	90 e0       	ldi	r25, 0x00	; 0
- 266:	fc 01       	movw	r30, r24
- 268:	ee 0f       	add	r30, r30
- 26a:	ff 1f       	adc	r31, r31
- 26c:	e8 0f       	add	r30, r24
- 26e:	f9 1f       	adc	r31, r25
- 270:	e0 5a       	subi	r30, 0xA0	; 160
- 272:	ff 4f       	sbci	r31, 0xFF	; 255
- 274:	20 81       	ld	r18, Z
- 276:	32 2f       	mov	r19, r18
- 278:	36 95       	lsr	r19
- 27a:	36 95       	lsr	r19
- 27c:	36 95       	lsr	r19
-   u8pin =astrDIOConfigParameters[u8GroupId].enuPinNo % DIO_PINS_NO;
- 27e:	27 70       	andi	r18, 0x07	; 7
-   
-   //if port number is invalid or the pin is set as input
-   if(u8port >= DIO_PORT_NO || astrDIOConfigParameters[u8GroupId].enuPinDir == INPUT)
- 280:	34 30       	cpi	r19, 0x04	; 4
- 282:	08 f0       	brcs	.+2      	; 0x286 <DIO_Write+0x22>
- 284:	61 c0       	rjmp	.+194    	; 0x348 <DIO_Write+0xe4>
- 286:	fc 01       	movw	r30, r24
- 288:	ee 0f       	add	r30, r30
- 28a:	ff 1f       	adc	r31, r31
- 28c:	8e 0f       	add	r24, r30
- 28e:	9f 1f       	adc	r25, r31
- 290:	fc 01       	movw	r30, r24
- 292:	e0 5a       	subi	r30, 0xA0	; 160
- 294:	ff 4f       	sbci	r31, 0xFF	; 255
- 296:	81 81       	ldd	r24, Z+1	; 0x01
- 298:	88 23       	and	r24, r24
- 29a:	09 f4       	brne	.+2      	; 0x29e <DIO_Write+0x3a>
- 29c:	57 c0       	rjmp	.+174    	; 0x34c <DIO_Write+0xe8>
-   }
-   
-   else
-   {
-      //select the calculated port
-      switch(u8port)
- 29e:	31 30       	cpi	r19, 0x01	; 1
- 2a0:	d1 f0       	breq	.+52     	; 0x2d6 <DIO_Write+0x72>
- 2a2:	28 f0       	brcs	.+10     	; 0x2ae <DIO_Write+0x4a>
- 2a4:	32 30       	cpi	r19, 0x02	; 2
- 2a6:	51 f1       	breq	.+84     	; 0x2fc <DIO_Write+0x98>
- 2a8:	33 30       	cpi	r19, 0x03	; 3
- 2aa:	d9 f1       	breq	.+118    	; 0x322 <DIO_Write+0xbe>
- 2ac:	51 c0       	rjmp	.+162    	; 0x350 <DIO_Write+0xec>
-      {
-         case M_PORTA:
-         //clear the pin's equivalent bit in the PORTx Register
-         CLR_BIT(PORTA_R,u8pin);
- 2ae:	3b b3       	in	r19, 0x1b	; 27
- 2b0:	81 e0       	ldi	r24, 0x01	; 1
- 2b2:	90 e0       	ldi	r25, 0x00	; 0
- 2b4:	02 c0       	rjmp	.+4      	; 0x2ba <DIO_Write+0x56>
- 2b6:	88 0f       	add	r24, r24
- 2b8:	99 1f       	adc	r25, r25
- 2ba:	2a 95       	dec	r18
- 2bc:	e2 f7       	brpl	.-8      	; 0x2b6 <DIO_Write+0x52>
- 2be:	28 2f       	mov	r18, r24
- 2c0:	20 95       	com	r18
- 2c2:	23 23       	and	r18, r19
- 2c4:	2b bb       	out	0x1b, r18	; 27
-         //if we want to apply 5V to the pin
-         if (u8Data)
- 2c6:	66 23       	and	r22, r22
- 2c8:	09 f4       	brne	.+2      	; 0x2cc <DIO_Write+0x68>
- 2ca:	44 c0       	rjmp	.+136    	; 0x354 <DIO_Write+0xf0>
-         {
-            //set the pin's equivalent bit in the PORTx Register
-            SET_BIT(PORTA_R,u8pin);
- 2cc:	9b b3       	in	r25, 0x1b	; 27
- 2ce:	89 2b       	or	r24, r25
- 2d0:	8b bb       	out	0x1b, r24	; 27
-         }
-         break;
-      }
-   }
-   //return success status
-   return SUCCESS;
- 2d2:	81 e0       	ldi	r24, 0x01	; 1
- 2d4:	08 95       	ret
-         }
-         break;
-
-         case M_PORTB:
-         //clear the pin's equivalent bit in the PORTx Register
-         CLR_BIT(PORTB_R,u8pin);
- 2d6:	38 b3       	in	r19, 0x18	; 24
- 2d8:	81 e0       	ldi	r24, 0x01	; 1
- 2da:	90 e0       	ldi	r25, 0x00	; 0
- 2dc:	02 c0       	rjmp	.+4      	; 0x2e2 <DIO_Write+0x7e>
- 2de:	88 0f       	add	r24, r24
- 2e0:	99 1f       	adc	r25, r25
- 2e2:	2a 95       	dec	r18
- 2e4:	e2 f7       	brpl	.-8      	; 0x2de <DIO_Write+0x7a>
- 2e6:	28 2f       	mov	r18, r24
- 2e8:	20 95       	com	r18
- 2ea:	23 23       	and	r18, r19
- 2ec:	28 bb       	out	0x18, r18	; 24
-         //if we want to apply 5V to the pin
-         if (u8Data)
- 2ee:	66 23       	and	r22, r22
- 2f0:	99 f1       	breq	.+102    	; 0x358 <DIO_Write+0xf4>
-         {
-            //set the pin's equivalent bit in the PORTx Register
-            SET_BIT(PORTB_R,u8pin);
- 2f2:	98 b3       	in	r25, 0x18	; 24
- 2f4:	89 2b       	or	r24, r25
- 2f6:	88 bb       	out	0x18, r24	; 24
-         }
-         break;
-      }
-   }
-   //return success status
-   return SUCCESS;
- 2f8:	81 e0       	ldi	r24, 0x01	; 1
- 2fa:	08 95       	ret
-         }
-         break;
-
-         case M_PORTC:
-         //clear the pin's equivalent bit in the PORTx Register
-         CLR_BIT(PORTC_R,u8pin);
- 2fc:	35 b3       	in	r19, 0x15	; 21
- 2fe:	81 e0       	ldi	r24, 0x01	; 1
- 300:	90 e0       	ldi	r25, 0x00	; 0
- 302:	02 c0       	rjmp	.+4      	; 0x308 <DIO_Write+0xa4>
- 304:	88 0f       	add	r24, r24
- 306:	99 1f       	adc	r25, r25
- 308:	2a 95       	dec	r18
- 30a:	e2 f7       	brpl	.-8      	; 0x304 <DIO_Write+0xa0>
- 30c:	28 2f       	mov	r18, r24
- 30e:	20 95       	com	r18
- 310:	23 23       	and	r18, r19
- 312:	25 bb       	out	0x15, r18	; 21
-         //if we want to apply 5V to the pin
-         if (u8Data)
- 314:	66 23       	and	r22, r22
- 316:	11 f1       	breq	.+68     	; 0x35c <DIO_Write+0xf8>
-         {
-            //set the pin's equivalent bit in the PORTx Register
-            SET_BIT(PORTC_R,u8pin);
- 318:	95 b3       	in	r25, 0x15	; 21
- 31a:	89 2b       	or	r24, r25
- 31c:	85 bb       	out	0x15, r24	; 21
-         }
-         break;
-      }
-   }
-   //return success status
-   return SUCCESS;
- 31e:	81 e0       	ldi	r24, 0x01	; 1
- 320:	08 95       	ret
-         }
-         break;
-
-         case M_PORTD:
-         //clear the pin's equivalent bit in the PORTx Register
-         CLR_BIT(PORTD_R,u8pin);
- 322:	32 b3       	in	r19, 0x12	; 18
- 324:	81 e0       	ldi	r24, 0x01	; 1
- 326:	90 e0       	ldi	r25, 0x00	; 0
- 328:	02 c0       	rjmp	.+4      	; 0x32e <DIO_Write+0xca>
- 32a:	88 0f       	add	r24, r24
- 32c:	99 1f       	adc	r25, r25
- 32e:	2a 95       	dec	r18
- 330:	e2 f7       	brpl	.-8      	; 0x32a <DIO_Write+0xc6>
- 332:	28 2f       	mov	r18, r24
- 334:	20 95       	com	r18
- 336:	23 23       	and	r18, r19
- 338:	22 bb       	out	0x12, r18	; 18
-         //if we want to apply 5V to the pin
-         if (u8Data)
- 33a:	66 23       	and	r22, r22
- 33c:	89 f0       	breq	.+34     	; 0x360 <DIO_Write+0xfc>
-         {
-            //set the pin's equivalent bit in the PORTx Register
-            SET_BIT(PORTD_R,u8pin);
- 33e:	92 b3       	in	r25, 0x12	; 18
- 340:	89 2b       	or	r24, r25
- 342:	82 bb       	out	0x12, r24	; 18
-         }
-         break;
-      }
-   }
-   //return success status
-   return SUCCESS;
- 344:	81 e0       	ldi	r24, 0x01	; 1
- 346:	08 95       	ret
-   
-   //if port number is invalid or the pin is set as input
-   if(u8port >= DIO_PORT_NO || astrDIOConfigParameters[u8GroupId].enuPinDir == INPUT)
-   {
-      //return error status
-      return ERROR;
- 348:	80 e0       	ldi	r24, 0x00	; 0
- 34a:	08 95       	ret
- 34c:	80 e0       	ldi	r24, 0x00	; 0
- 34e:	08 95       	ret
-         }
-         break;
-      }
-   }
-   //return success status
-   return SUCCESS;
- 350:	81 e0       	ldi	r24, 0x01	; 1
- 352:	08 95       	ret
- 354:	81 e0       	ldi	r24, 0x01	; 1
- 356:	08 95       	ret
- 358:	81 e0       	ldi	r24, 0x01	; 1
- 35a:	08 95       	ret
- 35c:	81 e0       	ldi	r24, 0x01	; 1
- 35e:	08 95       	ret
- 360:	81 e0       	ldi	r24, 0x01	; 1
-}
- 362:	08 95       	ret
-
-00000364 <SPI_Init>:
+00000264 <SPI_Init>:
    //check if the sent pointer points to a valid position
    if (local_fptr== NULLPTR)     return ERROR;
    //if so, store the pointer address in the global pointer to function
    SPI_Callback=local_fptr;
    return SUCCESS;
 }
- 364:	0e 94 5d 00 	call	0xba	; 0xba <DIO_Init>
- 368:	8d b1       	in	r24, 0x0d	; 13
- 36a:	80 61       	ori	r24, 0x10	; 16
- 36c:	8d b9       	out	0x0d, r24	; 13
- 36e:	8d b1       	in	r24, 0x0d	; 13
- 370:	80 64       	ori	r24, 0x40	; 64
- 372:	8d b9       	out	0x0d, r24	; 13
- 374:	81 e0       	ldi	r24, 0x01	; 1
- 376:	08 95       	ret
+ 264:	0e 94 5d 00 	call	0xba	; 0xba <DIO_Init>
+ 268:	8d b1       	in	r24, 0x0d	; 13
+ 26a:	80 64       	ori	r24, 0x40	; 64
+ 26c:	8d b9       	out	0x0d, r24	; 13
+ 26e:	81 e0       	ldi	r24, 0x01	; 1
+ 270:	08 95       	ret
 
-00000378 <SPI_ReceiveData>:
- 378:	cf 93       	push	r28
- 37a:	df 93       	push	r29
- 37c:	00 97       	sbiw	r24, 0x00	; 0
- 37e:	89 f0       	breq	.+34     	; 0x3a2 <SPI_ReceiveData+0x2a>
- 380:	ec 01       	movw	r28, r24
- 382:	60 e0       	ldi	r22, 0x00	; 0
- 384:	80 e0       	ldi	r24, 0x00	; 0
- 386:	0e 94 32 01 	call	0x264	; 0x264 <DIO_Write>
- 38a:	88 81       	ld	r24, Y
- 38c:	8f b9       	out	0x0f, r24	; 15
- 38e:	77 9b       	sbis	0x0e, 7	; 14
- 390:	fe cf       	rjmp	.-4      	; 0x38e <SPI_ReceiveData+0x16>
- 392:	8f b1       	in	r24, 0x0f	; 15
- 394:	88 83       	st	Y, r24
- 396:	61 e0       	ldi	r22, 0x01	; 1
- 398:	80 e0       	ldi	r24, 0x00	; 0
- 39a:	0e 94 32 01 	call	0x264	; 0x264 <DIO_Write>
- 39e:	81 e0       	ldi	r24, 0x01	; 1
- 3a0:	01 c0       	rjmp	.+2      	; 0x3a4 <SPI_ReceiveData+0x2c>
- 3a2:	80 e0       	ldi	r24, 0x00	; 0
- 3a4:	df 91       	pop	r29
- 3a6:	cf 91       	pop	r28
- 3a8:	08 95       	ret
+00000272 <SPI_ReceiveData>:
+ 272:	00 97       	sbiw	r24, 0x00	; 0
+ 274:	39 f0       	breq	.+14     	; 0x284 <SPI_ReceiveData+0x12>
+ 276:	77 9b       	sbis	0x0e, 7	; 14
+ 278:	fe cf       	rjmp	.-4      	; 0x276 <SPI_ReceiveData+0x4>
+ 27a:	2f b1       	in	r18, 0x0f	; 15
+ 27c:	fc 01       	movw	r30, r24
+ 27e:	20 83       	st	Z, r18
+ 280:	81 e0       	ldi	r24, 0x01	; 1
+ 282:	08 95       	ret
+ 284:	80 e0       	ldi	r24, 0x00	; 0
+ 286:	08 95       	ret
 
-000003aa <SPI_ReceiveString>:
- 3aa:	ef 92       	push	r14
- 3ac:	ff 92       	push	r15
- 3ae:	0f 93       	push	r16
- 3b0:	1f 93       	push	r17
- 3b2:	cf 93       	push	r28
- 3b4:	df 93       	push	r29
- 3b6:	00 97       	sbiw	r24, 0x00	; 0
- 3b8:	d1 f0       	breq	.+52     	; 0x3ee <SPI_ReceiveString+0x44>
- 3ba:	d6 2f       	mov	r29, r22
- 3bc:	8c 01       	movw	r16, r24
- 3be:	c0 e0       	ldi	r28, 0x00	; 0
- 3c0:	0b c0       	rjmp	.+22     	; 0x3d8 <SPI_ReceiveString+0x2e>
- 3c2:	78 01       	movw	r14, r16
- 3c4:	ec 0e       	add	r14, r28
- 3c6:	f1 1c       	adc	r15, r1
- 3c8:	c7 01       	movw	r24, r14
- 3ca:	0e 94 bc 01 	call	0x378	; 0x378 <SPI_ReceiveData>
- 3ce:	f7 01       	movw	r30, r14
- 3d0:	80 81       	ld	r24, Z
- 3d2:	88 23       	and	r24, r24
- 3d4:	71 f0       	breq	.+28     	; 0x3f2 <SPI_ReceiveString+0x48>
- 3d6:	cf 5f       	subi	r28, 0xFF	; 255
- 3d8:	4c 2f       	mov	r20, r28
- 3da:	50 e0       	ldi	r21, 0x00	; 0
- 3dc:	2d 2f       	mov	r18, r29
- 3de:	30 e0       	ldi	r19, 0x00	; 0
- 3e0:	21 50       	subi	r18, 0x01	; 1
- 3e2:	31 09       	sbc	r19, r1
- 3e4:	42 17       	cp	r20, r18
- 3e6:	53 07       	cpc	r21, r19
- 3e8:	64 f3       	brlt	.-40     	; 0x3c2 <SPI_ReceiveString+0x18>
- 3ea:	81 e0       	ldi	r24, 0x01	; 1
- 3ec:	03 c0       	rjmp	.+6      	; 0x3f4 <SPI_ReceiveString+0x4a>
- 3ee:	80 e0       	ldi	r24, 0x00	; 0
- 3f0:	01 c0       	rjmp	.+2      	; 0x3f4 <SPI_ReceiveString+0x4a>
- 3f2:	81 e0       	ldi	r24, 0x01	; 1
- 3f4:	df 91       	pop	r29
- 3f6:	cf 91       	pop	r28
- 3f8:	1f 91       	pop	r17
- 3fa:	0f 91       	pop	r16
- 3fc:	ff 90       	pop	r15
- 3fe:	ef 90       	pop	r14
- 400:	08 95       	ret
+00000288 <SPI_ReceiveString>:
+ 288:	ef 92       	push	r14
+ 28a:	ff 92       	push	r15
+ 28c:	0f 93       	push	r16
+ 28e:	1f 93       	push	r17
+ 290:	cf 93       	push	r28
+ 292:	df 93       	push	r29
+ 294:	00 97       	sbiw	r24, 0x00	; 0
+ 296:	d1 f0       	breq	.+52     	; 0x2cc <SPI_ReceiveString+0x44>
+ 298:	d6 2f       	mov	r29, r22
+ 29a:	8c 01       	movw	r16, r24
+ 29c:	c0 e0       	ldi	r28, 0x00	; 0
+ 29e:	0b c0       	rjmp	.+22     	; 0x2b6 <SPI_ReceiveString+0x2e>
+ 2a0:	78 01       	movw	r14, r16
+ 2a2:	ec 0e       	add	r14, r28
+ 2a4:	f1 1c       	adc	r15, r1
+ 2a6:	c7 01       	movw	r24, r14
+ 2a8:	0e 94 39 01 	call	0x272	; 0x272 <SPI_ReceiveData>
+ 2ac:	f7 01       	movw	r30, r14
+ 2ae:	80 81       	ld	r24, Z
+ 2b0:	88 23       	and	r24, r24
+ 2b2:	71 f0       	breq	.+28     	; 0x2d0 <SPI_ReceiveString+0x48>
+ 2b4:	cf 5f       	subi	r28, 0xFF	; 255
+ 2b6:	4c 2f       	mov	r20, r28
+ 2b8:	50 e0       	ldi	r21, 0x00	; 0
+ 2ba:	2d 2f       	mov	r18, r29
+ 2bc:	30 e0       	ldi	r19, 0x00	; 0
+ 2be:	21 50       	subi	r18, 0x01	; 1
+ 2c0:	31 09       	sbc	r19, r1
+ 2c2:	42 17       	cp	r20, r18
+ 2c4:	53 07       	cpc	r21, r19
+ 2c6:	64 f3       	brlt	.-40     	; 0x2a0 <SPI_ReceiveString+0x18>
+ 2c8:	81 e0       	ldi	r24, 0x01	; 1
+ 2ca:	03 c0       	rjmp	.+6      	; 0x2d2 <SPI_ReceiveString+0x4a>
+ 2cc:	80 e0       	ldi	r24, 0x00	; 0
+ 2ce:	01 c0       	rjmp	.+2      	; 0x2d2 <SPI_ReceiveString+0x4a>
+ 2d0:	81 e0       	ldi	r24, 0x01	; 1
+ 2d2:	df 91       	pop	r29
+ 2d4:	cf 91       	pop	r28
+ 2d6:	1f 91       	pop	r17
+ 2d8:	0f 91       	pop	r16
+ 2da:	ff 90       	pop	r15
+ 2dc:	ef 90       	pop	r14
+ 2de:	08 95       	ret
 
-00000402 <__vector_12>:
+000002e0 <__vector_12>:
 
 
 /* ISRs----------------------------------------------------------*/
 
 ISR(SPI_STC_vect)
 {
- 402:	1f 92       	push	r1
- 404:	0f 92       	push	r0
- 406:	0f b6       	in	r0, 0x3f	; 63
- 408:	0f 92       	push	r0
- 40a:	11 24       	eor	r1, r1
- 40c:	2f 93       	push	r18
- 40e:	3f 93       	push	r19
- 410:	4f 93       	push	r20
- 412:	5f 93       	push	r21
- 414:	6f 93       	push	r22
- 416:	7f 93       	push	r23
- 418:	8f 93       	push	r24
- 41a:	9f 93       	push	r25
- 41c:	af 93       	push	r26
- 41e:	bf 93       	push	r27
- 420:	ef 93       	push	r30
- 422:	ff 93       	push	r31
+ 2e0:	1f 92       	push	r1
+ 2e2:	0f 92       	push	r0
+ 2e4:	0f b6       	in	r0, 0x3f	; 63
+ 2e6:	0f 92       	push	r0
+ 2e8:	11 24       	eor	r1, r1
+ 2ea:	2f 93       	push	r18
+ 2ec:	3f 93       	push	r19
+ 2ee:	4f 93       	push	r20
+ 2f0:	5f 93       	push	r21
+ 2f2:	6f 93       	push	r22
+ 2f4:	7f 93       	push	r23
+ 2f6:	8f 93       	push	r24
+ 2f8:	9f 93       	push	r25
+ 2fa:	af 93       	push	r26
+ 2fc:	bf 93       	push	r27
+ 2fe:	ef 93       	push	r30
+ 300:	ff 93       	push	r31
    //if the global pointer to function points to a valid position
    if (SPI_Callback!=NULLPTR)
- 424:	e0 91 6b 01 	lds	r30, 0x016B	; 0x80016b <SPI_Callback>
- 428:	f0 91 6c 01 	lds	r31, 0x016C	; 0x80016c <SPI_Callback+0x1>
- 42c:	30 97       	sbiw	r30, 0x00	; 0
- 42e:	09 f0       	breq	.+2      	; 0x432 <__vector_12+0x30>
+ 302:	e0 91 6b 01 	lds	r30, 0x016B	; 0x80016b <SPI_Callback>
+ 306:	f0 91 6c 01 	lds	r31, 0x016C	; 0x80016c <SPI_Callback+0x1>
+ 30a:	30 97       	sbiw	r30, 0x00	; 0
+ 30c:	09 f0       	breq	.+2      	; 0x310 <__vector_12+0x30>
    {
       //call the function
       SPI_Callback();
- 430:	09 95       	icall
+ 30e:	09 95       	icall
    }
- 432:	ff 91       	pop	r31
- 434:	ef 91       	pop	r30
- 436:	bf 91       	pop	r27
- 438:	af 91       	pop	r26
- 43a:	9f 91       	pop	r25
- 43c:	8f 91       	pop	r24
- 43e:	7f 91       	pop	r23
- 440:	6f 91       	pop	r22
- 442:	5f 91       	pop	r21
- 444:	4f 91       	pop	r20
- 446:	3f 91       	pop	r19
- 448:	2f 91       	pop	r18
- 44a:	0f 90       	pop	r0
- 44c:	0f be       	out	0x3f, r0	; 63
- 44e:	0f 90       	pop	r0
- 450:	1f 90       	pop	r1
- 452:	18 95       	reti
+ 310:	ff 91       	pop	r31
+ 312:	ef 91       	pop	r30
+ 314:	bf 91       	pop	r27
+ 316:	af 91       	pop	r26
+ 318:	9f 91       	pop	r25
+ 31a:	8f 91       	pop	r24
+ 31c:	7f 91       	pop	r23
+ 31e:	6f 91       	pop	r22
+ 320:	5f 91       	pop	r21
+ 322:	4f 91       	pop	r20
+ 324:	3f 91       	pop	r19
+ 326:	2f 91       	pop	r18
+ 328:	0f 90       	pop	r0
+ 32a:	0f be       	out	0x3f, r0	; 63
+ 32c:	0f 90       	pop	r0
+ 32e:	1f 90       	pop	r1
+ 330:	18 95       	reti
 
-00000454 <UART_Init>:
+00000332 <UART_Init>:
    //check if the sent pointer points to a valid position
    if (local_fptr== NULLPTR)     return ERROR;
    //if so, store the pointer address in the global pointer to function
    RXC_Callback=local_fptr;
    return SUCCESS;
 }
- 454:	cf 93       	push	r28
- 456:	df 93       	push	r29
- 458:	1f 92       	push	r1
- 45a:	cd b7       	in	r28, 0x3d	; 61
- 45c:	de b7       	in	r29, 0x3e	; 62
- 45e:	19 82       	std	Y+1, r1	; 0x01
- 460:	10 bc       	out	0x20, r1	; 32
- 462:	83 e3       	ldi	r24, 0x33	; 51
- 464:	89 b9       	out	0x09, r24	; 9
- 466:	8a b1       	in	r24, 0x0a	; 10
- 468:	88 60       	ori	r24, 0x08	; 8
- 46a:	8a b9       	out	0x0a, r24	; 10
- 46c:	8a b1       	in	r24, 0x0a	; 10
- 46e:	80 61       	ori	r24, 0x10	; 16
- 470:	8a b9       	out	0x0a, r24	; 10
- 472:	89 81       	ldd	r24, Y+1	; 0x01
- 474:	82 60       	ori	r24, 0x02	; 2
- 476:	89 83       	std	Y+1, r24	; 0x01
- 478:	89 81       	ldd	r24, Y+1	; 0x01
- 47a:	84 60       	ori	r24, 0x04	; 4
- 47c:	89 83       	std	Y+1, r24	; 0x01
- 47e:	8a b1       	in	r24, 0x0a	; 10
- 480:	8b 7f       	andi	r24, 0xFB	; 251
- 482:	8a b9       	out	0x0a, r24	; 10
- 484:	89 81       	ldd	r24, Y+1	; 0x01
- 486:	80 62       	ori	r24, 0x20	; 32
- 488:	89 83       	std	Y+1, r24	; 0x01
- 48a:	80 b5       	in	r24, 0x20	; 32
- 48c:	80 68       	ori	r24, 0x80	; 128
- 48e:	80 bd       	out	0x20, r24	; 32
- 490:	99 81       	ldd	r25, Y+1	; 0x01
- 492:	80 b5       	in	r24, 0x20	; 32
- 494:	89 2b       	or	r24, r25
- 496:	80 bd       	out	0x20, r24	; 32
- 498:	80 b5       	in	r24, 0x20	; 32
- 49a:	8f 77       	andi	r24, 0x7F	; 127
- 49c:	80 bd       	out	0x20, r24	; 32
- 49e:	81 e0       	ldi	r24, 0x01	; 1
- 4a0:	0f 90       	pop	r0
- 4a2:	df 91       	pop	r29
- 4a4:	cf 91       	pop	r28
- 4a6:	08 95       	ret
+ 332:	cf 93       	push	r28
+ 334:	df 93       	push	r29
+ 336:	1f 92       	push	r1
+ 338:	cd b7       	in	r28, 0x3d	; 61
+ 33a:	de b7       	in	r29, 0x3e	; 62
+ 33c:	19 82       	std	Y+1, r1	; 0x01
+ 33e:	10 bc       	out	0x20, r1	; 32
+ 340:	83 e3       	ldi	r24, 0x33	; 51
+ 342:	89 b9       	out	0x09, r24	; 9
+ 344:	8a b1       	in	r24, 0x0a	; 10
+ 346:	88 60       	ori	r24, 0x08	; 8
+ 348:	8a b9       	out	0x0a, r24	; 10
+ 34a:	8a b1       	in	r24, 0x0a	; 10
+ 34c:	80 61       	ori	r24, 0x10	; 16
+ 34e:	8a b9       	out	0x0a, r24	; 10
+ 350:	89 81       	ldd	r24, Y+1	; 0x01
+ 352:	82 60       	ori	r24, 0x02	; 2
+ 354:	89 83       	std	Y+1, r24	; 0x01
+ 356:	89 81       	ldd	r24, Y+1	; 0x01
+ 358:	84 60       	ori	r24, 0x04	; 4
+ 35a:	89 83       	std	Y+1, r24	; 0x01
+ 35c:	8a b1       	in	r24, 0x0a	; 10
+ 35e:	8b 7f       	andi	r24, 0xFB	; 251
+ 360:	8a b9       	out	0x0a, r24	; 10
+ 362:	89 81       	ldd	r24, Y+1	; 0x01
+ 364:	80 62       	ori	r24, 0x20	; 32
+ 366:	89 83       	std	Y+1, r24	; 0x01
+ 368:	80 b5       	in	r24, 0x20	; 32
+ 36a:	80 68       	ori	r24, 0x80	; 128
+ 36c:	80 bd       	out	0x20, r24	; 32
+ 36e:	99 81       	ldd	r25, Y+1	; 0x01
+ 370:	80 b5       	in	r24, 0x20	; 32
+ 372:	89 2b       	or	r24, r25
+ 374:	80 bd       	out	0x20, r24	; 32
+ 376:	80 b5       	in	r24, 0x20	; 32
+ 378:	8f 77       	andi	r24, 0x7F	; 127
+ 37a:	80 bd       	out	0x20, r24	; 32
+ 37c:	81 e0       	ldi	r24, 0x01	; 1
+ 37e:	0f 90       	pop	r0
+ 380:	df 91       	pop	r29
+ 382:	cf 91       	pop	r28
+ 384:	08 95       	ret
 
-000004a8 <UART_SendData>:
- 4a8:	5d 9b       	sbis	0x0b, 5	; 11
- 4aa:	fe cf       	rjmp	.-4      	; 0x4a8 <UART_SendData>
- 4ac:	8c b9       	out	0x0c, r24	; 12
- 4ae:	81 e0       	ldi	r24, 0x01	; 1
- 4b0:	08 95       	ret
+00000386 <UART_SendData>:
+ 386:	5d 9b       	sbis	0x0b, 5	; 11
+ 388:	fe cf       	rjmp	.-4      	; 0x386 <UART_SendData>
+ 38a:	8c b9       	out	0x0c, r24	; 12
+ 38c:	81 e0       	ldi	r24, 0x01	; 1
+ 38e:	08 95       	ret
 
-000004b2 <UART_SendString>:
- 4b2:	0f 93       	push	r16
- 4b4:	1f 93       	push	r17
- 4b6:	cf 93       	push	r28
- 4b8:	8c 01       	movw	r16, r24
- 4ba:	c0 e0       	ldi	r28, 0x00	; 0
- 4bc:	04 c0       	rjmp	.+8      	; 0x4c6 <UART_SendString+0x14>
- 4be:	90 e0       	ldi	r25, 0x00	; 0
- 4c0:	0e 94 54 02 	call	0x4a8	; 0x4a8 <UART_SendData>
- 4c4:	cf 5f       	subi	r28, 0xFF	; 255
- 4c6:	f8 01       	movw	r30, r16
- 4c8:	ec 0f       	add	r30, r28
- 4ca:	f1 1d       	adc	r31, r1
- 4cc:	80 81       	ld	r24, Z
- 4ce:	81 11       	cpse	r24, r1
- 4d0:	f6 cf       	rjmp	.-20     	; 0x4be <UART_SendString+0xc>
- 4d2:	8d e0       	ldi	r24, 0x0D	; 13
- 4d4:	90 e0       	ldi	r25, 0x00	; 0
- 4d6:	0e 94 54 02 	call	0x4a8	; 0x4a8 <UART_SendData>
- 4da:	8a e0       	ldi	r24, 0x0A	; 10
- 4dc:	90 e0       	ldi	r25, 0x00	; 0
- 4de:	0e 94 54 02 	call	0x4a8	; 0x4a8 <UART_SendData>
- 4e2:	81 e0       	ldi	r24, 0x01	; 1
- 4e4:	cf 91       	pop	r28
- 4e6:	1f 91       	pop	r17
- 4e8:	0f 91       	pop	r16
- 4ea:	08 95       	ret
+00000390 <UART_SendString>:
+ 390:	0f 93       	push	r16
+ 392:	1f 93       	push	r17
+ 394:	cf 93       	push	r28
+ 396:	00 97       	sbiw	r24, 0x00	; 0
+ 398:	b9 f0       	breq	.+46     	; 0x3c8 <UART_SendString+0x38>
+ 39a:	8c 01       	movw	r16, r24
+ 39c:	c0 e0       	ldi	r28, 0x00	; 0
+ 39e:	04 c0       	rjmp	.+8      	; 0x3a8 <UART_SendString+0x18>
+ 3a0:	90 e0       	ldi	r25, 0x00	; 0
+ 3a2:	0e 94 c3 01 	call	0x386	; 0x386 <UART_SendData>
+ 3a6:	cf 5f       	subi	r28, 0xFF	; 255
+ 3a8:	f8 01       	movw	r30, r16
+ 3aa:	ec 0f       	add	r30, r28
+ 3ac:	f1 1d       	adc	r31, r1
+ 3ae:	80 81       	ld	r24, Z
+ 3b0:	81 11       	cpse	r24, r1
+ 3b2:	f6 cf       	rjmp	.-20     	; 0x3a0 <UART_SendString+0x10>
+ 3b4:	8d e0       	ldi	r24, 0x0D	; 13
+ 3b6:	90 e0       	ldi	r25, 0x00	; 0
+ 3b8:	0e 94 c3 01 	call	0x386	; 0x386 <UART_SendData>
+ 3bc:	8a e0       	ldi	r24, 0x0A	; 10
+ 3be:	90 e0       	ldi	r25, 0x00	; 0
+ 3c0:	0e 94 c3 01 	call	0x386	; 0x386 <UART_SendData>
+ 3c4:	81 e0       	ldi	r24, 0x01	; 1
+ 3c6:	01 c0       	rjmp	.+2      	; 0x3ca <UART_SendString+0x3a>
+ 3c8:	80 e0       	ldi	r24, 0x00	; 0
+ 3ca:	cf 91       	pop	r28
+ 3cc:	1f 91       	pop	r17
+ 3ce:	0f 91       	pop	r16
+ 3d0:	08 95       	ret
 
-000004ec <__vector_13>:
+000003d2 <__vector_13>:
 
 
 /* ISRs----------------------------------------------------------*/
 
 ISR(UART_RX_vect)
 {
- 4ec:	1f 92       	push	r1
- 4ee:	0f 92       	push	r0
- 4f0:	0f b6       	in	r0, 0x3f	; 63
- 4f2:	0f 92       	push	r0
- 4f4:	11 24       	eor	r1, r1
- 4f6:	2f 93       	push	r18
- 4f8:	3f 93       	push	r19
- 4fa:	4f 93       	push	r20
- 4fc:	5f 93       	push	r21
- 4fe:	6f 93       	push	r22
- 500:	7f 93       	push	r23
- 502:	8f 93       	push	r24
- 504:	9f 93       	push	r25
- 506:	af 93       	push	r26
- 508:	bf 93       	push	r27
- 50a:	ef 93       	push	r30
- 50c:	ff 93       	push	r31
+ 3d2:	1f 92       	push	r1
+ 3d4:	0f 92       	push	r0
+ 3d6:	0f b6       	in	r0, 0x3f	; 63
+ 3d8:	0f 92       	push	r0
+ 3da:	11 24       	eor	r1, r1
+ 3dc:	2f 93       	push	r18
+ 3de:	3f 93       	push	r19
+ 3e0:	4f 93       	push	r20
+ 3e2:	5f 93       	push	r21
+ 3e4:	6f 93       	push	r22
+ 3e6:	7f 93       	push	r23
+ 3e8:	8f 93       	push	r24
+ 3ea:	9f 93       	push	r25
+ 3ec:	af 93       	push	r26
+ 3ee:	bf 93       	push	r27
+ 3f0:	ef 93       	push	r30
+ 3f2:	ff 93       	push	r31
    //if the global pointer to function points to a valid position
    if (RXC_Callback!=NULLPTR)
- 50e:	e0 91 6f 01 	lds	r30, 0x016F	; 0x80016f <RXC_Callback>
- 512:	f0 91 70 01 	lds	r31, 0x0170	; 0x800170 <RXC_Callback+0x1>
- 516:	30 97       	sbiw	r30, 0x00	; 0
- 518:	09 f0       	breq	.+2      	; 0x51c <__vector_13+0x30>
+ 3f4:	e0 91 6f 01 	lds	r30, 0x016F	; 0x80016f <RXC_Callback>
+ 3f8:	f0 91 70 01 	lds	r31, 0x0170	; 0x800170 <RXC_Callback+0x1>
+ 3fc:	30 97       	sbiw	r30, 0x00	; 0
+ 3fe:	09 f0       	breq	.+2      	; 0x402 <__EEPROM_REGION_LENGTH__+0x2>
    {
       //call the function
       RXC_Callback();
- 51a:	09 95       	icall
+ 400:	09 95       	icall
    }
 }
- 51c:	ff 91       	pop	r31
- 51e:	ef 91       	pop	r30
- 520:	bf 91       	pop	r27
- 522:	af 91       	pop	r26
- 524:	9f 91       	pop	r25
- 526:	8f 91       	pop	r24
- 528:	7f 91       	pop	r23
- 52a:	6f 91       	pop	r22
- 52c:	5f 91       	pop	r21
- 52e:	4f 91       	pop	r20
- 530:	3f 91       	pop	r19
- 532:	2f 91       	pop	r18
- 534:	0f 90       	pop	r0
- 536:	0f be       	out	0x3f, r0	; 63
- 538:	0f 90       	pop	r0
- 53a:	1f 90       	pop	r1
- 53c:	18 95       	reti
+ 402:	ff 91       	pop	r31
+ 404:	ef 91       	pop	r30
+ 406:	bf 91       	pop	r27
+ 408:	af 91       	pop	r26
+ 40a:	9f 91       	pop	r25
+ 40c:	8f 91       	pop	r24
+ 40e:	7f 91       	pop	r23
+ 410:	6f 91       	pop	r22
+ 412:	5f 91       	pop	r21
+ 414:	4f 91       	pop	r20
+ 416:	3f 91       	pop	r19
+ 418:	2f 91       	pop	r18
+ 41a:	0f 90       	pop	r0
+ 41c:	0f be       	out	0x3f, r0	; 63
+ 41e:	0f 90       	pop	r0
+ 420:	1f 90       	pop	r1
+ 422:	18 95       	reti
 
-0000053e <__vector_15>:
+00000424 <__vector_15>:
 
 ISR(UART_TX_vect)
 {
- 53e:	1f 92       	push	r1
- 540:	0f 92       	push	r0
- 542:	0f b6       	in	r0, 0x3f	; 63
- 544:	0f 92       	push	r0
- 546:	11 24       	eor	r1, r1
- 548:	2f 93       	push	r18
- 54a:	3f 93       	push	r19
- 54c:	4f 93       	push	r20
- 54e:	5f 93       	push	r21
- 550:	6f 93       	push	r22
- 552:	7f 93       	push	r23
- 554:	8f 93       	push	r24
- 556:	9f 93       	push	r25
- 558:	af 93       	push	r26
- 55a:	bf 93       	push	r27
- 55c:	ef 93       	push	r30
- 55e:	ff 93       	push	r31
+ 424:	1f 92       	push	r1
+ 426:	0f 92       	push	r0
+ 428:	0f b6       	in	r0, 0x3f	; 63
+ 42a:	0f 92       	push	r0
+ 42c:	11 24       	eor	r1, r1
+ 42e:	2f 93       	push	r18
+ 430:	3f 93       	push	r19
+ 432:	4f 93       	push	r20
+ 434:	5f 93       	push	r21
+ 436:	6f 93       	push	r22
+ 438:	7f 93       	push	r23
+ 43a:	8f 93       	push	r24
+ 43c:	9f 93       	push	r25
+ 43e:	af 93       	push	r26
+ 440:	bf 93       	push	r27
+ 442:	ef 93       	push	r30
+ 444:	ff 93       	push	r31
    //if the global pointer to function points to a valid position
    if (TXC_Callback!=NULLPTR)
- 560:	e0 91 6d 01 	lds	r30, 0x016D	; 0x80016d <TXC_Callback>
- 564:	f0 91 6e 01 	lds	r31, 0x016E	; 0x80016e <TXC_Callback+0x1>
- 568:	30 97       	sbiw	r30, 0x00	; 0
- 56a:	09 f0       	breq	.+2      	; 0x56e <__vector_15+0x30>
+ 446:	e0 91 6d 01 	lds	r30, 0x016D	; 0x80016d <TXC_Callback>
+ 44a:	f0 91 6e 01 	lds	r31, 0x016E	; 0x80016e <TXC_Callback+0x1>
+ 44e:	30 97       	sbiw	r30, 0x00	; 0
+ 450:	09 f0       	breq	.+2      	; 0x454 <__vector_15+0x30>
    {
       //call the function
       TXC_Callback();
- 56c:	09 95       	icall
+ 452:	09 95       	icall
    }
- 56e:	ff 91       	pop	r31
- 570:	ef 91       	pop	r30
- 572:	bf 91       	pop	r27
- 574:	af 91       	pop	r26
- 576:	9f 91       	pop	r25
- 578:	8f 91       	pop	r24
- 57a:	7f 91       	pop	r23
- 57c:	6f 91       	pop	r22
- 57e:	5f 91       	pop	r21
- 580:	4f 91       	pop	r20
- 582:	3f 91       	pop	r19
- 584:	2f 91       	pop	r18
- 586:	0f 90       	pop	r0
- 588:	0f be       	out	0x3f, r0	; 63
- 58a:	0f 90       	pop	r0
- 58c:	1f 90       	pop	r1
- 58e:	18 95       	reti
+ 454:	ff 91       	pop	r31
+ 456:	ef 91       	pop	r30
+ 458:	bf 91       	pop	r27
+ 45a:	af 91       	pop	r26
+ 45c:	9f 91       	pop	r25
+ 45e:	8f 91       	pop	r24
+ 460:	7f 91       	pop	r23
+ 462:	6f 91       	pop	r22
+ 464:	5f 91       	pop	r21
+ 466:	4f 91       	pop	r20
+ 468:	3f 91       	pop	r19
+ 46a:	2f 91       	pop	r18
+ 46c:	0f 90       	pop	r0
+ 46e:	0f be       	out	0x3f, r0	; 63
+ 470:	0f 90       	pop	r0
+ 472:	1f 90       	pop	r1
+ 474:	18 95       	reti
 
-00000590 <_exit>:
- 590:	f8 94       	cli
+00000476 <_exit>:
+ 476:	f8 94       	cli
 
-00000592 <__stop_program>:
- 592:	ff cf       	rjmp	.-2      	; 0x592 <__stop_program>
+00000478 <__stop_program>:
+ 478:	ff cf       	rjmp	.-2      	; 0x478 <__stop_program>

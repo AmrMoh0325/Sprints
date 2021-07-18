@@ -243,6 +243,12 @@ enuErrorStatus_t UART_SendDataNoBLOCK(uint16_t u16Data)
 ************************************************************************************/
 enuErrorStatus_t UART_ReceiveString(uint8_t* pu8String, uint8_t u8bufferMaxSize)
 {
+   //check if sent pointer points to a valid location
+   if (pu8String == NULLPTR)
+   {
+      //return an error
+      return ERROR;
+   }
    uint8_t u8i;
    //traverse the string
    for (u8i=0; u8i<u8bufferMaxSize-1;u8i++)
@@ -269,6 +275,12 @@ enuErrorStatus_t UART_ReceiveString(uint8_t* pu8String, uint8_t u8bufferMaxSize)
 ************************************************************************************/
 enuErrorStatus_t UART_SendString(uint8_t* pu8String)
 {
+   //check if sent pointer points to a valid location
+   if (pu8String == NULLPTR)
+   {
+      //return an error
+      return ERROR;
+   }
    uint8_t u8i;
    //loop on the string
    for (u8i=0;pu8String[u8i];u8i++)

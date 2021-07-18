@@ -3,31 +3,31 @@ SPI_UART_Chat_APP.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         00000590  00000000  00000000  00000094  2**1
+  0 .text         0000059a  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         0000000c  00800060  00000590  00000624  2**0
+  1 .data         0000000c  00800060  0000059a  0000062e  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .bss          00000105  0080006c  0080006c  00000630  2**0
+  2 .bss          00000105  0080006c  0080006c  0000063a  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  00000630  2**0
+  3 .comment      00000030  00000000  00000000  0000063a  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000660  2**2
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  0000066c  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 00000188  00000000  00000000  0000069c  2**0
+  5 .debug_aranges 00000188  00000000  00000000  000006a8  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   000012c5  00000000  00000000  00000824  2**0
+  6 .debug_info   000012c9  00000000  00000000  00000830  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00000a94  00000000  00000000  00001ae9  2**0
+  7 .debug_abbrev 00000a85  00000000  00000000  00001af9  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00000abe  00000000  00000000  0000257d  2**0
+  8 .debug_line   00000ae2  00000000  00000000  0000257e  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  000003b0  00000000  00000000  0000303c  2**2
+  9 .debug_frame  000003b0  00000000  00000000  00003060  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    000006d0  00000000  00000000  000033ec  2**0
+ 10 .debug_str    000006d0  00000000  00000000  00003410  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00000bf2  00000000  00000000  00003abc  2**0
+ 11 .debug_loc    00000c5a  00000000  00000000  00003ae0  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000120  00000000  00000000  000046ae  2**0
+ 12 .debug_ranges 00000120  00000000  00000000  0000473a  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -46,9 +46,9 @@ Disassembly of section .text:
   28:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
   2c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
   30:	0c 94 e6 01 	jmp	0x3cc	; 0x3cc <__vector_12>
-  34:	0c 94 74 02 	jmp	0x4e8	; 0x4e8 <__vector_13>
+  34:	0c 94 79 02 	jmp	0x4f2	; 0x4f2 <__vector_13>
   38:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
-  3c:	0c 94 9d 02 	jmp	0x53a	; 0x53a <__vector_15>
+  3c:	0c 94 a2 02 	jmp	0x544	; 0x544 <__vector_15>
   40:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
   44:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
   48:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
@@ -67,7 +67,7 @@ Disassembly of section .text:
   60:	10 e0       	ldi	r17, 0x00	; 0
   62:	a0 e6       	ldi	r26, 0x60	; 96
   64:	b0 e0       	ldi	r27, 0x00	; 0
-  66:	e0 e9       	ldi	r30, 0x90	; 144
+  66:	ea e9       	ldi	r30, 0x9A	; 154
   68:	f5 e0       	ldi	r31, 0x05	; 5
   6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
   6c:	05 90       	lpm	r0, Z+
@@ -90,7 +90,7 @@ Disassembly of section .text:
   82:	b2 07       	cpc	r27, r18
   84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
   86:	0e 94 58 00 	call	0xb0	; 0xb0 <main>
-  8a:	0c 94 c6 02 	jmp	0x58c	; 0x58c <_exit>
+  8a:	0c 94 cb 02 	jmp	0x596	; 0x596 <_exit>
 
 0000008e <__bad_interrupt>:
   8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -881,149 +881,154 @@ ISR(SPI_STC_vect)
  498:	1f 93       	push	r17
  49a:	cf 93       	push	r28
  49c:	df 93       	push	r29
- 49e:	8c 01       	movw	r16, r24
- 4a0:	d6 2f       	mov	r29, r22
- 4a2:	c0 e0       	ldi	r28, 0x00	; 0
- 4a4:	0d c0       	rjmp	.+26     	; 0x4c0 <UART_ReceiveString+0x2e>
- 4a6:	78 01       	movw	r14, r16
- 4a8:	ec 0e       	add	r14, r28
- 4aa:	f1 1c       	adc	r15, r1
- 4ac:	c7 01       	movw	r24, r14
- 4ae:	0e 94 39 02 	call	0x472	; 0x472 <UART_ReceiveData>
- 4b2:	f7 01       	movw	r30, r14
- 4b4:	80 81       	ld	r24, Z
- 4b6:	8d 30       	cpi	r24, 0x0D	; 13
- 4b8:	59 f0       	breq	.+22     	; 0x4d0 <UART_ReceiveString+0x3e>
- 4ba:	8a 30       	cpi	r24, 0x0A	; 10
- 4bc:	49 f0       	breq	.+18     	; 0x4d0 <UART_ReceiveString+0x3e>
- 4be:	cf 5f       	subi	r28, 0xFF	; 255
- 4c0:	2c 2f       	mov	r18, r28
- 4c2:	30 e0       	ldi	r19, 0x00	; 0
- 4c4:	8d 2f       	mov	r24, r29
- 4c6:	90 e0       	ldi	r25, 0x00	; 0
- 4c8:	01 97       	sbiw	r24, 0x01	; 1
- 4ca:	28 17       	cp	r18, r24
- 4cc:	39 07       	cpc	r19, r25
- 4ce:	5c f3       	brlt	.-42     	; 0x4a6 <UART_ReceiveString+0x14>
- 4d0:	f8 01       	movw	r30, r16
- 4d2:	ec 0f       	add	r30, r28
- 4d4:	f1 1d       	adc	r31, r1
- 4d6:	10 82       	st	Z, r1
- 4d8:	81 e0       	ldi	r24, 0x01	; 1
- 4da:	df 91       	pop	r29
- 4dc:	cf 91       	pop	r28
- 4de:	1f 91       	pop	r17
- 4e0:	0f 91       	pop	r16
- 4e2:	ff 90       	pop	r15
- 4e4:	ef 90       	pop	r14
- 4e6:	08 95       	ret
+ 49e:	00 97       	sbiw	r24, 0x00	; 0
+ 4a0:	01 f1       	breq	.+64     	; 0x4e2 <UART_ReceiveString+0x50>
+ 4a2:	d6 2f       	mov	r29, r22
+ 4a4:	8c 01       	movw	r16, r24
+ 4a6:	c0 e0       	ldi	r28, 0x00	; 0
+ 4a8:	0d c0       	rjmp	.+26     	; 0x4c4 <UART_ReceiveString+0x32>
+ 4aa:	78 01       	movw	r14, r16
+ 4ac:	ec 0e       	add	r14, r28
+ 4ae:	f1 1c       	adc	r15, r1
+ 4b0:	c7 01       	movw	r24, r14
+ 4b2:	0e 94 39 02 	call	0x472	; 0x472 <UART_ReceiveData>
+ 4b6:	f7 01       	movw	r30, r14
+ 4b8:	80 81       	ld	r24, Z
+ 4ba:	8d 30       	cpi	r24, 0x0D	; 13
+ 4bc:	61 f0       	breq	.+24     	; 0x4d6 <UART_ReceiveString+0x44>
+ 4be:	8a 30       	cpi	r24, 0x0A	; 10
+ 4c0:	51 f0       	breq	.+20     	; 0x4d6 <UART_ReceiveString+0x44>
+ 4c2:	cf 5f       	subi	r28, 0xFF	; 255
+ 4c4:	4c 2f       	mov	r20, r28
+ 4c6:	50 e0       	ldi	r21, 0x00	; 0
+ 4c8:	2d 2f       	mov	r18, r29
+ 4ca:	30 e0       	ldi	r19, 0x00	; 0
+ 4cc:	21 50       	subi	r18, 0x01	; 1
+ 4ce:	31 09       	sbc	r19, r1
+ 4d0:	42 17       	cp	r20, r18
+ 4d2:	53 07       	cpc	r21, r19
+ 4d4:	54 f3       	brlt	.-44     	; 0x4aa <UART_ReceiveString+0x18>
+ 4d6:	f8 01       	movw	r30, r16
+ 4d8:	ec 0f       	add	r30, r28
+ 4da:	f1 1d       	adc	r31, r1
+ 4dc:	10 82       	st	Z, r1
+ 4de:	81 e0       	ldi	r24, 0x01	; 1
+ 4e0:	01 c0       	rjmp	.+2      	; 0x4e4 <UART_ReceiveString+0x52>
+ 4e2:	80 e0       	ldi	r24, 0x00	; 0
+ 4e4:	df 91       	pop	r29
+ 4e6:	cf 91       	pop	r28
+ 4e8:	1f 91       	pop	r17
+ 4ea:	0f 91       	pop	r16
+ 4ec:	ff 90       	pop	r15
+ 4ee:	ef 90       	pop	r14
+ 4f0:	08 95       	ret
 
-000004e8 <__vector_13>:
+000004f2 <__vector_13>:
 
 
 /* ISRs----------------------------------------------------------*/
 
 ISR(UART_RX_vect)
 {
- 4e8:	1f 92       	push	r1
- 4ea:	0f 92       	push	r0
- 4ec:	0f b6       	in	r0, 0x3f	; 63
- 4ee:	0f 92       	push	r0
- 4f0:	11 24       	eor	r1, r1
- 4f2:	2f 93       	push	r18
- 4f4:	3f 93       	push	r19
- 4f6:	4f 93       	push	r20
- 4f8:	5f 93       	push	r21
- 4fa:	6f 93       	push	r22
- 4fc:	7f 93       	push	r23
- 4fe:	8f 93       	push	r24
- 500:	9f 93       	push	r25
- 502:	af 93       	push	r26
- 504:	bf 93       	push	r27
- 506:	ef 93       	push	r30
- 508:	ff 93       	push	r31
+ 4f2:	1f 92       	push	r1
+ 4f4:	0f 92       	push	r0
+ 4f6:	0f b6       	in	r0, 0x3f	; 63
+ 4f8:	0f 92       	push	r0
+ 4fa:	11 24       	eor	r1, r1
+ 4fc:	2f 93       	push	r18
+ 4fe:	3f 93       	push	r19
+ 500:	4f 93       	push	r20
+ 502:	5f 93       	push	r21
+ 504:	6f 93       	push	r22
+ 506:	7f 93       	push	r23
+ 508:	8f 93       	push	r24
+ 50a:	9f 93       	push	r25
+ 50c:	af 93       	push	r26
+ 50e:	bf 93       	push	r27
+ 510:	ef 93       	push	r30
+ 512:	ff 93       	push	r31
    //if the global pointer to function points to a valid position
    if (RXC_Callback!=NULLPTR)
- 50a:	e0 91 6f 01 	lds	r30, 0x016F	; 0x80016f <RXC_Callback>
- 50e:	f0 91 70 01 	lds	r31, 0x0170	; 0x800170 <RXC_Callback+0x1>
- 512:	30 97       	sbiw	r30, 0x00	; 0
- 514:	09 f0       	breq	.+2      	; 0x518 <__vector_13+0x30>
+ 514:	e0 91 6f 01 	lds	r30, 0x016F	; 0x80016f <RXC_Callback>
+ 518:	f0 91 70 01 	lds	r31, 0x0170	; 0x800170 <RXC_Callback+0x1>
+ 51c:	30 97       	sbiw	r30, 0x00	; 0
+ 51e:	09 f0       	breq	.+2      	; 0x522 <__vector_13+0x30>
    {
       //call the function
       RXC_Callback();
- 516:	09 95       	icall
+ 520:	09 95       	icall
    }
 }
- 518:	ff 91       	pop	r31
- 51a:	ef 91       	pop	r30
- 51c:	bf 91       	pop	r27
- 51e:	af 91       	pop	r26
- 520:	9f 91       	pop	r25
- 522:	8f 91       	pop	r24
- 524:	7f 91       	pop	r23
- 526:	6f 91       	pop	r22
- 528:	5f 91       	pop	r21
- 52a:	4f 91       	pop	r20
- 52c:	3f 91       	pop	r19
- 52e:	2f 91       	pop	r18
- 530:	0f 90       	pop	r0
- 532:	0f be       	out	0x3f, r0	; 63
- 534:	0f 90       	pop	r0
- 536:	1f 90       	pop	r1
- 538:	18 95       	reti
+ 522:	ff 91       	pop	r31
+ 524:	ef 91       	pop	r30
+ 526:	bf 91       	pop	r27
+ 528:	af 91       	pop	r26
+ 52a:	9f 91       	pop	r25
+ 52c:	8f 91       	pop	r24
+ 52e:	7f 91       	pop	r23
+ 530:	6f 91       	pop	r22
+ 532:	5f 91       	pop	r21
+ 534:	4f 91       	pop	r20
+ 536:	3f 91       	pop	r19
+ 538:	2f 91       	pop	r18
+ 53a:	0f 90       	pop	r0
+ 53c:	0f be       	out	0x3f, r0	; 63
+ 53e:	0f 90       	pop	r0
+ 540:	1f 90       	pop	r1
+ 542:	18 95       	reti
 
-0000053a <__vector_15>:
+00000544 <__vector_15>:
 
 ISR(UART_TX_vect)
 {
- 53a:	1f 92       	push	r1
- 53c:	0f 92       	push	r0
- 53e:	0f b6       	in	r0, 0x3f	; 63
- 540:	0f 92       	push	r0
- 542:	11 24       	eor	r1, r1
- 544:	2f 93       	push	r18
- 546:	3f 93       	push	r19
- 548:	4f 93       	push	r20
- 54a:	5f 93       	push	r21
- 54c:	6f 93       	push	r22
- 54e:	7f 93       	push	r23
- 550:	8f 93       	push	r24
- 552:	9f 93       	push	r25
- 554:	af 93       	push	r26
- 556:	bf 93       	push	r27
- 558:	ef 93       	push	r30
- 55a:	ff 93       	push	r31
+ 544:	1f 92       	push	r1
+ 546:	0f 92       	push	r0
+ 548:	0f b6       	in	r0, 0x3f	; 63
+ 54a:	0f 92       	push	r0
+ 54c:	11 24       	eor	r1, r1
+ 54e:	2f 93       	push	r18
+ 550:	3f 93       	push	r19
+ 552:	4f 93       	push	r20
+ 554:	5f 93       	push	r21
+ 556:	6f 93       	push	r22
+ 558:	7f 93       	push	r23
+ 55a:	8f 93       	push	r24
+ 55c:	9f 93       	push	r25
+ 55e:	af 93       	push	r26
+ 560:	bf 93       	push	r27
+ 562:	ef 93       	push	r30
+ 564:	ff 93       	push	r31
    //if the global pointer to function points to a valid position
    if (TXC_Callback!=NULLPTR)
- 55c:	e0 91 6d 01 	lds	r30, 0x016D	; 0x80016d <TXC_Callback>
- 560:	f0 91 6e 01 	lds	r31, 0x016E	; 0x80016e <TXC_Callback+0x1>
- 564:	30 97       	sbiw	r30, 0x00	; 0
- 566:	09 f0       	breq	.+2      	; 0x56a <__vector_15+0x30>
+ 566:	e0 91 6d 01 	lds	r30, 0x016D	; 0x80016d <TXC_Callback>
+ 56a:	f0 91 6e 01 	lds	r31, 0x016E	; 0x80016e <TXC_Callback+0x1>
+ 56e:	30 97       	sbiw	r30, 0x00	; 0
+ 570:	09 f0       	breq	.+2      	; 0x574 <__vector_15+0x30>
    {
       //call the function
       TXC_Callback();
- 568:	09 95       	icall
+ 572:	09 95       	icall
    }
- 56a:	ff 91       	pop	r31
- 56c:	ef 91       	pop	r30
- 56e:	bf 91       	pop	r27
- 570:	af 91       	pop	r26
- 572:	9f 91       	pop	r25
- 574:	8f 91       	pop	r24
- 576:	7f 91       	pop	r23
- 578:	6f 91       	pop	r22
- 57a:	5f 91       	pop	r21
- 57c:	4f 91       	pop	r20
- 57e:	3f 91       	pop	r19
- 580:	2f 91       	pop	r18
- 582:	0f 90       	pop	r0
- 584:	0f be       	out	0x3f, r0	; 63
- 586:	0f 90       	pop	r0
- 588:	1f 90       	pop	r1
- 58a:	18 95       	reti
+ 574:	ff 91       	pop	r31
+ 576:	ef 91       	pop	r30
+ 578:	bf 91       	pop	r27
+ 57a:	af 91       	pop	r26
+ 57c:	9f 91       	pop	r25
+ 57e:	8f 91       	pop	r24
+ 580:	7f 91       	pop	r23
+ 582:	6f 91       	pop	r22
+ 584:	5f 91       	pop	r21
+ 586:	4f 91       	pop	r20
+ 588:	3f 91       	pop	r19
+ 58a:	2f 91       	pop	r18
+ 58c:	0f 90       	pop	r0
+ 58e:	0f be       	out	0x3f, r0	; 63
+ 590:	0f 90       	pop	r0
+ 592:	1f 90       	pop	r1
+ 594:	18 95       	reti
 
-0000058c <_exit>:
- 58c:	f8 94       	cli
+00000596 <_exit>:
+ 596:	f8 94       	cli
 
-0000058e <__stop_program>:
- 58e:	ff cf       	rjmp	.-2      	; 0x58e <__stop_program>
+00000598 <__stop_program>:
+ 598:	ff cf       	rjmp	.-2      	; 0x598 <__stop_program>
