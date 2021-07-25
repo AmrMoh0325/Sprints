@@ -1,11 +1,19 @@
+/*****************************************************************************
+* Task: I2C Driver
+* File Name: I2C.c
+* Description: Functions for I2C driver
+* Author: Amr Mohamed
+* Date: 24/7/2021
+******************************************************************************/
+
+/*- INCLUDES --------------------------------------------------*/
 #include "MCAL/I2C/I2C.h"
 
 
+/*- MACROS --------------------------------------------------*/
+/*I2C Consts */
 
-/*I2C MASTER OPERATIONS */ 
-
-#define I2C_READ        1
-#define I2C_WRITE       0
+#define I2C_MAX_ADDRESS       119
 
 /* STATUS CODES FOR I2C BUS */
 /* MASTER CODES */
@@ -40,7 +48,7 @@
 #define GENERAL_CALL_DATA_RECEIVED_NACK                           0x88
 #define RECEIVED_STOP_OR_RESTART_AS_SLAVE                         0xA0
 
-/* SLAVE TRASMITTER MODE */       
+/* SLAVE TRASMITTER MODE */
 #define OWN_SLA_R_RECEIVED_ACK                                    0xA8
 #define M_ARBITRATION_LOST_OWN_SLA_R_RECEIVED_ACK                 0xB0
 #define SLAVE_DATA_TRANSMITTED_ACK                                0xB8
@@ -53,145 +61,440 @@
 #define BUS_ERROR                                                 0x00
 
 
+/*- GLOBAL VARIABLES --------------------------------------------------*/
+void (*I2C_Callback)(void)=NULLPTR;
 
+
+
+/*- APIs IMPLEMENTATION-----------------------------------*/
+
+/************************************** MISC FUNCTIONS **********************************/
+
+/************************************************************************************
+* Parameters (in): void
+* Parameters (out): uint8_t
+* Return value: I2C status code
+* Description: A function to read the I2C bus status from the TWSR register
+************************************************************************************/
 static uint8_t I2C_GetStatus(void)
 {
    return (TWSR_R & 0xF8);
 }
 
+
+/************************************** CORE FUNCTIONS **********************************/
+
+/************************************************************************************
+* Parameters (in): void
+* Parameters (out): enuErrorStatus_t
+* Return value: 1=SUCCESS or 0=FAIL
+* Description: A function to initialize the I2C peripheral
+************************************************************************************/
 enuErrorStatus_t I2C_Init(void)
 {
-   /* set up master clock */ 
-   CLR_BIT(TWSR_R,TWPS0_B);
-   CLR_BIT(TWSR_R,TWPS1_B);
-   
-   TWBR_R=32;
+   /* set up master clock */
+   TWSR_R &= 0b11111100;
+   TWSR_R |= I2C_PRESCALER;
+   uint16_t power=4;
+   for (uint8_t i=0;i<I2C_PRESCALER;i++)
+   {
+      power*=power;
+   }
+   TWBR_R=(((F_CPU/I2C_CLK)-16)/(2*power));
    /* set up slave address */
-   TWAR_R= (0x01<<1) & 1; 
+   TWAR_R= (I2C_SLAVE_ADDRESS<<1) | I2C_SLAVE_GLOBAL_EN;
+   /* Enable acknowledgment */
+   if(I2C_SLAVE_ACK == ENABLE)      SET_BIT(TWCR_R,TWEA_B);
    /* write 1 to TWINT bit */
    SET_BIT(TWCR_R,TWINT_B);
    /*Enable I2C Communication*/
    SET_BIT(TWCR_R,TWEN_B);
-}
-
-
-enuErrorStatus_t I2C_Start(void)
-{
-   CLR_BIT(TWCR_R,TWSTO_B);
-   SET_BIT(TWCR_R,TWSTA_B);
-   SET_BIT(TWCR_R,TWEN_B);
-   SET_BIT(TWCR_R,TWINT_B);
-}
-enuErrorStatus_t I2C_Repeated_Start(void)
-{
-   CLR_BIT(TWCR_R,TWSTO_B);
-   SET_BIT(TWCR_R,TWSTA_B);
-   SET_BIT(TWCR_R,TWEN_B);
-   SET_BIT(TWCR_R,TWINT_B);
-}
-
-enuErrorStatus_t I2C_Stop(void)
-{
-   CLR_BIT(TWCR_R,TWSTA_B);
-   SET_BIT(TWCR_R,TWSTO_B);
-   SET_BIT(TWCR_R,TWEN_B);
-   SET_BIT(TWCR_R,TWINT_B);
-}
-
-enuErrorStatus_t I2C_MASTER_SendData(uint8_t u8SlaveAddress,uint8_t u8Data)
-{
-   I2C_Start();
-   while(!GET_BIT(TWCR_R,TWINT_B));
-   if(I2C_GetStatus()!=START_TRANSMITTED)
-   {
-      return ERROR;
-   }
-   TWDR_R= (u8SlaveAddress<<1) | I2C_WRITE;
-   SET_BIT(TWCR_R,TWINT_B);
-   while(!GET_BIT(TWCR_R,TWINT_B));
-   if(I2C_GetStatus()!=SLA_W_TRANSMITTED_ACK)
-   {
-      return ERROR;
-   }
-   TWDR_R=u8Data;
-   SET_BIT(TWCR_R,TWINT_B);
-   while(!GET_BIT(TWCR_R,TWINT_B));
-   if(I2C_GetStatus()!=MASTER_DATA_TRANSMITTED_ACK)
-   {
-      return ERROR;
-   }
-   I2C_Stop();
-}
-
-enuErrorStatus_t I2C_MASTER_RecieveData(uint8_t u8SlaveAddress,uint8_t  *pu8Data)
-{
-   I2C_Start();
-   while(!GET_BIT(TWCR_R,TWINT_B));
-   if(I2C_GetStatus()!=START_TRANSMITTED)
-   {
-      return ERROR;
-   }
-   TWDR_R= (u8SlaveAddress<<1) | I2C_READ;
-   SET_BIT(TWCR_R,TWINT_B);
-   while(!GET_BIT(TWCR_R,TWINT_B));
-   if(I2C_GetStatus()!=SLA_R_TRANSMITTED_ACK)
-   {
-      return ERROR;
-   }   
-   SET_BIT(TWCR_R,TWINT_B);
-   while(!GET_BIT(TWCR_R,TWINT_B));
-   if(I2C_GetStatus()!=DATA_RECEIVED_ACK)
-   {
-      return ERROR;
-   }
-   *pu8Data=TWDR_R;
-   I2C_Stop();
    return SUCCESS;
 }
 
-
-enuErrorStatus_t I2C_SLAVE_SendData(uint8_t u8Data)
+/************************************************************************************
+* Parameters (in): void
+* Parameters (out): enuErrorStatus_t
+* Return value: 1=SUCCESS or 0=FAIL
+* Description: A function to send a start bit to the I2C bus
+************************************************************************************/
+enuErrorStatus_t I2C_Start(void)
 {
+   //Setup the TWCR register for the start condition
+   CLR_BIT(TWCR_R,TWSTO_B);
+   SET_BIT(TWCR_R,TWSTA_B);
+   SET_BIT(TWCR_R,TWEN_B);
+   //enable transmission
+   SET_BIT(TWCR_R,TWINT_B);
+   //wait for transmission to complete
    while(!GET_BIT(TWCR_R,TWINT_B));
-   if(I2C_GetStatus()==OWN_SLA_R_RECEIVED_ACK || I2C_GetStatus()==M_ARBITRATION_LOST_OWN_SLA_R_RECEIVED_ACK)
+   //if start bit is sent, return a success
+   if(I2C_GetStatus()==START_TRANSMITTED)
    {
-      TWDR_R=u8Data;
-      SET_BIT(TWCR_R,TWINT_B);
-      while(!GET_BIT(TWCR_R,TWINT_B));
-      if(I2C_GetStatus()!=SLAVE_DATA_TRANSMITTED_ACK && I2C_GetStatus()!=SLAVE_LAST_DATA_BYTE_TRANSMITTED_ACK)
-      {
-         return ERROR;
-      }
       return SUCCESS;
    }
    return ERROR;
 }
 
-enuErrorStatus_t I2C_SLAVE_ReceiveData(uint8_t *pu8Data)
+/************************************************************************************
+* Parameters (in): void
+* Parameters (out): enuErrorStatus_t
+* Return value: 1=SUCCESS or 0=FAIL
+* Description: A function to send a repeated start bit to the I2C bus
+************************************************************************************/
+enuErrorStatus_t I2C_Repeated_Start(void)
 {
+   //Setup the TWCR register for the repeated start condition
+   CLR_BIT(TWCR_R,TWSTO_B);
+   SET_BIT(TWCR_R,TWSTA_B);
+   SET_BIT(TWCR_R,TWEN_B);
+   //enable transmission
+   SET_BIT(TWCR_R,TWINT_B);
+   //wait for transmission to complete
    while(!GET_BIT(TWCR_R,TWINT_B));
-   if(I2C_GetStatus()==OWN_SLA_W_RECEIVED_ACK || I2C_GetStatus()== GENERAL_CALL_ADDRESS_RECEIVED_ACK)
+   //if repeated start bit is sent, return a success
+   if(I2C_GetStatus()==RESTART_TRANSMITTED)
    {
-      SET_BIT(TWCR_R,TWINT_B);
-      while(!GET_BIT(TWCR_R,TWINT_B));
-      if(I2C_GetStatus()!=OWN_SLA_W_DATA_RECEIVED_ACK && I2C_GetStatus()!=GENERAL_CALL_DATA_RECEIVED_ACK)
-      {
-         return ERROR;
-      }
-      *pu8Data=TWDR_R;
-      SET_BIT(TWCR_R,TWINT_B);
-      while(!GET_BIT(TWCR_R,TWINT_B));
-      if(I2C_GetStatus()==RECEIVED_STOP_OR_RESTART_AS_SLAVE)
-      {
-         return SUCCESS;
-      }
+      return SUCCESS;
    }
    return ERROR;
 }
 
-enuErrorStatus_t I2C_SendString(uint8_t *pu8Data);
-enuErrorStatus_t I2C_ReceiveString(uint8_t *pu8Data,uint8_t u8bufferMaxSize);
+/************************************************************************************
+* Parameters (in): void
+* Parameters (out): enuErrorStatus_t
+* Return value: 1=SUCCESS or 0=FAIL
+* Description: A function to send a stop bit to the I2C bus
+************************************************************************************/
+enuErrorStatus_t I2C_Stop(void)
+{
+   //Setup the TWCR register for the stop condition
+   CLR_BIT(TWCR_R,TWSTA_B);
+   SET_BIT(TWCR_R,TWSTO_B);
+   SET_BIT(TWCR_R,TWEN_B);
+   //enable transmission
+   SET_BIT(TWCR_R,TWINT_B);
+   //return a success
+   return SUCCESS;
+}
 
-enuErrorStatus_t I2C_Enable_Interrupt(void);
-enuErrorStatus_t I2C_Disable_Interrupt(void);
-enuErrorStatus_t I2C_SetCallBack(void(*local_fptr)(void));
+/************************************************************************************
+* Parameters (in): uint8_t u8SlaveAddress, enuI2CMode_t enuMode
+* Parameters (out): enuErrorStatus_t
+* Return value: 1=SUCCESS or 0=FAIL
+* Description: A function to send the address portion of the I2C frame to the I2C bus
+************************************************************************************/
+enuErrorStatus_t I2C_SendAddressFrame(uint8_t u8SlaveAddress, enuI2CMode_t enuMode)
+{
+   //if parameters are invalid
+   if ((enuMode!= Read && enuMode!= Write) || enuMode > I2C_MAX_ADDRESS)
+   {
+      //return an error
+      return ERROR;
+   }
+   //prepare the address frame and send it to the data register
+   TWDR_R = (u8SlaveAddress<<1) | enuMode;
+   //enable transmission
+   SET_BIT(TWCR_R,TWINT_B);
+   //wait for transmission to complete
+   while(!GET_BIT(TWCR_R,TWINT_B));
+   //depending of the selected transmission mode
+   if (enuMode == Read)
+   {
+      //check if bus status is invalid
+      if(I2C_GetStatus()!=SLA_R_TRANSMITTED_ACK)
+      {
+         //stop the communication
+         I2C_Stop();
+         //return an error
+         return ERROR;
+      }
+   }
+   else if (enuMode == Write)
+   {
+      //check if bus status is invalid
+      if(I2C_GetStatus()!=SLA_W_TRANSMITTED_ACK)
+      {
+         //stop the communication
+         I2C_Stop();
+         //return an error
+         return ERROR;
+      }
+   }
+   //return a success
+   return SUCCESS;
+}
+
+
+/************************************************************************************
+* Parameters (in): uint8_t u8Data
+* Parameters (out): enuErrorStatus_t
+* Return value: 1=SUCCESS or 0=FAIL
+* Description: A function to send the data portion of the I2C frame to the I2C bus
+************************************************************************************/
+enuErrorStatus_t I2C_SendDataFrame(uint8_t u8Data)
+{
+   //wait for current transmission to complete
+   while(!GET_BIT(TWCR_R,TWINT_B));
+   //set the sent value to the data register
+   TWDR_R=u8Data;
+   //enable transmission
+   SET_BIT(TWCR_R,TWINT_B);
+   //wait for transmission to complete
+   while(!GET_BIT(TWCR_R,TWINT_B));
+   //check if bus status is invalid
+   uint8_t status=I2C_GetStatus();
+   if(status !=  MASTER_DATA_TRANSMITTED_ACK &&
+   status !=  SLAVE_DATA_TRANSMITTED_ACK  &&
+   status !=  SLAVE_LAST_DATA_BYTE_TRANSMITTED_ACK)
+   {
+      return ERROR;
+   }
+   //return a success
+   return SUCCESS;
+}
+
+/************************************************************************************
+* Parameters (in): uint8_t * pu8Data, enuI2CAck_t enuACK
+* Parameters (out): enuErrorStatus_t
+* Return value: 1=SUCCESS or 0=FAIL
+* Description: A function to receive the data portion of the I2C frame from the I2C bus
+************************************************************************************/
+enuErrorStatus_t I2C_RecieveDataFrame(uint8_t * pu8Data, enuI2CAck_t enuACK)
+{
+   //check if pointer points to an invalid location
+   if (pu8Data == NULLPTR)
+   {
+      //if so return an error
+      return ERROR;
+   }
+   //wait for current transmission to complete
+   while(!GET_BIT(TWCR_R,TWINT_B));
+   //depending on the acknowledgments
+   switch(enuACK)
+   {
+      //set the acknowledgments bit in control register
+      case ACK:      SET_BIT(TWCR_R,TWEA_B);   break;
+      case NACK:     CLR_BIT(TWCR_R,TWEA_B);   break;
+      default:       return ERROR;             break;
+   }
+   //enable transmission
+   SET_BIT(TWCR_R,TWINT_B);
+   //wait for current transmission to complete
+   while(!GET_BIT(TWCR_R,TWINT_B));
+   
+   //check if bus status is invalid
+   uint8_t status=I2C_GetStatus();
+   switch(enuACK)
+   {
+      case ACK:
+      if(status != DATA_RECEIVED_ACK &&
+      status != OWN_SLA_W_DATA_RECEIVED_ACK &&
+      status != GENERAL_CALL_DATA_RECEIVED_ACK)
+      {
+         //return an error
+         return ERROR;
+      }
+      break;
+      
+      case NACK:
+      if(status != DATA_RECEIVED_NACK &&
+      status != OWN_SLA_W_DATA_RECEIVED_NACK &&
+      status != GENERAL_CALL_DATA_RECEIVED_NACK)
+      {
+         //return an error
+         return ERROR;
+      }
+      break;
+   }
+   //store data in sent pointer
+   *pu8Data = TWDR_R;
+   //return success
+   return SUCCESS;
+}
+
+
+/************************************** SERVICE FUNCTIONS **********************************/
+
+/************************************************************************************
+* Parameters (in): uint8_t u8SlaveAddress,uint8_t u8Data
+* Parameters (out): enuErrorStatus_t
+* Return value: 1=SUCCESS or 0=FAIL
+* Description: A function to send a byte to the I2C bus as a master
+************************************************************************************/
+enuErrorStatus_t I2C_MASTER_SendData(uint8_t u8SlaveAddress,uint8_t u8Data)
+{
+   //start transmission
+   I2C_Start();
+   //Send the SLA+W frame
+   I2C_SendAddressFrame(u8SlaveAddress,Write);
+   //send the data frame
+   I2C_SendDataFrame(u8Data);
+   //check if bus status is invalid
+   if(I2C_GetStatus()!=MASTER_DATA_TRANSMITTED_ACK)
+   {
+      //stop transmission
+      I2C_Stop();
+      //return an error
+      return ERROR;
+   }
+   //stop transmission
+   I2C_Stop();
+   //return a success
+   return SUCCESS;
+}
+
+
+/************************************************************************************
+* Parameters (in): uint8_t u8SlaveAddress,uint8_t  *pu8Data
+* Parameters (out): enuErrorStatus_t
+* Return value: 1=SUCCESS or 0=FAIL
+* Description: A function to receive a byte from the I2C bus as a master
+************************************************************************************/
+enuErrorStatus_t I2C_MASTER_RecieveData(uint8_t u8SlaveAddress,uint8_t  *pu8Data)
+{
+   //check if pointer points to an invalid location
+   if (pu8Data == NULLPTR)
+   {
+      //if so return an error
+      return ERROR;
+   }
+   //start transmission
+   I2C_Start();
+   //Send the SLA+R frame
+   I2C_SendAddressFrame(u8SlaveAddress,Read);
+   //send the data frame
+   I2C_RecieveDataFrame(pu8Data,NACK);
+   //check if bus status is invalid
+   if(I2C_GetStatus()!=DATA_RECEIVED_NACK)
+   {
+      //stop transmission
+      I2C_Stop();
+      //return an error
+      return ERROR;
+   }
+   //stop transmission
+   I2C_Stop();
+   //return a success
+   return SUCCESS;
+}
+
+/************************************************************************************
+* Parameters (in): uint8_t u8Data
+* Parameters (out): enuErrorStatus_t
+* Return value: 1=SUCCESS or 0=FAIL
+* Description: A function to send a byte from the I2C bus as a slave
+************************************************************************************/
+enuErrorStatus_t I2C_SLAVE_SendData(uint8_t u8Data)
+{
+   //prepare peripheral to send data
+   SET_BIT(TWCR_R,TWINT_B);
+   //wait for current transmission to finish
+   while(!GET_BIT(TWCR_R,TWINT_B));
+   //if status is valid
+   if(I2C_GetStatus()==OWN_SLA_R_RECEIVED_ACK || I2C_GetStatus()==M_ARBITRATION_LOST_OWN_SLA_R_RECEIVED_ACK)
+   {
+      //send the data
+      I2C_SendDataFrame(u8Data);
+      //return a success state
+      return SUCCESS;
+   }
+   //else return a fail state
+   return ERROR;
+}
+
+/************************************************************************************
+* Parameters (in): uint8_t *pu8Data
+* Parameters (out): enuErrorStatus_t
+* Return value: 1=SUCCESS or 0=FAIL
+* Description: A function to receive a byte from the I2C bus as a slave
+************************************************************************************/
+enuErrorStatus_t I2C_SLAVE_ReceiveData(uint8_t *pu8Data)
+{
+   //prepare peripheral to receive data
+   SET_BIT(TWCR_R,TWINT_B);
+   //wait for current transmission to finish
+   while(!GET_BIT(TWCR_R,TWINT_B));
+   //if status is valid
+   if(I2C_GetStatus()==OWN_SLA_W_RECEIVED_ACK || I2C_GetStatus()== GENERAL_CALL_ADDRESS_RECEIVED_ACK)
+   {
+      //receive the data
+      I2C_RecieveDataFrame(pu8Data,ACK);
+      //complete transmission
+      SET_BIT(TWCR_R,TWINT_B);
+      //wait for current transmission to finish
+      while(!GET_BIT(TWCR_R,TWINT_B));
+      //if stop bit is received
+      if(I2C_GetStatus()==RECEIVED_STOP_OR_RESTART_AS_SLAVE)
+      {
+         //return a success
+         return SUCCESS;
+      }
+   }
+   //else return a fail
+   return ERROR;
+}
+
+
+/************************************************************************************
+* Parameters (in): void
+* Parameters (out): enuErrorStatus_t
+* Return value: 1=SUCCESS or 0=FAIL
+* Description: A function to enable the I2C bus event interrupt
+************************************************************************************/
+enuErrorStatus_t I2C_Enable_Interrupt(void)
+{
+   //set the interrupt enable bit in the control register
+   SET_BIT(TWCR_R,TWIE_B);
+   return SUCCESS;
+}
+
+/************************************************************************************
+* Parameters (in): void
+* Parameters (out): enuErrorStatus_t
+* Return value: 1=SUCCESS or 0=FAIL
+* Description: A function to disable the I2C bus event interrupt
+************************************************************************************/
+enuErrorStatus_t I2C_Disable_Interrupt(void)
+{
+   //clear the interrupt enable bit in the control register
+   CLR_BIT(TWCR_R,TWIE_B);
+   return SUCCESS;
+}
+
+/************************************************************************************
+* Parameters (in): void(*local_fptr)(void)
+* Parameters (out): enuErrorStatus_t
+* Return value: 1=SUCCESS or 0=FAIL
+* Description: A function to set the callback function of the I2C bus event interrupt
+************************************************************************************/
+enuErrorStatus_t I2C_SetCallBack(void(*local_fptr)(void))
+{
+   //check if callback function pointer points to a valid function
+   if(local_fptr == NULLPTR)
+   {
+      return ERROR;
+   }
+   //set the callback function to the sent function pointer
+   I2C_Callback=local_fptr;
+   return SUCCESS;
+}
+
+/********************************** ISR FUNCTION *************************/
+
+
+/************************************************************************************
+* Parameters (in): void
+* Parameters (out): void
+* Return value: void
+* Description: I2C event interrupt service routine
+************************************************************************************/
+ISR(TWI_vect)
+{
+   //check if callback function pointer points to a valid function
+   if(I2C_Callback != NULLPTR)
+   {
+      //call the callback function
+      I2C_Callback();
+   }
+}
