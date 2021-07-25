@@ -1,0 +1,694 @@
+
+I2C_Driver.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000003fe  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000018  00800060  000003fe  00000492  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000002  00800078  00800078  000004aa  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  000004aa  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000004dc  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 00000108  00000000  00000000  00000518  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   000010e4  00000000  00000000  00000620  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 00000937  00000000  00000000  00001704  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   00000a23  00000000  00000000  0000203b  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  00000214  00000000  00000000  00002a60  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    0000063b  00000000  00000000  00002c74  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    000008cf  00000000  00000000  000032af  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 000000c0  00000000  00000000  00003b7e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   8:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  10:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  14:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  18:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  1c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  20:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  24:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  28:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  2c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  30:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  34:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  38:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  3c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  40:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  44:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  48:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  4c:	0c 94 d4 01 	jmp	0x3a8	; 0x3a8 <__vector_19>
+  50:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	10 e0       	ldi	r17, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	ee ef       	ldi	r30, 0xFE	; 254
+  68:	f3 e0       	ldi	r31, 0x03	; 3
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+  70:	a8 37       	cpi	r26, 0x78	; 120
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
+
+00000076 <__do_clear_bss>:
+  76:	20 e0       	ldi	r18, 0x00	; 0
+  78:	a8 e7       	ldi	r26, 0x78	; 120
+  7a:	b0 e0       	ldi	r27, 0x00	; 0
+  7c:	01 c0       	rjmp	.+2      	; 0x80 <.do_clear_bss_start>
+
+0000007e <.do_clear_bss_loop>:
+  7e:	1d 92       	st	X+, r1
+
+00000080 <.do_clear_bss_start>:
+  80:	aa 37       	cpi	r26, 0x7A	; 122
+  82:	b2 07       	cpc	r27, r18
+  84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
+  86:	0e 94 49 00 	call	0x92	; 0x92 <main>
+  8a:	0c 94 fd 01 	jmp	0x3fa	; 0x3fa <_exit>
+
+0000008e <__bad_interrupt>:
+  8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000092 <main>:
+#include "MCAL/DIO/DIO.h"
+#include "util/delay.h"
+
+int main(void)
+{
+    DIO_Init();
+  92:	0e 94 5f 00 	call	0xbe	; 0xbe <DIO_Init>
+    I2C_Init();
+  96:	0e 94 3d 01 	call	0x27a	; 0x27a <I2C_Init>
+    /* Replace with your application code */
+    uint8_t Data=0;
+  9a:	60 e0       	ldi	r22, 0x00	; 0
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  9c:	2f ef       	ldi	r18, 0xFF	; 255
+  9e:	89 e6       	ldi	r24, 0x69	; 105
+  a0:	98 e1       	ldi	r25, 0x18	; 24
+  a2:	21 50       	subi	r18, 0x01	; 1
+  a4:	80 40       	sbci	r24, 0x00	; 0
+  a6:	90 40       	sbci	r25, 0x00	; 0
+  a8:	e1 f7       	brne	.-8      	; 0xa2 <main+0x10>
+  aa:	00 c0       	rjmp	.+0      	; 0xac <main+0x1a>
+  ac:	00 00       	nop
+    while (1) 
+    {
+      //Master Transmitter App
+      _delay_ms(1000);
+      PORTA_R=Data;
+  ae:	6b bb       	out	0x1b, r22	; 27
+      I2C_MASTER_SendData(0x02,Data++);
+  b0:	c1 e0       	ldi	r28, 0x01	; 1
+  b2:	c6 0f       	add	r28, r22
+  b4:	82 e0       	ldi	r24, 0x02	; 2
+  b6:	0e 94 b9 01 	call	0x372	; 0x372 <I2C_MASTER_SendData>
+  ba:	6c 2f       	mov	r22, r28
+  bc:	ef cf       	rjmp	.-34     	; 0x9c <main+0xa>
+
+000000be <DIO_Init>:
+enuErrorStatus_t DIO_Init(void)
+{
+   uint8_t u8i;
+   uint8_t u8port,u8pin;
+   //traverse the array of pins the user have used
+   for (u8i=0;u8i<DIO_GROUPS_NO;u8i++)
+  be:	40 e0       	ldi	r20, 0x00	; 0
+  c0:	d2 c0       	rjmp	.+420    	; 0x266 <DIO_Init+0x1a8>
+   {
+      //calculate the port and pin number for each pin
+      u8port=astrDIOConfigParameters[u8i].enuPinNo / DIO_PINS_NO;
+  c2:	84 2f       	mov	r24, r20
+  c4:	90 e0       	ldi	r25, 0x00	; 0
+  c6:	fc 01       	movw	r30, r24
+  c8:	ee 0f       	add	r30, r30
+  ca:	ff 1f       	adc	r31, r31
+  cc:	e8 0f       	add	r30, r24
+  ce:	f9 1f       	adc	r31, r25
+  d0:	e0 5a       	subi	r30, 0xA0	; 160
+  d2:	ff 4f       	sbci	r31, 0xFF	; 255
+  d4:	20 81       	ld	r18, Z
+  d6:	32 2f       	mov	r19, r18
+  d8:	36 95       	lsr	r19
+  da:	36 95       	lsr	r19
+  dc:	36 95       	lsr	r19
+      u8pin=astrDIOConfigParameters[u8i].enuPinNo  % DIO_PINS_NO;
+  de:	27 70       	andi	r18, 0x07	; 7
+      
+      //if port number is invalid
+      if (u8port>=DIO_PORT_NO)
+  e0:	34 30       	cpi	r19, 0x04	; 4
+  e2:	08 f0       	brcs	.+2      	; 0xe6 <DIO_Init+0x28>
+  e4:	c5 c0       	rjmp	.+394    	; 0x270 <DIO_Init+0x1b2>
+         //return FAIL
+         return 0;
+      }
+      
+      //decide which port are we working with
+      switch (u8port)
+  e6:	31 30       	cpi	r19, 0x01	; 1
+  e8:	b1 f1       	breq	.+108    	; 0x156 <DIO_Init+0x98>
+  ea:	38 f0       	brcs	.+14     	; 0xfa <DIO_Init+0x3c>
+  ec:	32 30       	cpi	r19, 0x02	; 2
+  ee:	09 f4       	brne	.+2      	; 0xf2 <DIO_Init+0x34>
+  f0:	60 c0       	rjmp	.+192    	; 0x1b2 <DIO_Init+0xf4>
+  f2:	33 30       	cpi	r19, 0x03	; 3
+  f4:	09 f4       	brne	.+2      	; 0xf8 <DIO_Init+0x3a>
+  f6:	8a c0       	rjmp	.+276    	; 0x20c <DIO_Init+0x14e>
+  f8:	b5 c0       	rjmp	.+362    	; 0x264 <DIO_Init+0x1a6>
+      {
+         case M_PORTA:
+         //clear the pin bit in the DDRx and PORTx registers of each port
+         CLR_BIT(DDRA_R,u8pin);
+  fa:	6a b3       	in	r22, 0x1a	; 26
+  fc:	e1 e0       	ldi	r30, 0x01	; 1
+  fe:	f0 e0       	ldi	r31, 0x00	; 0
+ 100:	df 01       	movw	r26, r30
+ 102:	02 c0       	rjmp	.+4      	; 0x108 <DIO_Init+0x4a>
+ 104:	aa 0f       	add	r26, r26
+ 106:	bb 1f       	adc	r27, r27
+ 108:	2a 95       	dec	r18
+ 10a:	e2 f7       	brpl	.-8      	; 0x104 <DIO_Init+0x46>
+ 10c:	9d 01       	movw	r18, r26
+ 10e:	5a 2f       	mov	r21, r26
+ 110:	50 95       	com	r21
+ 112:	65 23       	and	r22, r21
+ 114:	6a bb       	out	0x1a, r22	; 26
+         CLR_BIT(PORTA_R,u8pin);
+ 116:	6b b3       	in	r22, 0x1b	; 27
+ 118:	56 23       	and	r21, r22
+ 11a:	5b bb       	out	0x1b, r21	; 27
+         //if the pin is set as output
+         if(astrDIOConfigParameters[u8i].enuPinDir)
+ 11c:	fc 01       	movw	r30, r24
+ 11e:	ee 0f       	add	r30, r30
+ 120:	ff 1f       	adc	r31, r31
+ 122:	e8 0f       	add	r30, r24
+ 124:	f9 1f       	adc	r31, r25
+ 126:	e0 5a       	subi	r30, 0xA0	; 160
+ 128:	ff 4f       	sbci	r31, 0xFF	; 255
+ 12a:	51 81       	ldd	r21, Z+1	; 0x01
+ 12c:	55 23       	and	r21, r21
+ 12e:	19 f0       	breq	.+6      	; 0x136 <DIO_Init+0x78>
+         {
+            //set its equivalent bit in the DDRx register
+            SET_BIT(DDRA_R,u8pin);
+ 130:	5a b3       	in	r21, 0x1a	; 26
+ 132:	5a 2b       	or	r21, r26
+ 134:	5a bb       	out	0x1a, r21	; 26
+         }
+
+         // check if the pins pullup resistor will be used
+         if (astrDIOConfigParameters[u8i].enuPullupResEn)
+ 136:	fc 01       	movw	r30, r24
+ 138:	ee 0f       	add	r30, r30
+ 13a:	ff 1f       	adc	r31, r31
+ 13c:	8e 0f       	add	r24, r30
+ 13e:	9f 1f       	adc	r25, r31
+ 140:	fc 01       	movw	r30, r24
+ 142:	e0 5a       	subi	r30, 0xA0	; 160
+ 144:	ff 4f       	sbci	r31, 0xFF	; 255
+ 146:	82 81       	ldd	r24, Z+2	; 0x02
+ 148:	88 23       	and	r24, r24
+ 14a:	09 f4       	brne	.+2      	; 0x14e <DIO_Init+0x90>
+ 14c:	8b c0       	rjmp	.+278    	; 0x264 <DIO_Init+0x1a6>
+         {
+            //if so, set it's equivalent bit in the PORTx register
+            SET_BIT(PORTA_R,u8pin);
+ 14e:	8b b3       	in	r24, 0x1b	; 27
+ 150:	28 2b       	or	r18, r24
+ 152:	2b bb       	out	0x1b, r18	; 27
+ 154:	87 c0       	rjmp	.+270    	; 0x264 <DIO_Init+0x1a6>
+         }
+         break;
+
+         case M_PORTB:
+         //clear the pin bit in the DDRx and PORTx registers of each port
+         CLR_BIT(DDRB_R,u8pin);
+ 156:	67 b3       	in	r22, 0x17	; 23
+ 158:	e1 e0       	ldi	r30, 0x01	; 1
+ 15a:	f0 e0       	ldi	r31, 0x00	; 0
+ 15c:	df 01       	movw	r26, r30
+ 15e:	02 c0       	rjmp	.+4      	; 0x164 <DIO_Init+0xa6>
+ 160:	aa 0f       	add	r26, r26
+ 162:	bb 1f       	adc	r27, r27
+ 164:	2a 95       	dec	r18
+ 166:	e2 f7       	brpl	.-8      	; 0x160 <DIO_Init+0xa2>
+ 168:	9d 01       	movw	r18, r26
+ 16a:	5a 2f       	mov	r21, r26
+ 16c:	50 95       	com	r21
+ 16e:	65 23       	and	r22, r21
+ 170:	67 bb       	out	0x17, r22	; 23
+         CLR_BIT(PORTB_R,u8pin);
+ 172:	68 b3       	in	r22, 0x18	; 24
+ 174:	56 23       	and	r21, r22
+ 176:	58 bb       	out	0x18, r21	; 24
+         //if the pin is set as output
+         if(astrDIOConfigParameters[u8i].enuPinDir)
+ 178:	fc 01       	movw	r30, r24
+ 17a:	ee 0f       	add	r30, r30
+ 17c:	ff 1f       	adc	r31, r31
+ 17e:	e8 0f       	add	r30, r24
+ 180:	f9 1f       	adc	r31, r25
+ 182:	e0 5a       	subi	r30, 0xA0	; 160
+ 184:	ff 4f       	sbci	r31, 0xFF	; 255
+ 186:	51 81       	ldd	r21, Z+1	; 0x01
+ 188:	55 23       	and	r21, r21
+ 18a:	19 f0       	breq	.+6      	; 0x192 <DIO_Init+0xd4>
+         {
+            //set its equivalent bit in the DDRx register
+            SET_BIT(DDRB_R,u8pin);
+ 18c:	57 b3       	in	r21, 0x17	; 23
+ 18e:	5a 2b       	or	r21, r26
+ 190:	57 bb       	out	0x17, r21	; 23
+         }
+         // check if the pins pullup resistor will be used
+         if (astrDIOConfigParameters[u8i].enuPullupResEn)
+ 192:	fc 01       	movw	r30, r24
+ 194:	ee 0f       	add	r30, r30
+ 196:	ff 1f       	adc	r31, r31
+ 198:	8e 0f       	add	r24, r30
+ 19a:	9f 1f       	adc	r25, r31
+ 19c:	fc 01       	movw	r30, r24
+ 19e:	e0 5a       	subi	r30, 0xA0	; 160
+ 1a0:	ff 4f       	sbci	r31, 0xFF	; 255
+ 1a2:	82 81       	ldd	r24, Z+2	; 0x02
+ 1a4:	88 23       	and	r24, r24
+ 1a6:	09 f4       	brne	.+2      	; 0x1aa <DIO_Init+0xec>
+ 1a8:	5d c0       	rjmp	.+186    	; 0x264 <DIO_Init+0x1a6>
+         {
+            //if so, set it's equivalent bit in the PORTx register
+            SET_BIT(PORTB_R,u8pin);
+ 1aa:	88 b3       	in	r24, 0x18	; 24
+ 1ac:	28 2b       	or	r18, r24
+ 1ae:	28 bb       	out	0x18, r18	; 24
+ 1b0:	59 c0       	rjmp	.+178    	; 0x264 <DIO_Init+0x1a6>
+         }
+         break;
+
+         case M_PORTC:
+         //clear the pin bit in the DDRx and PORTx registers of each port
+         CLR_BIT(DDRC_R,u8pin);
+ 1b2:	64 b3       	in	r22, 0x14	; 20
+ 1b4:	e1 e0       	ldi	r30, 0x01	; 1
+ 1b6:	f0 e0       	ldi	r31, 0x00	; 0
+ 1b8:	df 01       	movw	r26, r30
+ 1ba:	02 c0       	rjmp	.+4      	; 0x1c0 <DIO_Init+0x102>
+ 1bc:	aa 0f       	add	r26, r26
+ 1be:	bb 1f       	adc	r27, r27
+ 1c0:	2a 95       	dec	r18
+ 1c2:	e2 f7       	brpl	.-8      	; 0x1bc <DIO_Init+0xfe>
+ 1c4:	9d 01       	movw	r18, r26
+ 1c6:	5a 2f       	mov	r21, r26
+ 1c8:	50 95       	com	r21
+ 1ca:	65 23       	and	r22, r21
+ 1cc:	64 bb       	out	0x14, r22	; 20
+         CLR_BIT(PORTC_R,u8pin);
+ 1ce:	65 b3       	in	r22, 0x15	; 21
+ 1d0:	56 23       	and	r21, r22
+ 1d2:	55 bb       	out	0x15, r21	; 21
+         //if the pin is set as output
+         if(astrDIOConfigParameters[u8i].enuPinDir)
+ 1d4:	fc 01       	movw	r30, r24
+ 1d6:	ee 0f       	add	r30, r30
+ 1d8:	ff 1f       	adc	r31, r31
+ 1da:	e8 0f       	add	r30, r24
+ 1dc:	f9 1f       	adc	r31, r25
+ 1de:	e0 5a       	subi	r30, 0xA0	; 160
+ 1e0:	ff 4f       	sbci	r31, 0xFF	; 255
+ 1e2:	51 81       	ldd	r21, Z+1	; 0x01
+ 1e4:	55 23       	and	r21, r21
+ 1e6:	19 f0       	breq	.+6      	; 0x1ee <DIO_Init+0x130>
+         {
+            //set its equivalent bit in the DDRx register
+            SET_BIT(DDRC_R,u8pin);
+ 1e8:	54 b3       	in	r21, 0x14	; 20
+ 1ea:	5a 2b       	or	r21, r26
+ 1ec:	54 bb       	out	0x14, r21	; 20
+         }
+         // check if the pins pullup resistor will be used
+         if (astrDIOConfigParameters[u8i].enuPullupResEn)
+ 1ee:	fc 01       	movw	r30, r24
+ 1f0:	ee 0f       	add	r30, r30
+ 1f2:	ff 1f       	adc	r31, r31
+ 1f4:	8e 0f       	add	r24, r30
+ 1f6:	9f 1f       	adc	r25, r31
+ 1f8:	fc 01       	movw	r30, r24
+ 1fa:	e0 5a       	subi	r30, 0xA0	; 160
+ 1fc:	ff 4f       	sbci	r31, 0xFF	; 255
+ 1fe:	82 81       	ldd	r24, Z+2	; 0x02
+ 200:	88 23       	and	r24, r24
+ 202:	81 f1       	breq	.+96     	; 0x264 <DIO_Init+0x1a6>
+         {
+            //if so, set it's equivalent bit in the PORTx register
+            SET_BIT(PORTC_R,u8pin);
+ 204:	85 b3       	in	r24, 0x15	; 21
+ 206:	28 2b       	or	r18, r24
+ 208:	25 bb       	out	0x15, r18	; 21
+ 20a:	2c c0       	rjmp	.+88     	; 0x264 <DIO_Init+0x1a6>
+         }
+         break;
+
+         case M_PORTD:
+         //clear the pin bit in the DDRx and PORTx registers of each port
+         CLR_BIT(DDRD_R,u8pin);
+ 20c:	61 b3       	in	r22, 0x11	; 17
+ 20e:	e1 e0       	ldi	r30, 0x01	; 1
+ 210:	f0 e0       	ldi	r31, 0x00	; 0
+ 212:	df 01       	movw	r26, r30
+ 214:	02 c0       	rjmp	.+4      	; 0x21a <DIO_Init+0x15c>
+ 216:	aa 0f       	add	r26, r26
+ 218:	bb 1f       	adc	r27, r27
+ 21a:	2a 95       	dec	r18
+ 21c:	e2 f7       	brpl	.-8      	; 0x216 <DIO_Init+0x158>
+ 21e:	9d 01       	movw	r18, r26
+ 220:	5a 2f       	mov	r21, r26
+ 222:	50 95       	com	r21
+ 224:	65 23       	and	r22, r21
+ 226:	61 bb       	out	0x11, r22	; 17
+         CLR_BIT(PORTD_R,u8pin);
+ 228:	62 b3       	in	r22, 0x12	; 18
+ 22a:	56 23       	and	r21, r22
+ 22c:	52 bb       	out	0x12, r21	; 18
+         //if the pin is set as output
+         if(astrDIOConfigParameters[u8i].enuPinDir)
+ 22e:	fc 01       	movw	r30, r24
+ 230:	ee 0f       	add	r30, r30
+ 232:	ff 1f       	adc	r31, r31
+ 234:	e8 0f       	add	r30, r24
+ 236:	f9 1f       	adc	r31, r25
+ 238:	e0 5a       	subi	r30, 0xA0	; 160
+ 23a:	ff 4f       	sbci	r31, 0xFF	; 255
+ 23c:	51 81       	ldd	r21, Z+1	; 0x01
+ 23e:	55 23       	and	r21, r21
+ 240:	19 f0       	breq	.+6      	; 0x248 <DIO_Init+0x18a>
+         {
+            //set its equivalent bit in the DDRx register
+            SET_BIT(DDRD_R,u8pin);
+ 242:	51 b3       	in	r21, 0x11	; 17
+ 244:	5a 2b       	or	r21, r26
+ 246:	51 bb       	out	0x11, r21	; 17
+         }
+         // check if the pins pullup resistor will be used
+         if (astrDIOConfigParameters[u8i].enuPullupResEn)
+ 248:	fc 01       	movw	r30, r24
+ 24a:	ee 0f       	add	r30, r30
+ 24c:	ff 1f       	adc	r31, r31
+ 24e:	8e 0f       	add	r24, r30
+ 250:	9f 1f       	adc	r25, r31
+ 252:	fc 01       	movw	r30, r24
+ 254:	e0 5a       	subi	r30, 0xA0	; 160
+ 256:	ff 4f       	sbci	r31, 0xFF	; 255
+ 258:	82 81       	ldd	r24, Z+2	; 0x02
+ 25a:	88 23       	and	r24, r24
+ 25c:	19 f0       	breq	.+6      	; 0x264 <DIO_Init+0x1a6>
+         {
+            //if so, set it's equivalent bit in the PORTx register
+            SET_BIT(PORTD_R,u8pin);
+ 25e:	82 b3       	in	r24, 0x12	; 18
+ 260:	28 2b       	or	r18, r24
+ 262:	22 bb       	out	0x12, r18	; 18
+enuErrorStatus_t DIO_Init(void)
+{
+   uint8_t u8i;
+   uint8_t u8port,u8pin;
+   //traverse the array of pins the user have used
+   for (u8i=0;u8i<DIO_GROUPS_NO;u8i++)
+ 264:	4f 5f       	subi	r20, 0xFF	; 255
+ 266:	48 30       	cpi	r20, 0x08	; 8
+ 268:	08 f4       	brcc	.+2      	; 0x26c <DIO_Init+0x1ae>
+ 26a:	2b cf       	rjmp	.-426    	; 0xc2 <DIO_Init+0x4>
+         }
+         break;
+      }
+   }
+   //return success status
+   return SUCCESS;
+ 26c:	81 e0       	ldi	r24, 0x01	; 1
+ 26e:	08 95       	ret
+      
+      //if port number is invalid
+      if (u8port>=DIO_PORT_NO)
+      {
+         //return FAIL
+         return 0;
+ 270:	80 e0       	ldi	r24, 0x00	; 0
+         break;
+      }
+   }
+   //return success status
+   return SUCCESS;
+}
+ 272:	08 95       	ret
+
+00000274 <I2C_GetStatus>:
+      return ERROR;
+   }
+   //set the callback function to the sent function pointer
+   I2C_Callback=local_fptr;
+   return SUCCESS;
+}
+ 274:	81 b1       	in	r24, 0x01	; 1
+ 276:	88 7f       	andi	r24, 0xF8	; 248
+ 278:	08 95       	ret
+
+0000027a <I2C_Init>:
+ 27a:	81 b1       	in	r24, 0x01	; 1
+ 27c:	8c 7f       	andi	r24, 0xFC	; 252
+ 27e:	81 b9       	out	0x01, r24	; 1
+ 280:	81 b1       	in	r24, 0x01	; 1
+ 282:	81 b9       	out	0x01, r24	; 1
+ 284:	88 e0       	ldi	r24, 0x08	; 8
+ 286:	80 b9       	out	0x00, r24	; 0
+ 288:	83 e0       	ldi	r24, 0x03	; 3
+ 28a:	82 b9       	out	0x02, r24	; 2
+ 28c:	86 b7       	in	r24, 0x36	; 54
+ 28e:	80 64       	ori	r24, 0x40	; 64
+ 290:	86 bf       	out	0x36, r24	; 54
+ 292:	86 b7       	in	r24, 0x36	; 54
+ 294:	80 68       	ori	r24, 0x80	; 128
+ 296:	86 bf       	out	0x36, r24	; 54
+ 298:	86 b7       	in	r24, 0x36	; 54
+ 29a:	84 60       	ori	r24, 0x04	; 4
+ 29c:	86 bf       	out	0x36, r24	; 54
+ 29e:	81 e0       	ldi	r24, 0x01	; 1
+ 2a0:	08 95       	ret
+
+000002a2 <I2C_Start>:
+ 2a2:	86 b7       	in	r24, 0x36	; 54
+ 2a4:	8f 7e       	andi	r24, 0xEF	; 239
+ 2a6:	86 bf       	out	0x36, r24	; 54
+ 2a8:	86 b7       	in	r24, 0x36	; 54
+ 2aa:	80 62       	ori	r24, 0x20	; 32
+ 2ac:	86 bf       	out	0x36, r24	; 54
+ 2ae:	86 b7       	in	r24, 0x36	; 54
+ 2b0:	84 60       	ori	r24, 0x04	; 4
+ 2b2:	86 bf       	out	0x36, r24	; 54
+ 2b4:	86 b7       	in	r24, 0x36	; 54
+ 2b6:	80 68       	ori	r24, 0x80	; 128
+ 2b8:	86 bf       	out	0x36, r24	; 54
+ 2ba:	06 b6       	in	r0, 0x36	; 54
+ 2bc:	07 fe       	sbrs	r0, 7
+ 2be:	fd cf       	rjmp	.-6      	; 0x2ba <I2C_Start+0x18>
+ 2c0:	0e 94 3a 01 	call	0x274	; 0x274 <I2C_GetStatus>
+ 2c4:	88 30       	cpi	r24, 0x08	; 8
+ 2c6:	11 f4       	brne	.+4      	; 0x2cc <I2C_Start+0x2a>
+ 2c8:	81 e0       	ldi	r24, 0x01	; 1
+ 2ca:	08 95       	ret
+ 2cc:	80 e0       	ldi	r24, 0x00	; 0
+ 2ce:	08 95       	ret
+
+000002d0 <I2C_Stop>:
+ 2d0:	86 b7       	in	r24, 0x36	; 54
+ 2d2:	8f 7d       	andi	r24, 0xDF	; 223
+ 2d4:	86 bf       	out	0x36, r24	; 54
+ 2d6:	86 b7       	in	r24, 0x36	; 54
+ 2d8:	80 61       	ori	r24, 0x10	; 16
+ 2da:	86 bf       	out	0x36, r24	; 54
+ 2dc:	86 b7       	in	r24, 0x36	; 54
+ 2de:	84 60       	ori	r24, 0x04	; 4
+ 2e0:	86 bf       	out	0x36, r24	; 54
+ 2e2:	86 b7       	in	r24, 0x36	; 54
+ 2e4:	80 68       	ori	r24, 0x80	; 128
+ 2e6:	86 bf       	out	0x36, r24	; 54
+ 2e8:	81 e0       	ldi	r24, 0x01	; 1
+ 2ea:	08 95       	ret
+
+000002ec <I2C_SendAddressFrame>:
+ 2ec:	62 30       	cpi	r22, 0x02	; 2
+ 2ee:	f8 f4       	brcc	.+62     	; 0x32e <I2C_SendAddressFrame+0x42>
+ 2f0:	90 e0       	ldi	r25, 0x00	; 0
+ 2f2:	88 0f       	add	r24, r24
+ 2f4:	99 1f       	adc	r25, r25
+ 2f6:	86 2b       	or	r24, r22
+ 2f8:	83 b9       	out	0x03, r24	; 3
+ 2fa:	86 b7       	in	r24, 0x36	; 54
+ 2fc:	80 68       	ori	r24, 0x80	; 128
+ 2fe:	86 bf       	out	0x36, r24	; 54
+ 300:	06 b6       	in	r0, 0x36	; 54
+ 302:	07 fe       	sbrs	r0, 7
+ 304:	fd cf       	rjmp	.-6      	; 0x300 <I2C_SendAddressFrame+0x14>
+ 306:	61 30       	cpi	r22, 0x01	; 1
+ 308:	41 f4       	brne	.+16     	; 0x31a <I2C_SendAddressFrame+0x2e>
+ 30a:	0e 94 3a 01 	call	0x274	; 0x274 <I2C_GetStatus>
+ 30e:	80 34       	cpi	r24, 0x40	; 64
+ 310:	81 f0       	breq	.+32     	; 0x332 <I2C_SendAddressFrame+0x46>
+ 312:	0e 94 68 01 	call	0x2d0	; 0x2d0 <I2C_Stop>
+ 316:	80 e0       	ldi	r24, 0x00	; 0
+ 318:	08 95       	ret
+ 31a:	61 11       	cpse	r22, r1
+ 31c:	0c c0       	rjmp	.+24     	; 0x336 <I2C_SendAddressFrame+0x4a>
+ 31e:	0e 94 3a 01 	call	0x274	; 0x274 <I2C_GetStatus>
+ 322:	88 31       	cpi	r24, 0x18	; 24
+ 324:	51 f0       	breq	.+20     	; 0x33a <I2C_SendAddressFrame+0x4e>
+ 326:	0e 94 68 01 	call	0x2d0	; 0x2d0 <I2C_Stop>
+ 32a:	80 e0       	ldi	r24, 0x00	; 0
+ 32c:	08 95       	ret
+ 32e:	80 e0       	ldi	r24, 0x00	; 0
+ 330:	08 95       	ret
+ 332:	81 e0       	ldi	r24, 0x01	; 1
+ 334:	08 95       	ret
+ 336:	81 e0       	ldi	r24, 0x01	; 1
+ 338:	08 95       	ret
+ 33a:	81 e0       	ldi	r24, 0x01	; 1
+ 33c:	08 95       	ret
+
+0000033e <I2C_SendDataFrame>:
+ 33e:	06 b6       	in	r0, 0x36	; 54
+ 340:	07 fe       	sbrs	r0, 7
+ 342:	fd cf       	rjmp	.-6      	; 0x33e <I2C_SendDataFrame>
+ 344:	83 b9       	out	0x03, r24	; 3
+ 346:	86 b7       	in	r24, 0x36	; 54
+ 348:	80 68       	ori	r24, 0x80	; 128
+ 34a:	86 bf       	out	0x36, r24	; 54
+ 34c:	06 b6       	in	r0, 0x36	; 54
+ 34e:	07 fe       	sbrs	r0, 7
+ 350:	fd cf       	rjmp	.-6      	; 0x34c <I2C_SendDataFrame+0xe>
+ 352:	0e 94 3a 01 	call	0x274	; 0x274 <I2C_GetStatus>
+ 356:	88 32       	cpi	r24, 0x28	; 40
+ 358:	31 f0       	breq	.+12     	; 0x366 <I2C_SendDataFrame+0x28>
+ 35a:	88 3b       	cpi	r24, 0xB8	; 184
+ 35c:	31 f0       	breq	.+12     	; 0x36a <I2C_SendDataFrame+0x2c>
+ 35e:	88 3c       	cpi	r24, 0xC8	; 200
+ 360:	31 f4       	brne	.+12     	; 0x36e <I2C_SendDataFrame+0x30>
+ 362:	81 e0       	ldi	r24, 0x01	; 1
+ 364:	08 95       	ret
+ 366:	81 e0       	ldi	r24, 0x01	; 1
+ 368:	08 95       	ret
+ 36a:	81 e0       	ldi	r24, 0x01	; 1
+ 36c:	08 95       	ret
+ 36e:	80 e0       	ldi	r24, 0x00	; 0
+ 370:	08 95       	ret
+
+00000372 <I2C_MASTER_SendData>:
+ 372:	cf 93       	push	r28
+ 374:	df 93       	push	r29
+ 376:	d8 2f       	mov	r29, r24
+ 378:	c6 2f       	mov	r28, r22
+ 37a:	0e 94 51 01 	call	0x2a2	; 0x2a2 <I2C_Start>
+ 37e:	60 e0       	ldi	r22, 0x00	; 0
+ 380:	8d 2f       	mov	r24, r29
+ 382:	0e 94 76 01 	call	0x2ec	; 0x2ec <I2C_SendAddressFrame>
+ 386:	8c 2f       	mov	r24, r28
+ 388:	0e 94 9f 01 	call	0x33e	; 0x33e <I2C_SendDataFrame>
+ 38c:	0e 94 3a 01 	call	0x274	; 0x274 <I2C_GetStatus>
+ 390:	88 32       	cpi	r24, 0x28	; 40
+ 392:	21 f0       	breq	.+8      	; 0x39c <I2C_MASTER_SendData+0x2a>
+ 394:	0e 94 68 01 	call	0x2d0	; 0x2d0 <I2C_Stop>
+ 398:	80 e0       	ldi	r24, 0x00	; 0
+ 39a:	03 c0       	rjmp	.+6      	; 0x3a2 <I2C_MASTER_SendData+0x30>
+ 39c:	0e 94 68 01 	call	0x2d0	; 0x2d0 <I2C_Stop>
+ 3a0:	81 e0       	ldi	r24, 0x01	; 1
+ 3a2:	df 91       	pop	r29
+ 3a4:	cf 91       	pop	r28
+ 3a6:	08 95       	ret
+
+000003a8 <__vector_19>:
+* Parameters (out): void
+* Return value: void
+* Description: I2C event interrupt service routine
+************************************************************************************/
+ISR(TWI_vect)
+{
+ 3a8:	1f 92       	push	r1
+ 3aa:	0f 92       	push	r0
+ 3ac:	0f b6       	in	r0, 0x3f	; 63
+ 3ae:	0f 92       	push	r0
+ 3b0:	11 24       	eor	r1, r1
+ 3b2:	2f 93       	push	r18
+ 3b4:	3f 93       	push	r19
+ 3b6:	4f 93       	push	r20
+ 3b8:	5f 93       	push	r21
+ 3ba:	6f 93       	push	r22
+ 3bc:	7f 93       	push	r23
+ 3be:	8f 93       	push	r24
+ 3c0:	9f 93       	push	r25
+ 3c2:	af 93       	push	r26
+ 3c4:	bf 93       	push	r27
+ 3c6:	ef 93       	push	r30
+ 3c8:	ff 93       	push	r31
+   //check if callback function pointer points to a valid function
+   if(I2C_Callback != NULLPTR)
+ 3ca:	e0 91 78 00 	lds	r30, 0x0078	; 0x800078 <__data_end>
+ 3ce:	f0 91 79 00 	lds	r31, 0x0079	; 0x800079 <__data_end+0x1>
+ 3d2:	30 97       	sbiw	r30, 0x00	; 0
+ 3d4:	09 f0       	breq	.+2      	; 0x3d8 <__vector_19+0x30>
+   {
+      //call the callback function
+      I2C_Callback();
+ 3d6:	09 95       	icall
+   }
+ 3d8:	ff 91       	pop	r31
+ 3da:	ef 91       	pop	r30
+ 3dc:	bf 91       	pop	r27
+ 3de:	af 91       	pop	r26
+ 3e0:	9f 91       	pop	r25
+ 3e2:	8f 91       	pop	r24
+ 3e4:	7f 91       	pop	r23
+ 3e6:	6f 91       	pop	r22
+ 3e8:	5f 91       	pop	r21
+ 3ea:	4f 91       	pop	r20
+ 3ec:	3f 91       	pop	r19
+ 3ee:	2f 91       	pop	r18
+ 3f0:	0f 90       	pop	r0
+ 3f2:	0f be       	out	0x3f, r0	; 63
+ 3f4:	0f 90       	pop	r0
+ 3f6:	1f 90       	pop	r1
+ 3f8:	18 95       	reti
+
+000003fa <_exit>:
+ 3fa:	f8 94       	cli
+
+000003fc <__stop_program>:
+ 3fc:	ff cf       	rjmp	.-2      	; 0x3fc <__stop_program>
