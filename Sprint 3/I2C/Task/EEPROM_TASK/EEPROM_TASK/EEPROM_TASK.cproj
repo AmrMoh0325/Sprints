@@ -152,15 +152,6 @@
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="MCAL\DIO\DIO.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\DIO\DIO.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\DIO\DIO_Cfg.c">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="MCAL\I2C\I2C.c">
       <SubType>compile</SubType>
     </Compile>
@@ -191,7 +182,6 @@
     <Folder Include="ECUAL\EEPROM" />
     <Folder Include="MCAL" />
     <Folder Include="MCAL\I2C" />
-    <Folder Include="MCAL\DIO" />
     <Folder Include="MCAL\UART" />
     <Folder Include="APP" />
     <Folder Include="ECUAL" />
