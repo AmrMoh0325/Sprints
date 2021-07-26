@@ -1,0 +1,1191 @@
+
+EEPROM_TASK.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000778  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         0000004a  00800060  00000778  0000080c  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000018  008000aa  008000aa  00000856  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  00000856  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000888  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 000001b0  00000000  00000000  000008c4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   0000160e  00000000  00000000  00000a74  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 00000ab7  00000000  00000000  00002082  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   00000cb0  00000000  00000000  00002b39  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  0000046c  00000000  00000000  000037ec  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    00000790  00000000  00000000  00003c58  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    00000df2  00000000  00000000  000043e8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 00000198  00000000  00000000  000051da  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   8:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  10:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  14:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  18:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  1c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  20:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  24:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  28:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  2c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  30:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  34:	0c 94 54 03 	jmp	0x6a8	; 0x6a8 <__vector_13>
+  38:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  3c:	0c 94 7d 03 	jmp	0x6fa	; 0x6fa <__vector_15>
+  40:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  44:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  48:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  4c:	0c 94 23 02 	jmp	0x446	; 0x446 <__vector_19>
+  50:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	10 e0       	ldi	r17, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	e8 e7       	ldi	r30, 0x78	; 120
+  68:	f7 e0       	ldi	r31, 0x07	; 7
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+  70:	aa 3a       	cpi	r26, 0xAA	; 170
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
+
+00000076 <__do_clear_bss>:
+  76:	20 e0       	ldi	r18, 0x00	; 0
+  78:	aa ea       	ldi	r26, 0xAA	; 170
+  7a:	b0 e0       	ldi	r27, 0x00	; 0
+  7c:	01 c0       	rjmp	.+2      	; 0x80 <.do_clear_bss_start>
+
+0000007e <.do_clear_bss_loop>:
+  7e:	1d 92       	st	X+, r1
+
+00000080 <.do_clear_bss_start>:
+  80:	a2 3c       	cpi	r26, 0xC2	; 194
+  82:	b2 07       	cpc	r27, r18
+  84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
+  86:	0e 94 5d 01 	call	0x2ba	; 0x2ba <main>
+  8a:	0c 94 ba 03 	jmp	0x774	; 0x774 <_exit>
+
+0000008e <__bad_interrupt>:
+  8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000092 <String_compare>:
+* Parameters (out): sint8_t
+* Return value: 0= strings are identical ,  1= str1>str2  ,  -1= str1<str2
+* Description: A function to compare string 1 with string 2 and check if they are identical 
+************************************************************************************/
+static sint8_t String_compare(uint8_t *str1,uint8_t *str2)
+{
+  92:	dc 01       	movw	r26, r24
+   uint16_t u16i;
+   //Traverse both strings
+   for(u16i=0;str1[u16i] || str2[u16i];u16i++)
+  94:	20 e0       	ldi	r18, 0x00	; 0
+  96:	30 e0       	ldi	r19, 0x00	; 0
+  98:	0a c0       	rjmp	.+20     	; 0xae <String_compare+0x1c>
+   {
+      // look for any difference
+      if      (str1[u16i] < str2[u16i])     return -1;
+  9a:	fb 01       	movw	r30, r22
+  9c:	e2 0f       	add	r30, r18
+  9e:	f3 1f       	adc	r31, r19
+  a0:	40 81       	ld	r20, Z
+  a2:	94 17       	cp	r25, r20
+  a4:	88 f0       	brcs	.+34     	; 0xc8 <String_compare+0x36>
+      else if (str1[u16i] > str2[u16i])     return 1;
+  a6:	49 17       	cp	r20, r25
+  a8:	88 f0       	brcs	.+34     	; 0xcc <String_compare+0x3a>
+************************************************************************************/
+static sint8_t String_compare(uint8_t *str1,uint8_t *str2)
+{
+   uint16_t u16i;
+   //Traverse both strings
+   for(u16i=0;str1[u16i] || str2[u16i];u16i++)
+  aa:	2f 5f       	subi	r18, 0xFF	; 255
+  ac:	3f 4f       	sbci	r19, 0xFF	; 255
+  ae:	fd 01       	movw	r30, r26
+  b0:	e2 0f       	add	r30, r18
+  b2:	f3 1f       	adc	r31, r19
+  b4:	90 81       	ld	r25, Z
+  b6:	91 11       	cpse	r25, r1
+  b8:	f0 cf       	rjmp	.-32     	; 0x9a <String_compare+0x8>
+  ba:	fb 01       	movw	r30, r22
+  bc:	e2 0f       	add	r30, r18
+  be:	f3 1f       	adc	r31, r19
+  c0:	80 81       	ld	r24, Z
+  c2:	81 11       	cpse	r24, r1
+  c4:	ea cf       	rjmp	.-44     	; 0x9a <String_compare+0x8>
+  c6:	08 95       	ret
+   {
+      // look for any difference
+      if      (str1[u16i] < str2[u16i])     return -1;
+  c8:	8f ef       	ldi	r24, 0xFF	; 255
+  ca:	08 95       	ret
+      else if (str1[u16i] > str2[u16i])     return 1;
+  cc:	81 e0       	ldi	r24, 0x01	; 1
+   }
+   return 0;
+}
+  ce:	08 95       	ret
+
+000000d0 <APP_Init>:
+* Description: A function to initialize application peripherals and devices
+************************************************************************************/
+void APP_Init(void)
+{
+     //initialize uart
+     UART_Init();
+  d0:	0e 94 4c 02 	call	0x498	; 0x498 <UART_Init>
+     //initiialize EEPROM
+     EEPROM_Init();
+  d4:	0e 94 1a 01 	call	0x234	; 0x234 <EEPROM_Init>
+  d8:	08 95       	ret
+
+000000da <APP_Update>:
+   static uint16_t u8Data=0,Flag=0;
+   static uint32_t u16Address=0;
+   static uint8_t pu8uart_buf[10]={0};
+   static enuI2CMode_t Operation=Read;
+   //check the current flag status
+   switch (Flag)
+  da:	80 91 ba 00 	lds	r24, 0x00BA	; 0x8000ba <Flag.1683>
+  de:	90 91 bb 00 	lds	r25, 0x00BB	; 0x8000bb <Flag.1683+0x1>
+  e2:	81 30       	cpi	r24, 0x01	; 1
+  e4:	91 05       	cpc	r25, r1
+  e6:	d1 f1       	breq	.+116    	; 0x15c <APP_Update+0x82>
+  e8:	40 f0       	brcs	.+16     	; 0xfa <APP_Update+0x20>
+  ea:	82 30       	cpi	r24, 0x02	; 2
+  ec:	91 05       	cpc	r25, r1
+  ee:	09 f4       	brne	.+2      	; 0xf2 <APP_Update+0x18>
+  f0:	69 c0       	rjmp	.+210    	; 0x1c4 <APP_Update+0xea>
+  f2:	03 97       	sbiw	r24, 0x03	; 3
+  f4:	09 f4       	brne	.+2      	; 0xf8 <APP_Update+0x1e>
+  f6:	81 c0       	rjmp	.+258    	; 0x1fa <APP_Update+0x120>
+  f8:	08 95       	ret
+   {
+      case 0:  //starting operation
+      //receive READ or WRITE from the user
+      UART_SendString((uint8_t *)"\rOPERATION: ");
+  fa:	81 e6       	ldi	r24, 0x61	; 97
+  fc:	90 e0       	ldi	r25, 0x00	; 0
+  fe:	0e 94 bb 02 	call	0x576	; 0x576 <UART_SendString>
+      UART_ReceiveString(pu8uart_buf,10);
+ 102:	6a e0       	ldi	r22, 0x0A	; 10
+ 104:	80 eb       	ldi	r24, 0xB0	; 176
+ 106:	90 e0       	ldi	r25, 0x00	; 0
+ 108:	0e 94 8b 02 	call	0x516	; 0x516 <UART_ReceiveString>
+      //if user input a valid input
+      if (String_compare(pu8uart_buf,(uint8_t *)"READ")==0)
+ 10c:	6e e6       	ldi	r22, 0x6E	; 110
+ 10e:	70 e0       	ldi	r23, 0x00	; 0
+ 110:	80 eb       	ldi	r24, 0xB0	; 176
+ 112:	90 e0       	ldi	r25, 0x00	; 0
+ 114:	0e 94 49 00 	call	0x92	; 0x92 <String_compare>
+ 118:	81 11       	cpse	r24, r1
+ 11a:	0a c0       	rjmp	.+20     	; 0x130 <APP_Update+0x56>
+      {
+         //store user input
+         Operation=Read;
+ 11c:	81 e0       	ldi	r24, 0x01	; 1
+ 11e:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
+         //change stage flag
+         Flag=1;
+ 122:	81 e0       	ldi	r24, 0x01	; 1
+ 124:	90 e0       	ldi	r25, 0x00	; 0
+ 126:	90 93 bb 00 	sts	0x00BB, r25	; 0x8000bb <Flag.1683+0x1>
+ 12a:	80 93 ba 00 	sts	0x00BA, r24	; 0x8000ba <Flag.1683>
+ 12e:	08 95       	ret
+      }
+      else if (String_compare(pu8uart_buf,(uint8_t *)"WRITE")==0)
+ 130:	63 e7       	ldi	r22, 0x73	; 115
+ 132:	70 e0       	ldi	r23, 0x00	; 0
+ 134:	80 eb       	ldi	r24, 0xB0	; 176
+ 136:	90 e0       	ldi	r25, 0x00	; 0
+ 138:	0e 94 49 00 	call	0x92	; 0x92 <String_compare>
+ 13c:	81 11       	cpse	r24, r1
+ 13e:	09 c0       	rjmp	.+18     	; 0x152 <APP_Update+0x78>
+      {
+         //store user input
+         Operation=Write;
+ 140:	10 92 60 00 	sts	0x0060, r1	; 0x800060 <__DATA_REGION_ORIGIN__>
+         //change stage flag
+         Flag=1;
+ 144:	81 e0       	ldi	r24, 0x01	; 1
+ 146:	90 e0       	ldi	r25, 0x00	; 0
+ 148:	90 93 bb 00 	sts	0x00BB, r25	; 0x8000bb <Flag.1683+0x1>
+ 14c:	80 93 ba 00 	sts	0x00BA, r24	; 0x8000ba <Flag.1683>
+ 150:	08 95       	ret
+      }
+      else
+      {
+         //if user input is invalid return an error
+         UART_SendString((uint8_t *)"ERROR\r");
+ 152:	89 e7       	ldi	r24, 0x79	; 121
+ 154:	90 e0       	ldi	r25, 0x00	; 0
+ 156:	0e 94 bb 02 	call	0x576	; 0x576 <UART_SendString>
+ 15a:	08 95       	ret
+      }
+      break;
+      
+      case 1:
+      //receive location address from user
+      UART_SendString((uint8_t *)"ADRESS: 0X");
+ 15c:	80 e8       	ldi	r24, 0x80	; 128
+ 15e:	90 e0       	ldi	r25, 0x00	; 0
+ 160:	0e 94 bb 02 	call	0x576	; 0x576 <UART_SendString>
+      UART_ReceiveHex(&u16Address);
+ 164:	8c ea       	ldi	r24, 0xAC	; 172
+ 166:	90 e0       	ldi	r25, 0x00	; 0
+ 168:	0e 94 d4 02 	call	0x5a8	; 0x5a8 <UART_ReceiveHex>
+      //if user input is within EEPROM range
+      if (u16Address>=0 && u16Address<2048)
+ 16c:	80 91 ac 00 	lds	r24, 0x00AC	; 0x8000ac <u16Address.1684>
+ 170:	90 91 ad 00 	lds	r25, 0x00AD	; 0x8000ad <u16Address.1684+0x1>
+ 174:	a0 91 ae 00 	lds	r26, 0x00AE	; 0x8000ae <u16Address.1684+0x2>
+ 178:	b0 91 af 00 	lds	r27, 0x00AF	; 0x8000af <u16Address.1684+0x3>
+ 17c:	81 15       	cp	r24, r1
+ 17e:	98 40       	sbci	r25, 0x08	; 8
+ 180:	a1 05       	cpc	r26, r1
+ 182:	b1 05       	cpc	r27, r1
+ 184:	b0 f4       	brcc	.+44     	; 0x1b2 <APP_Update+0xd8>
+      {
+         //send an OK status
+         UART_SendString((uint8_t *)"OK\r");
+ 186:	85 ea       	ldi	r24, 0xA5	; 165
+ 188:	90 e0       	ldi	r25, 0x00	; 0
+ 18a:	0e 94 bb 02 	call	0x576	; 0x576 <UART_SendString>
+         if (Operation == Read)
+ 18e:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 192:	81 30       	cpi	r24, 0x01	; 1
+ 194:	39 f4       	brne	.+14     	; 0x1a4 <APP_Update+0xca>
+         {
+            //if the operation mode is read, go to read operation
+            Flag=2;
+ 196:	82 e0       	ldi	r24, 0x02	; 2
+ 198:	90 e0       	ldi	r25, 0x00	; 0
+ 19a:	90 93 bb 00 	sts	0x00BB, r25	; 0x8000bb <Flag.1683+0x1>
+ 19e:	80 93 ba 00 	sts	0x00BA, r24	; 0x8000ba <Flag.1683>
+ 1a2:	08 95       	ret
+         }
+         else
+         {
+            //if the operation mode is write, go to write operation
+            Flag=3;
+ 1a4:	83 e0       	ldi	r24, 0x03	; 3
+ 1a6:	90 e0       	ldi	r25, 0x00	; 0
+ 1a8:	90 93 bb 00 	sts	0x00BB, r25	; 0x8000bb <Flag.1683+0x1>
+ 1ac:	80 93 ba 00 	sts	0x00BA, r24	; 0x8000ba <Flag.1683>
+ 1b0:	08 95       	ret
+         }
+      }
+      else
+      {
+         //else send an error and return to original state
+         UART_SendString((uint8_t *)"ERROR\r");
+ 1b2:	89 e7       	ldi	r24, 0x79	; 121
+ 1b4:	90 e0       	ldi	r25, 0x00	; 0
+ 1b6:	0e 94 bb 02 	call	0x576	; 0x576 <UART_SendString>
+         Flag=0;
+ 1ba:	10 92 bb 00 	sts	0x00BB, r1	; 0x8000bb <Flag.1683+0x1>
+ 1be:	10 92 ba 00 	sts	0x00BA, r1	; 0x8000ba <Flag.1683>
+ 1c2:	08 95       	ret
+      }
+      break;
+      
+      case 2:
+      //in case of read operation
+      UART_SendString((uint8_t *)"Data in address: ");
+ 1c4:	8b e8       	ldi	r24, 0x8B	; 139
+ 1c6:	90 e0       	ldi	r25, 0x00	; 0
+ 1c8:	0e 94 bb 02 	call	0x576	; 0x576 <UART_SendString>
+      //get the data stored in the position the user selected
+      EEPROM_ReadByte(u16Address,(uint8_t *)&u8Data);
+ 1cc:	6a ea       	ldi	r22, 0xAA	; 170
+ 1ce:	70 e0       	ldi	r23, 0x00	; 0
+ 1d0:	80 91 ac 00 	lds	r24, 0x00AC	; 0x8000ac <u16Address.1684>
+ 1d4:	90 91 ad 00 	lds	r25, 0x00AD	; 0x8000ad <u16Address.1684+0x1>
+ 1d8:	0e 94 39 01 	call	0x272	; 0x272 <EEPROM_ReadByte>
+      //send the data to the user
+      UART_SendData(u8Data);
+ 1dc:	80 91 aa 00 	lds	r24, 0x00AA	; 0x8000aa <__data_end>
+ 1e0:	90 91 ab 00 	lds	r25, 0x00AB	; 0x8000ab <__data_end+0x1>
+ 1e4:	0e 94 86 02 	call	0x50c	; 0x50c <UART_SendData>
+      UART_SendData('\r');
+ 1e8:	8d e0       	ldi	r24, 0x0D	; 13
+ 1ea:	90 e0       	ldi	r25, 0x00	; 0
+ 1ec:	0e 94 86 02 	call	0x50c	; 0x50c <UART_SendData>
+      //return to original state
+      Flag = 0;
+ 1f0:	10 92 bb 00 	sts	0x00BB, r1	; 0x8000bb <Flag.1683+0x1>
+ 1f4:	10 92 ba 00 	sts	0x00BA, r1	; 0x8000ba <Flag.1683>
+      break;
+ 1f8:	08 95       	ret
+      
+      case 3:
+      //in case of write operation
+      UART_SendString((uint8_t *)"Data: ");
+ 1fa:	8d e9       	ldi	r24, 0x9D	; 157
+ 1fc:	90 e0       	ldi	r25, 0x00	; 0
+ 1fe:	0e 94 bb 02 	call	0x576	; 0x576 <UART_SendString>
+      //get the new data value from the user
+      UART_ReceiveData(&u8Data);
+ 202:	8a ea       	ldi	r24, 0xAA	; 170
+ 204:	90 e0       	ldi	r25, 0x00	; 0
+ 206:	0e 94 76 02 	call	0x4ec	; 0x4ec <UART_ReceiveData>
+      //write the new data to the position the user selected
+      EEPROM_WriteByte(u16Address,u8Data);
+ 20a:	60 91 aa 00 	lds	r22, 0x00AA	; 0x8000aa <__data_end>
+ 20e:	80 91 ac 00 	lds	r24, 0x00AC	; 0x8000ac <u16Address.1684>
+ 212:	90 91 ad 00 	lds	r25, 0x00AD	; 0x8000ad <u16Address.1684+0x1>
+ 216:	0e 94 1e 01 	call	0x23c	; 0x23c <EEPROM_WriteByte>
+      UART_SendData('\n');
+ 21a:	8a e0       	ldi	r24, 0x0A	; 10
+ 21c:	90 e0       	ldi	r25, 0x00	; 0
+ 21e:	0e 94 86 02 	call	0x50c	; 0x50c <UART_SendData>
+      //return an OK status
+      UART_SendString((uint8_t *)"\rOK\r");
+ 222:	84 ea       	ldi	r24, 0xA4	; 164
+ 224:	90 e0       	ldi	r25, 0x00	; 0
+ 226:	0e 94 bb 02 	call	0x576	; 0x576 <UART_SendString>
+      //return to original state
+      Flag = 0;
+ 22a:	10 92 bb 00 	sts	0x00BB, r1	; 0x8000bb <Flag.1683+0x1>
+ 22e:	10 92 ba 00 	sts	0x00BA, r1	; 0x8000ba <Flag.1683>
+ 232:	08 95       	ret
+
+00000234 <EEPROM_Init>:
+* Description: A function to initialize EEPROM device
+************************************************************************************/
+enuErrorStatus_t EEPROM_Init      (void)
+{
+   //initialize I2C Bus
+   I2C_Init();
+ 234:	0e 94 65 01 	call	0x2ca	; 0x2ca <I2C_Init>
+   return SUCCESS;
+}
+ 238:	81 e0       	ldi	r24, 0x01	; 1
+ 23a:	08 95       	ret
+
+0000023c <EEPROM_WriteByte>:
+* Parameters (out): enuErrorStatus_t
+* Return value: 0=ERROR or 1=SUCCESS
+* Description: A function to write a byte in the EEPROM in a specific address
+************************************************************************************/
+enuErrorStatus_t EEPROM_WriteByte (uint16_t u16ByteAddress,uint8_t u8Data)
+{
+ 23c:	1f 93       	push	r17
+ 23e:	cf 93       	push	r28
+ 240:	df 93       	push	r29
+ 242:	18 2f       	mov	r17, r24
+ 244:	d6 2f       	mov	r29, r22
+   //transform the byte address into a page number and a byte address within the page
+   uint8_t u8ByteAddress_Page=(uint8_t)u16ByteAddress;
+   uint8_t u8PageAddress=(u16ByteAddress>>8)& 0b00000111;
+ 246:	97 70       	andi	r25, 0x07	; 7
+   //set up the EEPROM page address frame
+   uint8_t u8EEPROM_Address= EEPROM_DEVICE_BASE_ADDRESS | u8PageAddress;
+ 248:	c9 2f       	mov	r28, r25
+ 24a:	c0 65       	ori	r28, 0x50	; 80
+   
+   //send a start condition
+   I2C_Start();
+ 24c:	0e 94 8d 01 	call	0x31a	; 0x31a <I2C_Start>
+   //send the EEPROM page address frame
+   I2C_SendAddressFrame(u8EEPROM_Address,Write);
+ 250:	60 e0       	ldi	r22, 0x00	; 0
+ 252:	8c 2f       	mov	r24, r28
+ 254:	0e 94 ab 01 	call	0x356	; 0x356 <I2C_SendAddressFrame>
+   //send the byte address frame
+   I2C_SendDataFrame(u8ByteAddress_Page);
+ 258:	81 2f       	mov	r24, r17
+ 25a:	0e 94 d3 01 	call	0x3a6	; 0x3a6 <I2C_SendDataFrame>
+   //send the data
+   I2C_SendDataFrame(u8Data);
+ 25e:	8d 2f       	mov	r24, r29
+ 260:	0e 94 d3 01 	call	0x3a6	; 0x3a6 <I2C_SendDataFrame>
+   //send a stop bit
+   I2C_Stop();
+ 264:	0e 94 a7 01 	call	0x34e	; 0x34e <I2C_Stop>
+   return SUCCESS;
+}
+ 268:	81 e0       	ldi	r24, 0x01	; 1
+ 26a:	df 91       	pop	r29
+ 26c:	cf 91       	pop	r28
+ 26e:	1f 91       	pop	r17
+ 270:	08 95       	ret
+
+00000272 <EEPROM_ReadByte>:
+* Parameters (out): enuErrorStatus_t
+* Return value: 0=ERROR or 1=SUCCESS
+* Description: A function to read a byte from the EEPROM in a specific address
+************************************************************************************/
+enuErrorStatus_t EEPROM_ReadByte  (uint16_t u16ByteAddress,uint8_t *pu8Data)
+{
+ 272:	0f 93       	push	r16
+ 274:	1f 93       	push	r17
+ 276:	cf 93       	push	r28
+ 278:	df 93       	push	r29
+ 27a:	d8 2f       	mov	r29, r24
+ 27c:	8b 01       	movw	r16, r22
+   //transform the byte address into a page number and a byte address within the page
+   uint8_t u8ByteAddress_Page=(uint8_t)u16ByteAddress;
+   uint8_t u8PageAddress=(u16ByteAddress>>8)& 0b00000111;
+ 27e:	97 70       	andi	r25, 0x07	; 7
+   //set up the EEPROM page address frame
+   uint8_t u8EEPROM_Address= EEPROM_DEVICE_BASE_ADDRESS | u8PageAddress;
+ 280:	c9 2f       	mov	r28, r25
+ 282:	c0 65       	ori	r28, 0x50	; 80
+   
+   //send a start condition
+   I2C_Start();
+ 284:	0e 94 8d 01 	call	0x31a	; 0x31a <I2C_Start>
+   //send the EEPROM page address frame
+   I2C_SendAddressFrame(u8EEPROM_Address,Write);
+ 288:	60 e0       	ldi	r22, 0x00	; 0
+ 28a:	8c 2f       	mov	r24, r28
+ 28c:	0e 94 ab 01 	call	0x356	; 0x356 <I2C_SendAddressFrame>
+   //send the byte address frame
+   I2C_SendDataFrame(u8ByteAddress_Page);
+ 290:	8d 2f       	mov	r24, r29
+ 292:	0e 94 d3 01 	call	0x3a6	; 0x3a6 <I2C_SendDataFrame>
+   //send a repeated start condition
+   I2C_Repeated_Start();
+ 296:	0e 94 9a 01 	call	0x334	; 0x334 <I2C_Repeated_Start>
+   //send the EEPROM page address frame
+   I2C_SendAddressFrame(u8EEPROM_Address,Read);
+ 29a:	61 e0       	ldi	r22, 0x01	; 1
+ 29c:	8c 2f       	mov	r24, r28
+ 29e:	0e 94 ab 01 	call	0x356	; 0x356 <I2C_SendAddressFrame>
+   //receive the data from the EEPROM and send a NACK condition
+   I2C_RecieveDataFrame(pu8Data,NACK);
+ 2a2:	61 e0       	ldi	r22, 0x01	; 1
+ 2a4:	c8 01       	movw	r24, r16
+ 2a6:	0e 94 ec 01 	call	0x3d8	; 0x3d8 <I2C_RecieveDataFrame>
+   //send a stop bit
+   I2C_Stop();
+ 2aa:	0e 94 a7 01 	call	0x34e	; 0x34e <I2C_Stop>
+   
+   
+   return SUCCESS;
+ 2ae:	81 e0       	ldi	r24, 0x01	; 1
+ 2b0:	df 91       	pop	r29
+ 2b2:	cf 91       	pop	r28
+ 2b4:	1f 91       	pop	r17
+ 2b6:	0f 91       	pop	r16
+ 2b8:	08 95       	ret
+
+000002ba <main>:
+* Description: main application function
+************************************************************************************/
+int main(void)
+{
+   //initialize the app
+   APP_Init();
+ 2ba:	0e 94 68 00 	call	0xd0	; 0xd0 <APP_Init>
+ 
+   while (1) 
+   {
+      //update the app state
+      APP_Update();
+ 2be:	0e 94 6d 00 	call	0xda	; 0xda <APP_Update>
+ 2c2:	fd cf       	rjmp	.-6      	; 0x2be <main+0x4>
+
+000002c4 <I2C_GetStatus>:
+      return ERROR;
+   }
+   //set the callback function to the sent function pointer
+   I2C_Callback=local_fptr;
+   return SUCCESS;
+}
+ 2c4:	81 b1       	in	r24, 0x01	; 1
+ 2c6:	88 7f       	andi	r24, 0xF8	; 248
+ 2c8:	08 95       	ret
+
+000002ca <I2C_Init>:
+ 2ca:	81 b1       	in	r24, 0x01	; 1
+ 2cc:	8c 7f       	andi	r24, 0xFC	; 252
+ 2ce:	81 b9       	out	0x01, r24	; 1
+ 2d0:	81 b1       	in	r24, 0x01	; 1
+ 2d2:	83 60       	ori	r24, 0x03	; 3
+ 2d4:	81 b9       	out	0x01, r24	; 1
+ 2d6:	80 e0       	ldi	r24, 0x00	; 0
+ 2d8:	64 e0       	ldi	r22, 0x04	; 4
+ 2da:	70 e0       	ldi	r23, 0x00	; 0
+ 2dc:	08 c0       	rjmp	.+16     	; 0x2ee <I2C_Init+0x24>
+ 2de:	9b 01       	movw	r18, r22
+ 2e0:	22 9f       	mul	r18, r18
+ 2e2:	b0 01       	movw	r22, r0
+ 2e4:	23 9f       	mul	r18, r19
+ 2e6:	70 0d       	add	r23, r0
+ 2e8:	70 0d       	add	r23, r0
+ 2ea:	11 24       	eor	r1, r1
+ 2ec:	8f 5f       	subi	r24, 0xFF	; 255
+ 2ee:	83 30       	cpi	r24, 0x03	; 3
+ 2f0:	b0 f3       	brcs	.-20     	; 0x2de <I2C_Init+0x14>
+ 2f2:	66 0f       	add	r22, r22
+ 2f4:	77 1f       	adc	r23, r23
+ 2f6:	80 e4       	ldi	r24, 0x40	; 64
+ 2f8:	90 e0       	ldi	r25, 0x00	; 0
+ 2fa:	0e 94 a6 03 	call	0x74c	; 0x74c <__udivmodhi4>
+ 2fe:	60 b9       	out	0x00, r22	; 0
+ 300:	85 e0       	ldi	r24, 0x05	; 5
+ 302:	82 b9       	out	0x02, r24	; 2
+ 304:	86 b7       	in	r24, 0x36	; 54
+ 306:	80 64       	ori	r24, 0x40	; 64
+ 308:	86 bf       	out	0x36, r24	; 54
+ 30a:	86 b7       	in	r24, 0x36	; 54
+ 30c:	80 68       	ori	r24, 0x80	; 128
+ 30e:	86 bf       	out	0x36, r24	; 54
+ 310:	86 b7       	in	r24, 0x36	; 54
+ 312:	84 60       	ori	r24, 0x04	; 4
+ 314:	86 bf       	out	0x36, r24	; 54
+ 316:	81 e0       	ldi	r24, 0x01	; 1
+ 318:	08 95       	ret
+
+0000031a <I2C_Start>:
+ 31a:	84 ea       	ldi	r24, 0xA4	; 164
+ 31c:	86 bf       	out	0x36, r24	; 54
+ 31e:	06 b6       	in	r0, 0x36	; 54
+ 320:	07 fe       	sbrs	r0, 7
+ 322:	fd cf       	rjmp	.-6      	; 0x31e <I2C_Start+0x4>
+ 324:	0e 94 62 01 	call	0x2c4	; 0x2c4 <I2C_GetStatus>
+ 328:	88 30       	cpi	r24, 0x08	; 8
+ 32a:	11 f4       	brne	.+4      	; 0x330 <I2C_Start+0x16>
+ 32c:	81 e0       	ldi	r24, 0x01	; 1
+ 32e:	08 95       	ret
+ 330:	80 e0       	ldi	r24, 0x00	; 0
+ 332:	08 95       	ret
+
+00000334 <I2C_Repeated_Start>:
+ 334:	84 ea       	ldi	r24, 0xA4	; 164
+ 336:	86 bf       	out	0x36, r24	; 54
+ 338:	06 b6       	in	r0, 0x36	; 54
+ 33a:	07 fe       	sbrs	r0, 7
+ 33c:	fd cf       	rjmp	.-6      	; 0x338 <I2C_Repeated_Start+0x4>
+ 33e:	0e 94 62 01 	call	0x2c4	; 0x2c4 <I2C_GetStatus>
+ 342:	80 31       	cpi	r24, 0x10	; 16
+ 344:	11 f0       	breq	.+4      	; 0x34a <I2C_Repeated_Start+0x16>
+ 346:	80 e0       	ldi	r24, 0x00	; 0
+ 348:	08 95       	ret
+ 34a:	81 e0       	ldi	r24, 0x01	; 1
+ 34c:	08 95       	ret
+
+0000034e <I2C_Stop>:
+ 34e:	84 e9       	ldi	r24, 0x94	; 148
+ 350:	86 bf       	out	0x36, r24	; 54
+ 352:	81 e0       	ldi	r24, 0x01	; 1
+ 354:	08 95       	ret
+
+00000356 <I2C_SendAddressFrame>:
+ 356:	62 30       	cpi	r22, 0x02	; 2
+ 358:	f0 f4       	brcc	.+60     	; 0x396 <I2C_SendAddressFrame+0x40>
+ 35a:	90 e0       	ldi	r25, 0x00	; 0
+ 35c:	88 0f       	add	r24, r24
+ 35e:	99 1f       	adc	r25, r25
+ 360:	86 2b       	or	r24, r22
+ 362:	83 b9       	out	0x03, r24	; 3
+ 364:	84 e8       	ldi	r24, 0x84	; 132
+ 366:	86 bf       	out	0x36, r24	; 54
+ 368:	06 b6       	in	r0, 0x36	; 54
+ 36a:	07 fe       	sbrs	r0, 7
+ 36c:	fd cf       	rjmp	.-6      	; 0x368 <I2C_SendAddressFrame+0x12>
+ 36e:	61 30       	cpi	r22, 0x01	; 1
+ 370:	41 f4       	brne	.+16     	; 0x382 <I2C_SendAddressFrame+0x2c>
+ 372:	0e 94 62 01 	call	0x2c4	; 0x2c4 <I2C_GetStatus>
+ 376:	80 34       	cpi	r24, 0x40	; 64
+ 378:	81 f0       	breq	.+32     	; 0x39a <I2C_SendAddressFrame+0x44>
+ 37a:	0e 94 a7 01 	call	0x34e	; 0x34e <I2C_Stop>
+ 37e:	80 e0       	ldi	r24, 0x00	; 0
+ 380:	08 95       	ret
+ 382:	61 11       	cpse	r22, r1
+ 384:	0c c0       	rjmp	.+24     	; 0x39e <I2C_SendAddressFrame+0x48>
+ 386:	0e 94 62 01 	call	0x2c4	; 0x2c4 <I2C_GetStatus>
+ 38a:	88 31       	cpi	r24, 0x18	; 24
+ 38c:	51 f0       	breq	.+20     	; 0x3a2 <I2C_SendAddressFrame+0x4c>
+ 38e:	0e 94 a7 01 	call	0x34e	; 0x34e <I2C_Stop>
+ 392:	80 e0       	ldi	r24, 0x00	; 0
+ 394:	08 95       	ret
+ 396:	80 e0       	ldi	r24, 0x00	; 0
+ 398:	08 95       	ret
+ 39a:	81 e0       	ldi	r24, 0x01	; 1
+ 39c:	08 95       	ret
+ 39e:	81 e0       	ldi	r24, 0x01	; 1
+ 3a0:	08 95       	ret
+ 3a2:	81 e0       	ldi	r24, 0x01	; 1
+ 3a4:	08 95       	ret
+
+000003a6 <I2C_SendDataFrame>:
+ 3a6:	06 b6       	in	r0, 0x36	; 54
+ 3a8:	07 fe       	sbrs	r0, 7
+ 3aa:	fd cf       	rjmp	.-6      	; 0x3a6 <I2C_SendDataFrame>
+ 3ac:	83 b9       	out	0x03, r24	; 3
+ 3ae:	84 e8       	ldi	r24, 0x84	; 132
+ 3b0:	86 bf       	out	0x36, r24	; 54
+ 3b2:	06 b6       	in	r0, 0x36	; 54
+ 3b4:	07 fe       	sbrs	r0, 7
+ 3b6:	fd cf       	rjmp	.-6      	; 0x3b2 <I2C_SendDataFrame+0xc>
+ 3b8:	0e 94 62 01 	call	0x2c4	; 0x2c4 <I2C_GetStatus>
+ 3bc:	88 32       	cpi	r24, 0x28	; 40
+ 3be:	31 f0       	breq	.+12     	; 0x3cc <I2C_SendDataFrame+0x26>
+ 3c0:	88 3b       	cpi	r24, 0xB8	; 184
+ 3c2:	31 f0       	breq	.+12     	; 0x3d0 <I2C_SendDataFrame+0x2a>
+ 3c4:	88 3c       	cpi	r24, 0xC8	; 200
+ 3c6:	31 f4       	brne	.+12     	; 0x3d4 <I2C_SendDataFrame+0x2e>
+ 3c8:	81 e0       	ldi	r24, 0x01	; 1
+ 3ca:	08 95       	ret
+ 3cc:	81 e0       	ldi	r24, 0x01	; 1
+ 3ce:	08 95       	ret
+ 3d0:	81 e0       	ldi	r24, 0x01	; 1
+ 3d2:	08 95       	ret
+ 3d4:	80 e0       	ldi	r24, 0x00	; 0
+ 3d6:	08 95       	ret
+
+000003d8 <I2C_RecieveDataFrame>:
+ 3d8:	0f 93       	push	r16
+ 3da:	1f 93       	push	r17
+ 3dc:	cf 93       	push	r28
+ 3de:	00 97       	sbiw	r24, 0x00	; 0
+ 3e0:	39 f1       	breq	.+78     	; 0x430 <__EEPROM_REGION_LENGTH__+0x30>
+ 3e2:	06 b6       	in	r0, 0x36	; 54
+ 3e4:	07 fe       	sbrs	r0, 7
+ 3e6:	fd cf       	rjmp	.-6      	; 0x3e2 <I2C_RecieveDataFrame+0xa>
+ 3e8:	66 23       	and	r22, r22
+ 3ea:	19 f0       	breq	.+6      	; 0x3f2 <I2C_RecieveDataFrame+0x1a>
+ 3ec:	61 30       	cpi	r22, 0x01	; 1
+ 3ee:	21 f0       	breq	.+8      	; 0x3f8 <I2C_RecieveDataFrame+0x20>
+ 3f0:	21 c0       	rjmp	.+66     	; 0x434 <__EEPROM_REGION_LENGTH__+0x34>
+ 3f2:	24 ec       	ldi	r18, 0xC4	; 196
+ 3f4:	26 bf       	out	0x36, r18	; 54
+ 3f6:	02 c0       	rjmp	.+4      	; 0x3fc <I2C_RecieveDataFrame+0x24>
+ 3f8:	24 e8       	ldi	r18, 0x84	; 132
+ 3fa:	26 bf       	out	0x36, r18	; 54
+ 3fc:	06 b6       	in	r0, 0x36	; 54
+ 3fe:	07 fe       	sbrs	r0, 7
+ 400:	fd cf       	rjmp	.-6      	; 0x3fc <I2C_RecieveDataFrame+0x24>
+ 402:	c6 2f       	mov	r28, r22
+ 404:	8c 01       	movw	r16, r24
+ 406:	0e 94 62 01 	call	0x2c4	; 0x2c4 <I2C_GetStatus>
+ 40a:	cc 23       	and	r28, r28
+ 40c:	19 f0       	breq	.+6      	; 0x414 <__EEPROM_REGION_LENGTH__+0x14>
+ 40e:	c1 30       	cpi	r28, 0x01	; 1
+ 410:	31 f0       	breq	.+12     	; 0x41e <__EEPROM_REGION_LENGTH__+0x1e>
+ 412:	09 c0       	rjmp	.+18     	; 0x426 <__EEPROM_REGION_LENGTH__+0x26>
+ 414:	80 35       	cpi	r24, 0x50	; 80
+ 416:	39 f0       	breq	.+14     	; 0x426 <__EEPROM_REGION_LENGTH__+0x26>
+ 418:	80 38       	cpi	r24, 0x80	; 128
+ 41a:	71 f4       	brne	.+28     	; 0x438 <__EEPROM_REGION_LENGTH__+0x38>
+ 41c:	04 c0       	rjmp	.+8      	; 0x426 <__EEPROM_REGION_LENGTH__+0x26>
+ 41e:	88 35       	cpi	r24, 0x58	; 88
+ 420:	11 f0       	breq	.+4      	; 0x426 <__EEPROM_REGION_LENGTH__+0x26>
+ 422:	88 38       	cpi	r24, 0x88	; 136
+ 424:	59 f4       	brne	.+22     	; 0x43c <__EEPROM_REGION_LENGTH__+0x3c>
+ 426:	83 b1       	in	r24, 0x03	; 3
+ 428:	f8 01       	movw	r30, r16
+ 42a:	80 83       	st	Z, r24
+ 42c:	81 e0       	ldi	r24, 0x01	; 1
+ 42e:	07 c0       	rjmp	.+14     	; 0x43e <__EEPROM_REGION_LENGTH__+0x3e>
+ 430:	80 e0       	ldi	r24, 0x00	; 0
+ 432:	05 c0       	rjmp	.+10     	; 0x43e <__EEPROM_REGION_LENGTH__+0x3e>
+ 434:	80 e0       	ldi	r24, 0x00	; 0
+ 436:	03 c0       	rjmp	.+6      	; 0x43e <__EEPROM_REGION_LENGTH__+0x3e>
+ 438:	80 e0       	ldi	r24, 0x00	; 0
+ 43a:	01 c0       	rjmp	.+2      	; 0x43e <__EEPROM_REGION_LENGTH__+0x3e>
+ 43c:	80 e0       	ldi	r24, 0x00	; 0
+ 43e:	cf 91       	pop	r28
+ 440:	1f 91       	pop	r17
+ 442:	0f 91       	pop	r16
+ 444:	08 95       	ret
+
+00000446 <__vector_19>:
+* Parameters (out): void
+* Return value: void
+* Description: I2C event interrupt service routine
+************************************************************************************/
+ISR(TWI_vect)
+{
+ 446:	1f 92       	push	r1
+ 448:	0f 92       	push	r0
+ 44a:	0f b6       	in	r0, 0x3f	; 63
+ 44c:	0f 92       	push	r0
+ 44e:	11 24       	eor	r1, r1
+ 450:	2f 93       	push	r18
+ 452:	3f 93       	push	r19
+ 454:	4f 93       	push	r20
+ 456:	5f 93       	push	r21
+ 458:	6f 93       	push	r22
+ 45a:	7f 93       	push	r23
+ 45c:	8f 93       	push	r24
+ 45e:	9f 93       	push	r25
+ 460:	af 93       	push	r26
+ 462:	bf 93       	push	r27
+ 464:	ef 93       	push	r30
+ 466:	ff 93       	push	r31
+   //check if callback function pointer points to a valid function
+   if(I2C_Callback != NULLPTR)
+ 468:	e0 91 bc 00 	lds	r30, 0x00BC	; 0x8000bc <I2C_Callback>
+ 46c:	f0 91 bd 00 	lds	r31, 0x00BD	; 0x8000bd <I2C_Callback+0x1>
+ 470:	30 97       	sbiw	r30, 0x00	; 0
+ 472:	09 f0       	breq	.+2      	; 0x476 <__vector_19+0x30>
+   {
+      //call the callback function
+      I2C_Callback();
+ 474:	09 95       	icall
+   }
+ 476:	ff 91       	pop	r31
+ 478:	ef 91       	pop	r30
+ 47a:	bf 91       	pop	r27
+ 47c:	af 91       	pop	r26
+ 47e:	9f 91       	pop	r25
+ 480:	8f 91       	pop	r24
+ 482:	7f 91       	pop	r23
+ 484:	6f 91       	pop	r22
+ 486:	5f 91       	pop	r21
+ 488:	4f 91       	pop	r20
+ 48a:	3f 91       	pop	r19
+ 48c:	2f 91       	pop	r18
+ 48e:	0f 90       	pop	r0
+ 490:	0f be       	out	0x3f, r0	; 63
+ 492:	0f 90       	pop	r0
+ 494:	1f 90       	pop	r1
+ 496:	18 95       	reti
+
+00000498 <UART_Init>:
+   //check if the sent pointer points to a valid position
+   if (local_fptr== NULLPTR)     return ERROR;
+   //if so, store the pointer address in the global pointer to function
+   RXC_Callback=local_fptr;
+   return SUCCESS;
+}
+ 498:	cf 93       	push	r28
+ 49a:	df 93       	push	r29
+ 49c:	1f 92       	push	r1
+ 49e:	cd b7       	in	r28, 0x3d	; 61
+ 4a0:	de b7       	in	r29, 0x3e	; 62
+ 4a2:	19 82       	std	Y+1, r1	; 0x01
+ 4a4:	10 bc       	out	0x20, r1	; 32
+ 4a6:	83 e3       	ldi	r24, 0x33	; 51
+ 4a8:	89 b9       	out	0x09, r24	; 9
+ 4aa:	8a b1       	in	r24, 0x0a	; 10
+ 4ac:	88 60       	ori	r24, 0x08	; 8
+ 4ae:	8a b9       	out	0x0a, r24	; 10
+ 4b0:	8a b1       	in	r24, 0x0a	; 10
+ 4b2:	80 61       	ori	r24, 0x10	; 16
+ 4b4:	8a b9       	out	0x0a, r24	; 10
+ 4b6:	89 81       	ldd	r24, Y+1	; 0x01
+ 4b8:	82 60       	ori	r24, 0x02	; 2
+ 4ba:	89 83       	std	Y+1, r24	; 0x01
+ 4bc:	89 81       	ldd	r24, Y+1	; 0x01
+ 4be:	84 60       	ori	r24, 0x04	; 4
+ 4c0:	89 83       	std	Y+1, r24	; 0x01
+ 4c2:	8a b1       	in	r24, 0x0a	; 10
+ 4c4:	8b 7f       	andi	r24, 0xFB	; 251
+ 4c6:	8a b9       	out	0x0a, r24	; 10
+ 4c8:	89 81       	ldd	r24, Y+1	; 0x01
+ 4ca:	80 62       	ori	r24, 0x20	; 32
+ 4cc:	89 83       	std	Y+1, r24	; 0x01
+ 4ce:	80 b5       	in	r24, 0x20	; 32
+ 4d0:	80 68       	ori	r24, 0x80	; 128
+ 4d2:	80 bd       	out	0x20, r24	; 32
+ 4d4:	99 81       	ldd	r25, Y+1	; 0x01
+ 4d6:	80 b5       	in	r24, 0x20	; 32
+ 4d8:	89 2b       	or	r24, r25
+ 4da:	80 bd       	out	0x20, r24	; 32
+ 4dc:	80 b5       	in	r24, 0x20	; 32
+ 4de:	8f 77       	andi	r24, 0x7F	; 127
+ 4e0:	80 bd       	out	0x20, r24	; 32
+ 4e2:	81 e0       	ldi	r24, 0x01	; 1
+ 4e4:	0f 90       	pop	r0
+ 4e6:	df 91       	pop	r29
+ 4e8:	cf 91       	pop	r28
+ 4ea:	08 95       	ret
+
+000004ec <UART_ReceiveData>:
+ 4ec:	00 97       	sbiw	r24, 0x00	; 0
+ 4ee:	61 f0       	breq	.+24     	; 0x508 <UART_ReceiveData+0x1c>
+ 4f0:	fc 01       	movw	r30, r24
+ 4f2:	11 82       	std	Z+1, r1	; 0x01
+ 4f4:	10 82       	st	Z, r1
+ 4f6:	5f 9b       	sbis	0x0b, 7	; 11
+ 4f8:	fe cf       	rjmp	.-4      	; 0x4f6 <UART_ReceiveData+0xa>
+ 4fa:	2c b1       	in	r18, 0x0c	; 12
+ 4fc:	30 e0       	ldi	r19, 0x00	; 0
+ 4fe:	fc 01       	movw	r30, r24
+ 500:	31 83       	std	Z+1, r19	; 0x01
+ 502:	20 83       	st	Z, r18
+ 504:	81 e0       	ldi	r24, 0x01	; 1
+ 506:	08 95       	ret
+ 508:	80 e0       	ldi	r24, 0x00	; 0
+ 50a:	08 95       	ret
+
+0000050c <UART_SendData>:
+ 50c:	5d 9b       	sbis	0x0b, 5	; 11
+ 50e:	fe cf       	rjmp	.-4      	; 0x50c <UART_SendData>
+ 510:	8c b9       	out	0x0c, r24	; 12
+ 512:	81 e0       	ldi	r24, 0x01	; 1
+ 514:	08 95       	ret
+
+00000516 <UART_ReceiveString>:
+ 516:	ef 92       	push	r14
+ 518:	ff 92       	push	r15
+ 51a:	0f 93       	push	r16
+ 51c:	1f 93       	push	r17
+ 51e:	cf 93       	push	r28
+ 520:	df 93       	push	r29
+ 522:	00 97       	sbiw	r24, 0x00	; 0
+ 524:	01 f1       	breq	.+64     	; 0x566 <UART_ReceiveString+0x50>
+ 526:	d6 2f       	mov	r29, r22
+ 528:	8c 01       	movw	r16, r24
+ 52a:	c0 e0       	ldi	r28, 0x00	; 0
+ 52c:	0d c0       	rjmp	.+26     	; 0x548 <UART_ReceiveString+0x32>
+ 52e:	78 01       	movw	r14, r16
+ 530:	ec 0e       	add	r14, r28
+ 532:	f1 1c       	adc	r15, r1
+ 534:	c7 01       	movw	r24, r14
+ 536:	0e 94 76 02 	call	0x4ec	; 0x4ec <UART_ReceiveData>
+ 53a:	f7 01       	movw	r30, r14
+ 53c:	80 81       	ld	r24, Z
+ 53e:	8d 30       	cpi	r24, 0x0D	; 13
+ 540:	61 f0       	breq	.+24     	; 0x55a <UART_ReceiveString+0x44>
+ 542:	8a 30       	cpi	r24, 0x0A	; 10
+ 544:	51 f0       	breq	.+20     	; 0x55a <UART_ReceiveString+0x44>
+ 546:	cf 5f       	subi	r28, 0xFF	; 255
+ 548:	4c 2f       	mov	r20, r28
+ 54a:	50 e0       	ldi	r21, 0x00	; 0
+ 54c:	2d 2f       	mov	r18, r29
+ 54e:	30 e0       	ldi	r19, 0x00	; 0
+ 550:	21 50       	subi	r18, 0x01	; 1
+ 552:	31 09       	sbc	r19, r1
+ 554:	42 17       	cp	r20, r18
+ 556:	53 07       	cpc	r21, r19
+ 558:	54 f3       	brlt	.-44     	; 0x52e <UART_ReceiveString+0x18>
+ 55a:	f8 01       	movw	r30, r16
+ 55c:	ec 0f       	add	r30, r28
+ 55e:	f1 1d       	adc	r31, r1
+ 560:	10 82       	st	Z, r1
+ 562:	81 e0       	ldi	r24, 0x01	; 1
+ 564:	01 c0       	rjmp	.+2      	; 0x568 <UART_ReceiveString+0x52>
+ 566:	80 e0       	ldi	r24, 0x00	; 0
+ 568:	df 91       	pop	r29
+ 56a:	cf 91       	pop	r28
+ 56c:	1f 91       	pop	r17
+ 56e:	0f 91       	pop	r16
+ 570:	ff 90       	pop	r15
+ 572:	ef 90       	pop	r14
+ 574:	08 95       	ret
+
+00000576 <UART_SendString>:
+ 576:	0f 93       	push	r16
+ 578:	1f 93       	push	r17
+ 57a:	cf 93       	push	r28
+ 57c:	00 97       	sbiw	r24, 0x00	; 0
+ 57e:	79 f0       	breq	.+30     	; 0x59e <UART_SendString+0x28>
+ 580:	8c 01       	movw	r16, r24
+ 582:	c0 e0       	ldi	r28, 0x00	; 0
+ 584:	04 c0       	rjmp	.+8      	; 0x58e <UART_SendString+0x18>
+ 586:	90 e0       	ldi	r25, 0x00	; 0
+ 588:	0e 94 86 02 	call	0x50c	; 0x50c <UART_SendData>
+ 58c:	cf 5f       	subi	r28, 0xFF	; 255
+ 58e:	f8 01       	movw	r30, r16
+ 590:	ec 0f       	add	r30, r28
+ 592:	f1 1d       	adc	r31, r1
+ 594:	80 81       	ld	r24, Z
+ 596:	81 11       	cpse	r24, r1
+ 598:	f6 cf       	rjmp	.-20     	; 0x586 <UART_SendString+0x10>
+ 59a:	81 e0       	ldi	r24, 0x01	; 1
+ 59c:	01 c0       	rjmp	.+2      	; 0x5a0 <UART_SendString+0x2a>
+ 59e:	80 e0       	ldi	r24, 0x00	; 0
+ 5a0:	cf 91       	pop	r28
+ 5a2:	1f 91       	pop	r17
+ 5a4:	0f 91       	pop	r16
+ 5a6:	08 95       	ret
+
+000005a8 <UART_ReceiveHex>:
+ 5a8:	0f 93       	push	r16
+ 5aa:	1f 93       	push	r17
+ 5ac:	cf 93       	push	r28
+ 5ae:	df 93       	push	r29
+ 5b0:	cd b7       	in	r28, 0x3d	; 61
+ 5b2:	de b7       	in	r29, 0x3e	; 62
+ 5b4:	28 97       	sbiw	r28, 0x08	; 8
+ 5b6:	0f b6       	in	r0, 0x3f	; 63
+ 5b8:	f8 94       	cli
+ 5ba:	de bf       	out	0x3e, r29	; 62
+ 5bc:	0f be       	out	0x3f, r0	; 63
+ 5be:	cd bf       	out	0x3d, r28	; 61
+ 5c0:	00 97       	sbiw	r24, 0x00	; 0
+ 5c2:	09 f4       	brne	.+2      	; 0x5c6 <UART_ReceiveHex+0x1e>
+ 5c4:	63 c0       	rjmp	.+198    	; 0x68c <UART_ReceiveHex+0xe4>
+ 5c6:	8c 01       	movw	r16, r24
+ 5c8:	ce 01       	movw	r24, r28
+ 5ca:	01 96       	adiw	r24, 0x01	; 1
+ 5cc:	28 e0       	ldi	r18, 0x08	; 8
+ 5ce:	fc 01       	movw	r30, r24
+ 5d0:	11 92       	st	Z+, r1
+ 5d2:	2a 95       	dec	r18
+ 5d4:	e9 f7       	brne	.-6      	; 0x5d0 <UART_ReceiveHex+0x28>
+ 5d6:	68 e0       	ldi	r22, 0x08	; 8
+ 5d8:	0e 94 8b 02 	call	0x516	; 0x516 <UART_ReceiveString>
+ 5dc:	e0 e0       	ldi	r30, 0x00	; 0
+ 5de:	40 e0       	ldi	r20, 0x00	; 0
+ 5e0:	50 e0       	ldi	r21, 0x00	; 0
+ 5e2:	ba 01       	movw	r22, r20
+ 5e4:	43 c0       	rjmp	.+134    	; 0x66c <UART_ReceiveHex+0xc4>
+ 5e6:	80 ed       	ldi	r24, 0xD0	; 208
+ 5e8:	82 0f       	add	r24, r18
+ 5ea:	8a 30       	cpi	r24, 0x0A	; 10
+ 5ec:	f8 f4       	brcc	.+62     	; 0x62c <UART_ReceiveHex+0x84>
+ 5ee:	44 0f       	add	r20, r20
+ 5f0:	55 1f       	adc	r21, r21
+ 5f2:	66 1f       	adc	r22, r22
+ 5f4:	77 1f       	adc	r23, r23
+ 5f6:	44 0f       	add	r20, r20
+ 5f8:	55 1f       	adc	r21, r21
+ 5fa:	66 1f       	adc	r22, r22
+ 5fc:	77 1f       	adc	r23, r23
+ 5fe:	db 01       	movw	r26, r22
+ 600:	ca 01       	movw	r24, r20
+ 602:	88 0f       	add	r24, r24
+ 604:	99 1f       	adc	r25, r25
+ 606:	aa 1f       	adc	r26, r26
+ 608:	bb 1f       	adc	r27, r27
+ 60a:	88 0f       	add	r24, r24
+ 60c:	99 1f       	adc	r25, r25
+ 60e:	aa 1f       	adc	r26, r26
+ 610:	bb 1f       	adc	r27, r27
+ 612:	30 e0       	ldi	r19, 0x00	; 0
+ 614:	a9 01       	movw	r20, r18
+ 616:	40 53       	subi	r20, 0x30	; 48
+ 618:	51 09       	sbc	r21, r1
+ 61a:	05 2e       	mov	r0, r21
+ 61c:	00 0c       	add	r0, r0
+ 61e:	66 0b       	sbc	r22, r22
+ 620:	77 0b       	sbc	r23, r23
+ 622:	48 0f       	add	r20, r24
+ 624:	59 1f       	adc	r21, r25
+ 626:	6a 1f       	adc	r22, r26
+ 628:	7b 1f       	adc	r23, r27
+ 62a:	1f c0       	rjmp	.+62     	; 0x66a <UART_ReceiveHex+0xc2>
+ 62c:	8f eb       	ldi	r24, 0xBF	; 191
+ 62e:	82 0f       	add	r24, r18
+ 630:	86 30       	cpi	r24, 0x06	; 6
+ 632:	70 f5       	brcc	.+92     	; 0x690 <UART_ReceiveHex+0xe8>
+ 634:	44 0f       	add	r20, r20
+ 636:	55 1f       	adc	r21, r21
+ 638:	66 1f       	adc	r22, r22
+ 63a:	77 1f       	adc	r23, r23
+ 63c:	44 0f       	add	r20, r20
+ 63e:	55 1f       	adc	r21, r21
+ 640:	66 1f       	adc	r22, r22
+ 642:	77 1f       	adc	r23, r23
+ 644:	44 0f       	add	r20, r20
+ 646:	55 1f       	adc	r21, r21
+ 648:	66 1f       	adc	r22, r22
+ 64a:	77 1f       	adc	r23, r23
+ 64c:	44 0f       	add	r20, r20
+ 64e:	55 1f       	adc	r21, r21
+ 650:	66 1f       	adc	r22, r22
+ 652:	77 1f       	adc	r23, r23
+ 654:	30 e0       	ldi	r19, 0x00	; 0
+ 656:	c9 01       	movw	r24, r18
+ 658:	c7 97       	sbiw	r24, 0x37	; 55
+ 65a:	09 2e       	mov	r0, r25
+ 65c:	00 0c       	add	r0, r0
+ 65e:	aa 0b       	sbc	r26, r26
+ 660:	bb 0b       	sbc	r27, r27
+ 662:	48 0f       	add	r20, r24
+ 664:	59 1f       	adc	r21, r25
+ 666:	6a 1f       	adc	r22, r26
+ 668:	7b 1f       	adc	r23, r27
+ 66a:	ef 5f       	subi	r30, 0xFF	; 255
+ 66c:	a1 e0       	ldi	r26, 0x01	; 1
+ 66e:	b0 e0       	ldi	r27, 0x00	; 0
+ 670:	ac 0f       	add	r26, r28
+ 672:	bd 1f       	adc	r27, r29
+ 674:	ae 0f       	add	r26, r30
+ 676:	b1 1d       	adc	r27, r1
+ 678:	2c 91       	ld	r18, X
+ 67a:	21 11       	cpse	r18, r1
+ 67c:	b4 cf       	rjmp	.-152    	; 0x5e6 <UART_ReceiveHex+0x3e>
+ 67e:	f8 01       	movw	r30, r16
+ 680:	40 83       	st	Z, r20
+ 682:	51 83       	std	Z+1, r21	; 0x01
+ 684:	62 83       	std	Z+2, r22	; 0x02
+ 686:	73 83       	std	Z+3, r23	; 0x03
+ 688:	81 e0       	ldi	r24, 0x01	; 1
+ 68a:	03 c0       	rjmp	.+6      	; 0x692 <UART_ReceiveHex+0xea>
+ 68c:	80 e0       	ldi	r24, 0x00	; 0
+ 68e:	01 c0       	rjmp	.+2      	; 0x692 <UART_ReceiveHex+0xea>
+ 690:	80 e0       	ldi	r24, 0x00	; 0
+ 692:	28 96       	adiw	r28, 0x08	; 8
+ 694:	0f b6       	in	r0, 0x3f	; 63
+ 696:	f8 94       	cli
+ 698:	de bf       	out	0x3e, r29	; 62
+ 69a:	0f be       	out	0x3f, r0	; 63
+ 69c:	cd bf       	out	0x3d, r28	; 61
+ 69e:	df 91       	pop	r29
+ 6a0:	cf 91       	pop	r28
+ 6a2:	1f 91       	pop	r17
+ 6a4:	0f 91       	pop	r16
+ 6a6:	08 95       	ret
+
+000006a8 <__vector_13>:
+
+
+/* ISRs----------------------------------------------------------*/
+
+ISR(UART_RX_vect)
+{
+ 6a8:	1f 92       	push	r1
+ 6aa:	0f 92       	push	r0
+ 6ac:	0f b6       	in	r0, 0x3f	; 63
+ 6ae:	0f 92       	push	r0
+ 6b0:	11 24       	eor	r1, r1
+ 6b2:	2f 93       	push	r18
+ 6b4:	3f 93       	push	r19
+ 6b6:	4f 93       	push	r20
+ 6b8:	5f 93       	push	r21
+ 6ba:	6f 93       	push	r22
+ 6bc:	7f 93       	push	r23
+ 6be:	8f 93       	push	r24
+ 6c0:	9f 93       	push	r25
+ 6c2:	af 93       	push	r26
+ 6c4:	bf 93       	push	r27
+ 6c6:	ef 93       	push	r30
+ 6c8:	ff 93       	push	r31
+   //if the global pointer to function points to a valid position
+   if (RXC_Callback!=NULLPTR)
+ 6ca:	e0 91 c0 00 	lds	r30, 0x00C0	; 0x8000c0 <RXC_Callback>
+ 6ce:	f0 91 c1 00 	lds	r31, 0x00C1	; 0x8000c1 <RXC_Callback+0x1>
+ 6d2:	30 97       	sbiw	r30, 0x00	; 0
+ 6d4:	09 f0       	breq	.+2      	; 0x6d8 <__vector_13+0x30>
+   {
+      //call the function
+      RXC_Callback();
+ 6d6:	09 95       	icall
+   }
+}
+ 6d8:	ff 91       	pop	r31
+ 6da:	ef 91       	pop	r30
+ 6dc:	bf 91       	pop	r27
+ 6de:	af 91       	pop	r26
+ 6e0:	9f 91       	pop	r25
+ 6e2:	8f 91       	pop	r24
+ 6e4:	7f 91       	pop	r23
+ 6e6:	6f 91       	pop	r22
+ 6e8:	5f 91       	pop	r21
+ 6ea:	4f 91       	pop	r20
+ 6ec:	3f 91       	pop	r19
+ 6ee:	2f 91       	pop	r18
+ 6f0:	0f 90       	pop	r0
+ 6f2:	0f be       	out	0x3f, r0	; 63
+ 6f4:	0f 90       	pop	r0
+ 6f6:	1f 90       	pop	r1
+ 6f8:	18 95       	reti
+
+000006fa <__vector_15>:
+
+ISR(UART_TX_vect)
+{
+ 6fa:	1f 92       	push	r1
+ 6fc:	0f 92       	push	r0
+ 6fe:	0f b6       	in	r0, 0x3f	; 63
+ 700:	0f 92       	push	r0
+ 702:	11 24       	eor	r1, r1
+ 704:	2f 93       	push	r18
+ 706:	3f 93       	push	r19
+ 708:	4f 93       	push	r20
+ 70a:	5f 93       	push	r21
+ 70c:	6f 93       	push	r22
+ 70e:	7f 93       	push	r23
+ 710:	8f 93       	push	r24
+ 712:	9f 93       	push	r25
+ 714:	af 93       	push	r26
+ 716:	bf 93       	push	r27
+ 718:	ef 93       	push	r30
+ 71a:	ff 93       	push	r31
+   //if the global pointer to function points to a valid position
+   if (TXC_Callback!=NULLPTR)
+ 71c:	e0 91 be 00 	lds	r30, 0x00BE	; 0x8000be <TXC_Callback>
+ 720:	f0 91 bf 00 	lds	r31, 0x00BF	; 0x8000bf <TXC_Callback+0x1>
+ 724:	30 97       	sbiw	r30, 0x00	; 0
+ 726:	09 f0       	breq	.+2      	; 0x72a <__vector_15+0x30>
+   {
+      //call the function
+      TXC_Callback();
+ 728:	09 95       	icall
+   }
+ 72a:	ff 91       	pop	r31
+ 72c:	ef 91       	pop	r30
+ 72e:	bf 91       	pop	r27
+ 730:	af 91       	pop	r26
+ 732:	9f 91       	pop	r25
+ 734:	8f 91       	pop	r24
+ 736:	7f 91       	pop	r23
+ 738:	6f 91       	pop	r22
+ 73a:	5f 91       	pop	r21
+ 73c:	4f 91       	pop	r20
+ 73e:	3f 91       	pop	r19
+ 740:	2f 91       	pop	r18
+ 742:	0f 90       	pop	r0
+ 744:	0f be       	out	0x3f, r0	; 63
+ 746:	0f 90       	pop	r0
+ 748:	1f 90       	pop	r1
+ 74a:	18 95       	reti
+
+0000074c <__udivmodhi4>:
+ 74c:	aa 1b       	sub	r26, r26
+ 74e:	bb 1b       	sub	r27, r27
+ 750:	51 e1       	ldi	r21, 0x11	; 17
+ 752:	07 c0       	rjmp	.+14     	; 0x762 <__udivmodhi4_ep>
+
+00000754 <__udivmodhi4_loop>:
+ 754:	aa 1f       	adc	r26, r26
+ 756:	bb 1f       	adc	r27, r27
+ 758:	a6 17       	cp	r26, r22
+ 75a:	b7 07       	cpc	r27, r23
+ 75c:	10 f0       	brcs	.+4      	; 0x762 <__udivmodhi4_ep>
+ 75e:	a6 1b       	sub	r26, r22
+ 760:	b7 0b       	sbc	r27, r23
+
+00000762 <__udivmodhi4_ep>:
+ 762:	88 1f       	adc	r24, r24
+ 764:	99 1f       	adc	r25, r25
+ 766:	5a 95       	dec	r21
+ 768:	a9 f7       	brne	.-22     	; 0x754 <__udivmodhi4_loop>
+ 76a:	80 95       	com	r24
+ 76c:	90 95       	com	r25
+ 76e:	bc 01       	movw	r22, r24
+ 770:	cd 01       	movw	r24, r26
+ 772:	08 95       	ret
+
+00000774 <_exit>:
+ 774:	f8 94       	cli
+
+00000776 <__stop_program>:
+ 776:	ff cf       	rjmp	.-2      	; 0x776 <__stop_program>
