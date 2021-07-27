@@ -501,16 +501,16 @@ END GROUP
  .debug_frame   0x00000024       0x54 MCAL/DIO/DIO.o
  .debug_frame   0x00000078      0x19c MCAL/I2C/I2C.o
 
-.debug_str      0x00000000      0x63b
+.debug_str      0x00000000      0x691
  *(.debug_str)
  .debug_str     0x00000000      0x196 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
- .debug_str     0x00000196      0x1bb main.o
-                                0x1f4 (size before relaxing)
- .debug_str     0x00000351      0x11f MCAL/DIO/DIO.o
+ .debug_str     0x00000196      0x1be main.o
+                                0x1f7 (size before relaxing)
+ .debug_str     0x00000354      0x172 MCAL/DIO/DIO.o
                                 0x29c (size before relaxing)
- .debug_str     0x00000470       0x16 MCAL/DIO/DIO_Cfg.o
+ .debug_str     0x000004c6       0x16 MCAL/DIO/DIO_Cfg.o
                                 0x22c (size before relaxing)
- .debug_str     0x00000486      0x1b5 MCAL/I2C/I2C.o
+ .debug_str     0x000004dc      0x1b5 MCAL/I2C/I2C.o
                                 0x378 (size before relaxing)
 
 .debug_loc      0x00000000      0x8cf

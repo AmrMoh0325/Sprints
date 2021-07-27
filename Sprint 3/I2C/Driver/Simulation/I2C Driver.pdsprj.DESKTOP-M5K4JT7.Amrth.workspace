@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes'?>
 <WORKSPACE>
  <FRAME activewindow="1">
-  <PLACEMENT>2c0000000200000003000000fffffffffffffffffffffffffffffffff8ffffff000000000805000097020000</PLACEMENT>
+  <PLACEMENT>2c0000000200000003000000ffffffffffffffffffffffffffffffff1c020000a90100002c07000040040000</PLACEMENT>
   <WINDOW type="default" module="STARTUP"/>
   <WINDOW type="default" module="ISIS"/>
  </FRAME>
@@ -174,7 +174,7 @@
      <ITEM name="TopLineAddress">00000020</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="947" x="679" flags="00008023" y="610" h="378" pid="0" iid="5">
+   <POPUP w="947" x="489" flags="00008023" y="595" h="378" pid="0" iid="5">
     <PROPERTIES>
      <ITEM name="ComboBox1000">S</ITEM>
      <ITEM name="ComboBox1001">Sr</ITEM>

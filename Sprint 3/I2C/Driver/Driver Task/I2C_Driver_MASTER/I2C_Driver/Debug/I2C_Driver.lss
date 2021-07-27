@@ -23,11 +23,11 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   9 .debug_frame  00000214  00000000  00000000  00002a60  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    0000063b  00000000  00000000  00002c74  2**0
+ 10 .debug_str    00000691  00000000  00000000  00002c74  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    000008cf  00000000  00000000  000032af  2**0
+ 11 .debug_loc    000008cf  00000000  00000000  00003305  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 000000c0  00000000  00000000  00003b7e  2**0
+ 12 .debug_ranges 000000c0  00000000  00000000  00003bd4  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -96,9 +96,9 @@ Disassembly of section .text:
   8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
 00000092 <main>:
-#include "MCAL/DIO/DIO.h"
-#include "util/delay.h"
 
+
+#define    MASTER_TRANSMITTER
 int main(void)
 {
     DIO_Init();
@@ -125,6 +125,7 @@ int main(void)
   ac:	00 00       	nop
     while (1) 
     {
+       #ifdef MASTER_TRANSMITTER
       //Master Transmitter App
       _delay_ms(1000);
       PORTA_R=Data;
@@ -138,17 +139,8 @@ int main(void)
   bc:	ef cf       	rjmp	.-34     	; 0x9c <main+0xa>
 
 000000be <DIO_Init>:
-enuErrorStatus_t DIO_Init(void)
-{
-   uint8_t u8i;
-   uint8_t u8port,u8pin;
-   //traverse the array of pins the user have used
-   for (u8i=0;u8i<DIO_GROUPS_NO;u8i++)
   be:	40 e0       	ldi	r20, 0x00	; 0
   c0:	d2 c0       	rjmp	.+420    	; 0x266 <DIO_Init+0x1a8>
-   {
-      //calculate the port and pin number for each pin
-      u8port=astrDIOConfigParameters[u8i].enuPinNo / DIO_PINS_NO;
   c2:	84 2f       	mov	r24, r20
   c4:	90 e0       	ldi	r25, 0x00	; 0
   c6:	fc 01       	movw	r30, r24
@@ -163,20 +155,10 @@ enuErrorStatus_t DIO_Init(void)
   d8:	36 95       	lsr	r19
   da:	36 95       	lsr	r19
   dc:	36 95       	lsr	r19
-      u8pin=astrDIOConfigParameters[u8i].enuPinNo  % DIO_PINS_NO;
   de:	27 70       	andi	r18, 0x07	; 7
-      
-      //if port number is invalid
-      if (u8port>=DIO_PORT_NO)
   e0:	34 30       	cpi	r19, 0x04	; 4
   e2:	08 f0       	brcs	.+2      	; 0xe6 <DIO_Init+0x28>
   e4:	c5 c0       	rjmp	.+394    	; 0x270 <DIO_Init+0x1b2>
-         //return FAIL
-         return 0;
-      }
-      
-      //decide which port are we working with
-      switch (u8port)
   e6:	31 30       	cpi	r19, 0x01	; 1
   e8:	b1 f1       	breq	.+108    	; 0x156 <DIO_Init+0x98>
   ea:	38 f0       	brcs	.+14     	; 0xfa <DIO_Init+0x3c>
@@ -187,10 +169,6 @@ enuErrorStatus_t DIO_Init(void)
   f4:	09 f4       	brne	.+2      	; 0xf8 <DIO_Init+0x3a>
   f6:	8a c0       	rjmp	.+276    	; 0x20c <DIO_Init+0x14e>
   f8:	b5 c0       	rjmp	.+362    	; 0x264 <DIO_Init+0x1a6>
-      {
-         case M_PORTA:
-         //clear the pin bit in the DDRx and PORTx registers of each port
-         CLR_BIT(DDRA_R,u8pin);
   fa:	6a b3       	in	r22, 0x1a	; 26
   fc:	e1 e0       	ldi	r30, 0x01	; 1
   fe:	f0 e0       	ldi	r31, 0x00	; 0
@@ -205,12 +183,9 @@ enuErrorStatus_t DIO_Init(void)
  110:	50 95       	com	r21
  112:	65 23       	and	r22, r21
  114:	6a bb       	out	0x1a, r22	; 26
-         CLR_BIT(PORTA_R,u8pin);
  116:	6b b3       	in	r22, 0x1b	; 27
  118:	56 23       	and	r21, r22
  11a:	5b bb       	out	0x1b, r21	; 27
-         //if the pin is set as output
-         if(astrDIOConfigParameters[u8i].enuPinDir)
  11c:	fc 01       	movw	r30, r24
  11e:	ee 0f       	add	r30, r30
  120:	ff 1f       	adc	r31, r31
@@ -221,16 +196,9 @@ enuErrorStatus_t DIO_Init(void)
  12a:	51 81       	ldd	r21, Z+1	; 0x01
  12c:	55 23       	and	r21, r21
  12e:	19 f0       	breq	.+6      	; 0x136 <DIO_Init+0x78>
-         {
-            //set its equivalent bit in the DDRx register
-            SET_BIT(DDRA_R,u8pin);
  130:	5a b3       	in	r21, 0x1a	; 26
  132:	5a 2b       	or	r21, r26
  134:	5a bb       	out	0x1a, r21	; 26
-         }
-
-         // check if the pins pullup resistor will be used
-         if (astrDIOConfigParameters[u8i].enuPullupResEn)
  136:	fc 01       	movw	r30, r24
  138:	ee 0f       	add	r30, r30
  13a:	ff 1f       	adc	r31, r31
@@ -243,19 +211,10 @@ enuErrorStatus_t DIO_Init(void)
  148:	88 23       	and	r24, r24
  14a:	09 f4       	brne	.+2      	; 0x14e <DIO_Init+0x90>
  14c:	8b c0       	rjmp	.+278    	; 0x264 <DIO_Init+0x1a6>
-         {
-            //if so, set it's equivalent bit in the PORTx register
-            SET_BIT(PORTA_R,u8pin);
  14e:	8b b3       	in	r24, 0x1b	; 27
  150:	28 2b       	or	r18, r24
  152:	2b bb       	out	0x1b, r18	; 27
  154:	87 c0       	rjmp	.+270    	; 0x264 <DIO_Init+0x1a6>
-         }
-         break;
-
-         case M_PORTB:
-         //clear the pin bit in the DDRx and PORTx registers of each port
-         CLR_BIT(DDRB_R,u8pin);
  156:	67 b3       	in	r22, 0x17	; 23
  158:	e1 e0       	ldi	r30, 0x01	; 1
  15a:	f0 e0       	ldi	r31, 0x00	; 0
@@ -270,12 +229,9 @@ enuErrorStatus_t DIO_Init(void)
  16c:	50 95       	com	r21
  16e:	65 23       	and	r22, r21
  170:	67 bb       	out	0x17, r22	; 23
-         CLR_BIT(PORTB_R,u8pin);
  172:	68 b3       	in	r22, 0x18	; 24
  174:	56 23       	and	r21, r22
  176:	58 bb       	out	0x18, r21	; 24
-         //if the pin is set as output
-         if(astrDIOConfigParameters[u8i].enuPinDir)
  178:	fc 01       	movw	r30, r24
  17a:	ee 0f       	add	r30, r30
  17c:	ff 1f       	adc	r31, r31
@@ -286,15 +242,9 @@ enuErrorStatus_t DIO_Init(void)
  186:	51 81       	ldd	r21, Z+1	; 0x01
  188:	55 23       	and	r21, r21
  18a:	19 f0       	breq	.+6      	; 0x192 <DIO_Init+0xd4>
-         {
-            //set its equivalent bit in the DDRx register
-            SET_BIT(DDRB_R,u8pin);
  18c:	57 b3       	in	r21, 0x17	; 23
  18e:	5a 2b       	or	r21, r26
  190:	57 bb       	out	0x17, r21	; 23
-         }
-         // check if the pins pullup resistor will be used
-         if (astrDIOConfigParameters[u8i].enuPullupResEn)
  192:	fc 01       	movw	r30, r24
  194:	ee 0f       	add	r30, r30
  196:	ff 1f       	adc	r31, r31
@@ -307,19 +257,10 @@ enuErrorStatus_t DIO_Init(void)
  1a4:	88 23       	and	r24, r24
  1a6:	09 f4       	brne	.+2      	; 0x1aa <DIO_Init+0xec>
  1a8:	5d c0       	rjmp	.+186    	; 0x264 <DIO_Init+0x1a6>
-         {
-            //if so, set it's equivalent bit in the PORTx register
-            SET_BIT(PORTB_R,u8pin);
  1aa:	88 b3       	in	r24, 0x18	; 24
  1ac:	28 2b       	or	r18, r24
  1ae:	28 bb       	out	0x18, r18	; 24
  1b0:	59 c0       	rjmp	.+178    	; 0x264 <DIO_Init+0x1a6>
-         }
-         break;
-
-         case M_PORTC:
-         //clear the pin bit in the DDRx and PORTx registers of each port
-         CLR_BIT(DDRC_R,u8pin);
  1b2:	64 b3       	in	r22, 0x14	; 20
  1b4:	e1 e0       	ldi	r30, 0x01	; 1
  1b6:	f0 e0       	ldi	r31, 0x00	; 0
@@ -334,12 +275,9 @@ enuErrorStatus_t DIO_Init(void)
  1c8:	50 95       	com	r21
  1ca:	65 23       	and	r22, r21
  1cc:	64 bb       	out	0x14, r22	; 20
-         CLR_BIT(PORTC_R,u8pin);
  1ce:	65 b3       	in	r22, 0x15	; 21
  1d0:	56 23       	and	r21, r22
  1d2:	55 bb       	out	0x15, r21	; 21
-         //if the pin is set as output
-         if(astrDIOConfigParameters[u8i].enuPinDir)
  1d4:	fc 01       	movw	r30, r24
  1d6:	ee 0f       	add	r30, r30
  1d8:	ff 1f       	adc	r31, r31
@@ -350,15 +288,9 @@ enuErrorStatus_t DIO_Init(void)
  1e2:	51 81       	ldd	r21, Z+1	; 0x01
  1e4:	55 23       	and	r21, r21
  1e6:	19 f0       	breq	.+6      	; 0x1ee <DIO_Init+0x130>
-         {
-            //set its equivalent bit in the DDRx register
-            SET_BIT(DDRC_R,u8pin);
  1e8:	54 b3       	in	r21, 0x14	; 20
  1ea:	5a 2b       	or	r21, r26
  1ec:	54 bb       	out	0x14, r21	; 20
-         }
-         // check if the pins pullup resistor will be used
-         if (astrDIOConfigParameters[u8i].enuPullupResEn)
  1ee:	fc 01       	movw	r30, r24
  1f0:	ee 0f       	add	r30, r30
  1f2:	ff 1f       	adc	r31, r31
@@ -370,19 +302,10 @@ enuErrorStatus_t DIO_Init(void)
  1fe:	82 81       	ldd	r24, Z+2	; 0x02
  200:	88 23       	and	r24, r24
  202:	81 f1       	breq	.+96     	; 0x264 <DIO_Init+0x1a6>
-         {
-            //if so, set it's equivalent bit in the PORTx register
-            SET_BIT(PORTC_R,u8pin);
  204:	85 b3       	in	r24, 0x15	; 21
  206:	28 2b       	or	r18, r24
  208:	25 bb       	out	0x15, r18	; 21
  20a:	2c c0       	rjmp	.+88     	; 0x264 <DIO_Init+0x1a6>
-         }
-         break;
-
-         case M_PORTD:
-         //clear the pin bit in the DDRx and PORTx registers of each port
-         CLR_BIT(DDRD_R,u8pin);
  20c:	61 b3       	in	r22, 0x11	; 17
  20e:	e1 e0       	ldi	r30, 0x01	; 1
  210:	f0 e0       	ldi	r31, 0x00	; 0
@@ -397,12 +320,9 @@ enuErrorStatus_t DIO_Init(void)
  222:	50 95       	com	r21
  224:	65 23       	and	r22, r21
  226:	61 bb       	out	0x11, r22	; 17
-         CLR_BIT(PORTD_R,u8pin);
  228:	62 b3       	in	r22, 0x12	; 18
  22a:	56 23       	and	r21, r22
  22c:	52 bb       	out	0x12, r21	; 18
-         //if the pin is set as output
-         if(astrDIOConfigParameters[u8i].enuPinDir)
  22e:	fc 01       	movw	r30, r24
  230:	ee 0f       	add	r30, r30
  232:	ff 1f       	adc	r31, r31
@@ -413,15 +333,9 @@ enuErrorStatus_t DIO_Init(void)
  23c:	51 81       	ldd	r21, Z+1	; 0x01
  23e:	55 23       	and	r21, r21
  240:	19 f0       	breq	.+6      	; 0x248 <DIO_Init+0x18a>
-         {
-            //set its equivalent bit in the DDRx register
-            SET_BIT(DDRD_R,u8pin);
  242:	51 b3       	in	r21, 0x11	; 17
  244:	5a 2b       	or	r21, r26
  246:	51 bb       	out	0x11, r21	; 17
-         }
-         // check if the pins pullup resistor will be used
-         if (astrDIOConfigParameters[u8i].enuPullupResEn)
  248:	fc 01       	movw	r30, r24
  24a:	ee 0f       	add	r30, r30
  24c:	ff 1f       	adc	r31, r31
@@ -433,52 +347,19 @@ enuErrorStatus_t DIO_Init(void)
  258:	82 81       	ldd	r24, Z+2	; 0x02
  25a:	88 23       	and	r24, r24
  25c:	19 f0       	breq	.+6      	; 0x264 <DIO_Init+0x1a6>
-         {
-            //if so, set it's equivalent bit in the PORTx register
-            SET_BIT(PORTD_R,u8pin);
  25e:	82 b3       	in	r24, 0x12	; 18
  260:	28 2b       	or	r18, r24
  262:	22 bb       	out	0x12, r18	; 18
-enuErrorStatus_t DIO_Init(void)
-{
-   uint8_t u8i;
-   uint8_t u8port,u8pin;
-   //traverse the array of pins the user have used
-   for (u8i=0;u8i<DIO_GROUPS_NO;u8i++)
  264:	4f 5f       	subi	r20, 0xFF	; 255
  266:	48 30       	cpi	r20, 0x08	; 8
  268:	08 f4       	brcc	.+2      	; 0x26c <DIO_Init+0x1ae>
  26a:	2b cf       	rjmp	.-426    	; 0xc2 <DIO_Init+0x4>
-         }
-         break;
-      }
-   }
-   //return success status
-   return SUCCESS;
  26c:	81 e0       	ldi	r24, 0x01	; 1
  26e:	08 95       	ret
-      
-      //if port number is invalid
-      if (u8port>=DIO_PORT_NO)
-      {
-         //return FAIL
-         return 0;
  270:	80 e0       	ldi	r24, 0x00	; 0
-         break;
-      }
-   }
-   //return success status
-   return SUCCESS;
-}
  272:	08 95       	ret
 
 00000274 <I2C_GetStatus>:
-      return ERROR;
-   }
-   //set the callback function to the sent function pointer
-   I2C_Callback=local_fptr;
-   return SUCCESS;
-}
  274:	81 b1       	in	r24, 0x01	; 1
  276:	88 7f       	andi	r24, 0xF8	; 248
  278:	08 95       	ret
@@ -635,12 +516,6 @@ enuErrorStatus_t DIO_Init(void)
  3a6:	08 95       	ret
 
 000003a8 <__vector_19>:
-* Parameters (out): void
-* Return value: void
-* Description: I2C event interrupt service routine
-************************************************************************************/
-ISR(TWI_vect)
-{
  3a8:	1f 92       	push	r1
  3aa:	0f 92       	push	r0
  3ac:	0f b6       	in	r0, 0x3f	; 63
@@ -658,17 +533,11 @@ ISR(TWI_vect)
  3c4:	bf 93       	push	r27
  3c6:	ef 93       	push	r30
  3c8:	ff 93       	push	r31
-   //check if callback function pointer points to a valid function
-   if(I2C_Callback != NULLPTR)
  3ca:	e0 91 78 00 	lds	r30, 0x0078	; 0x800078 <__data_end>
  3ce:	f0 91 79 00 	lds	r31, 0x0079	; 0x800079 <__data_end+0x1>
  3d2:	30 97       	sbiw	r30, 0x00	; 0
  3d4:	09 f0       	breq	.+2      	; 0x3d8 <__vector_19+0x30>
-   {
-      //call the callback function
-      I2C_Callback();
  3d6:	09 95       	icall
-   }
  3d8:	ff 91       	pop	r31
  3da:	ef 91       	pop	r30
  3dc:	bf 91       	pop	r27
