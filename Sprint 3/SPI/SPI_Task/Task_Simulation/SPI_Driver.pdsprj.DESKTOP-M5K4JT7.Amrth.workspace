@@ -177,19 +177,19 @@
      <ITEM name="TopLineAddress">00000020</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="604" x="795" flags="00000023" y="580" h="367" pid="0" iid="4">
+   <POPUP w="604" x="656" flags="00000023" y="642" h="367" pid="0" iid="4">
     <PROPERTIES>
      <ITEM name="HSplitter1Pos">100</ITEM>
      <ITEM name="VSplitter1Pos">238</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="482" x="1389" flags="00000023" y="508" h="347" pid="0" iid="5">
+   <POPUP w="482" x="1317" flags="00000023" y="550" h="347" pid="0" iid="5">
     <PROPERTIES>
      <ITEM name="AutoEcho">0</ITEM>
      <ITEM name="HexMode">0</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="450" x="283" flags="00008023" y="581" h="250" pid="0" iid="6">
+   <POPUP w="450" x="205" flags="00008023" y="569" h="250" pid="0" iid="6">
     <PROPERTIES>
      <ITEM name="AutoEcho">1</ITEM>
      <ITEM name="HexMode">0</ITEM>

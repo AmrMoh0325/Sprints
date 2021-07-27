@@ -127,9 +127,9 @@ void APP_Update_Slave(void)
   ae:	08 95       	ret
 
 000000b0 <main>:
-
 #include "APP/Chat_APP/APP.h"
 
+/*- APIs IMPLEMENTATION-----------------------------------*/
 int main(void)
 {
    APP_Init_Slave();
