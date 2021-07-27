@@ -126,7 +126,7 @@
      <ITEM name="nItems">0</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="450" x="1202" flags="00008023" y="624" h="250" pid="0" iid="2">
+   <POPUP w="450" x="890" flags="00008023" y="610" h="250" pid="0" iid="2">
     <PROPERTIES>
      <ITEM name="AutoEcho">1</ITEM>
      <ITEM name="HexMode">0</ITEM>
