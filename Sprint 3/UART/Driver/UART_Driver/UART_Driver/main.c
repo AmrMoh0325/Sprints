@@ -14,13 +14,13 @@
 
 int main(void)
 {
-   uint16_t Data='A';
+   uint16_t Data=0;
    UART_Init();
     /* Replace with your application code */
     while (1) 
     {
-       UART_SendData(Data); 
        UART_ReceiveData(&Data);
+       UART_SendData(Data); 
     }
 }
 
