@@ -7,6 +7,8 @@
 
 #include "MCAL/SPI/SPI.h"
 
+
+
 int main(void)
 {
     SPI_Init();
