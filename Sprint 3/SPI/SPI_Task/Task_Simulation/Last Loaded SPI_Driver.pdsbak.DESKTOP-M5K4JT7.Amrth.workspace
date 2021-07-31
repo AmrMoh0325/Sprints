@@ -1,18 +1,16 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes'?>
 <WORKSPACE>
- <FRAME activewindow="1">
-  <PLACEMENT>2c0000000200000003000000fffffffffffffffffffffffffffffffffc000000000000003507000097020000</PLACEMENT>
-  <WINDOW type="default" module="STARTUP"/>
+ <FRAME activewindow="0">
+  <PLACEMENT>2c0000000200000003000000ffffffffffffffffffffffffffffffff00000000000000001005000097020000</PLACEMENT>
   <WINDOW type="default" module="ISIS"/>
  </FRAME>
  <MODULE name="VSMDEBUG">
   <PWI>
-   <POPUP w="800" x="268" flags="00000003" y="106" h="200" pid="0" iid="-1">
+   <POPUP w="800" x="38" flags="00000002" y="129" h="200" pid="0" iid="-1">
     <PROPERTIES>
      <ITEM name="Message Column Width">663</ITEM>
      <ITEM name="ShowGrid">No</ITEM>
      <ITEM name="Source Column Width">100</ITEM>
-     <ITEM name="Time Column Width">120</ITEM>
      <ITEM name="Version">100</ITEM>
     </PROPERTIES>
    </POPUP>
@@ -33,22 +31,10 @@
      <ITEM name="nItems">0</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="723" x="274" flags="00000023" y="639" h="447" pid="0" iid="1">
+   <POPUP w="450" x="841" flags="00008023" y="159" h="250" pid="0" iid="4">
     <PROPERTIES>
-     <ITEM name="AutoEcho">1</ITEM>
-     <ITEM name="ComboBox1000">4</ITEM>
-     <ITEM name="ComboBox1001">5</ITEM>
-     <ITEM name="ComboBox1002">6</ITEM>
-     <ITEM name="ComboBox1003">'A'</ITEM>
-     <ITEM name="ComboBox1004">'S'</ITEM>
-     <ITEM name="ComboBox1005">2</ITEM>
-     <ITEM name="ComboBox1006">'q'</ITEM>
-     <ITEM name="ComboBox1007">7</ITEM>
-     <ITEM name="ComboBox1008">0xFF</ITEM>
-     <ITEM name="ComboBox1009">D</ITEM>
      <ITEM name="HSplitter1Pos">100</ITEM>
-     <ITEM name="HexMode">0</ITEM>
-     <ITEM name="VSplitter1Pos">138</ITEM>
+     <ITEM name="VSplitter1Pos">238</ITEM>
     </PROPERTIES>
    </POPUP>
    <POPUP w="226" x="98" flags="00000008" y="189" h="215" pid="3" iid="2">
@@ -84,7 +70,7 @@
      <ITEM name="TopLineAddress">00000000</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="16" x="178" flags="00000000" y="269" h="32" pid="14" iid="2">
+   <POPUP w="16" x="178" flags="80000000" y="269" h="32" pid="14" iid="2">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>
@@ -147,7 +133,7 @@
      <ITEM name="TopLineAddress">00000000</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="16" x="318" flags="00000000" y="409" h="32" pid="14" iid="3">
+   <POPUP w="16" x="318" flags="80000000" y="409" h="32" pid="14" iid="3">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>
@@ -175,24 +161,6 @@
      <ITEM name="ShowChanges">Yes</ITEM>
      <ITEM name="ShowToolTips">Yes</ITEM>
      <ITEM name="TopLineAddress">00000020</ITEM>
-    </PROPERTIES>
-   </POPUP>
-   <POPUP w="604" x="656" flags="00000023" y="642" h="367" pid="0" iid="4">
-    <PROPERTIES>
-     <ITEM name="HSplitter1Pos">100</ITEM>
-     <ITEM name="VSplitter1Pos">238</ITEM>
-    </PROPERTIES>
-   </POPUP>
-   <POPUP w="659" x="1140" flags="00000023" y="550" h="349" pid="0" iid="5">
-    <PROPERTIES>
-     <ITEM name="AutoEcho">0</ITEM>
-     <ITEM name="HexMode">0</ITEM>
-    </PROPERTIES>
-   </POPUP>
-   <POPUP w="450" x="205" flags="00008023" y="569" h="250" pid="0" iid="6">
-    <PROPERTIES>
-     <ITEM name="AutoEcho">1</ITEM>
-     <ITEM name="HexMode">0</ITEM>
     </PROPERTIES>
    </POPUP>
   </PWI>
