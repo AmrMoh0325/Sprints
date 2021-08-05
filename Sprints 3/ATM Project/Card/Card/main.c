@@ -10,5 +10,3 @@ int main(void)
      APP_Update();
 	}
 }
-
-

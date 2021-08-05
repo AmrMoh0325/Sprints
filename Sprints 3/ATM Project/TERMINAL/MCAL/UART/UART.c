@@ -20,6 +20,7 @@ void (*TXC_Callback)(void)=NULLPTR;
 *************************************************************/
 enuErrorStatus_t UART_Init(void)
 {
+   uint8_t UCSRC_Copy=0;
 	/*Set the Baud rate*/
 	uint16_t UBRRVAL=((F_CPU/(16L*UART_BAUDRATE))-1);
 	UBRRH_R=(uint8_t)(UBRRVAL>>8);
@@ -32,50 +33,57 @@ enuErrorStatus_t UART_Init(void)
 	uint8_t data=UART_DATA_BITS;
 	if(data==5)
 	{
-		CLEAR_BIT(UCSRC_R,UCSZ1_B);
-		CLEAR_BIT(UCSRC_R,UCSZ0_B);
+		CLEAR_BIT(UCSRC_Copy,UCSZ1_B);
+		CLEAR_BIT(UCSRC_Copy,UCSZ0_B);
 	}else if(data==6)
 	{
-		CLEAR_BIT(UCSRC_R,UCSZ1_B);
-		SET_BIT(UCSRC_R,UCSZ0_B);		
+		CLEAR_BIT(UCSRC_Copy,UCSZ1_B);
+		SET_BIT(UCSRC_Copy,UCSZ0_B);		
 	}else if(data==7)
 	{
-		SET_BIT(UCSRC_R,UCSZ1_B);
-		CLEAR_BIT(UCSRC_R,UCSZ0_B);		
+		SET_BIT(UCSRC_Copy,UCSZ1_B);
+		CLEAR_BIT(UCSRC_Copy,UCSZ0_B);		
 	}else if(data==8)
 	{
-		SET_BIT(UCSRC_R,UCSZ1_B);
-		SET_BIT(UCSRC_R,UCSZ0_B);
+		SET_BIT(UCSRC_Copy,UCSZ1_B);
+		SET_BIT(UCSRC_Copy,UCSZ0_B);
 	}else if (data==9)
 	{
 		SET_BIT(UCSRB_R,UCSZ2_B);
-		SET_BIT(UCSRC_R,UCSZ1_B);
-		SET_BIT(UCSRC_R,UCSZ0_B);		
+		SET_BIT(UCSRC_Copy,UCSZ1_B);
+		SET_BIT(UCSRC_Copy,UCSZ0_B);		
 	}
 	/*PARITY*/
 	uint8_t parity=UART_PARITY_BIT;
 	if(parity==0)
 	{
-		CLEAR_BIT(UCSRC_R,UPM1_B);
-		CLEAR_BIT(UCSRC_R,UPM0_B);
+		CLEAR_BIT(UCSRC_Copy,UPM1_B);
+		CLEAR_BIT(UCSRC_Copy,UPM0_B);
 	}else if(parity==1)
 	{
-		SET_BIT(UCSRC_R,UPM1_B);
-		SET_BIT(UCSRC_R,UPM0_B);	
+		SET_BIT(UCSRC_Copy,UPM1_B);
+		SET_BIT(UCSRC_Copy,UPM0_B);	
 	}else if(parity==2)
 	{
-		SET_BIT(UCSRC_R,UPM1_B);
-		CLEAR_BIT(UCSRC_R,UPM0_B);
+		SET_BIT(UCSRC_Copy,UPM1_B);
+		CLEAR_BIT(UCSRC_Copy,UPM0_B);
 	}
 	/*STOP BITS*/
 	uint8_t stop = UART_STOP_BITS;
 	if(stop==1)
 	{
-		CLEAR_BIT(UCSRC_R,USBS_B);
+		CLEAR_BIT(UCSRC_Copy,USBS_B);
 	}else if(stop==2)
 	{
-		SET_BIT(UCSRC_R,USBS_B);
+		SET_BIT(UCSRC_Copy,USBS_B);
 	}
+   
+   //enable access to UCSRC register & store the buffer value into UCSRC buffer to achieve atomic access
+   UCSRC_R = (UCSRC_Copy | (1<<URSEL_B));
+   //enable access to UDDRH register
+   CLEAR_BIT(UCSRC_R,URSEL_B);
+   
+   
 	gError=E_OK;
 	return gError;
 }

@@ -62,6 +62,7 @@ enuErrorStatus_t ADC_Init(enuADCReferenceSelectionBits_t enuADCReferenceSelectio
 		ASSIGN_BITS(ADCSRA_R, ADC_PRESCALER_SELECT_START_BIT, ADC_PRESCALER_SELECT_VALUE(enuADCPrescalerSelectBits), ADC_PRESCALER_SELECT_MASK);
 		/* Enabling the ADC module */
 		SET_BIT(ADCSRA_R, ADC_MODULE_EN_BIT);
+      CLEAR_BIT(ADCSRA_R,3);
 		enuADCState = ADC_INIT_DONE;
 		enuRetVar = E_OK;
 	}
@@ -90,6 +91,7 @@ enuErrorStatus_t ADC_ReadChannel(enuADCAnalogChannel_t enuAnalogChannel, uint16_
 		/* Waiting for the ADC conversion until it has successfully been completely */
 		while(IS_BIT_CLEAR(ADCSRA_R, ADC_CONVERSION_COMPLETE_FLAG_BIT));
 		/* Reading the value from the corresponding ADC channel */
+      
 		if(enuADCLeftAdjustResultState == ADC_DISABLE_LEFT_ADJUST_RESULT)
 		{
 			*pu16Data = ADC_VALUE_RIGHT_ADJUSTED;
@@ -98,10 +100,6 @@ enuErrorStatus_t ADC_ReadChannel(enuADCAnalogChannel_t enuAnalogChannel, uint16_
 		{
 			*pu16Data = ADC_VALUE_LEFT_ADJUSTED;
 		}
-		/* Clearing the ADC conversion complete flag */
-		CLEAR_BIT(ADCSRA_R, ADC_CONVERSION_COMPLETE_FLAG_BIT);
-		/* Stopping the conversion process */
-		CLEAR_BIT(ADCSRA_R, ADC_START_CONVERSION_EN_BIT);
 	   enuRetVar = E_OK;
    }
    else

@@ -2,93 +2,298 @@
 # Automatically-generated file. Do not edit!
 ################################################################################
 
--include ../makefile.init
-
+SHELL := cmd.exe
 RM := rm -rf
 
-# All of the sources participating in the build are defined here
--include sources.mk
--include MCAL/UART/subdir.mk
--include MCAL/SPI/subdir.mk
--include MCAL/I2C/subdir.mk
--include MCAL/DIO/subdir.mk
--include MCAL/ADC/subdir.mk
--include ECUAL/Sensor/subdir.mk
--include ECUAL/LCD/subdir.mk
--include ECUAL/Keypad/subdir.mk
--include ECUAL/EEPROM/subdir.mk
--include ECUAL/DCFan/subdir.mk
--include ECUAL/Button/subdir.mk
--include ATM/subdir.mk
--include subdir.mk
--include objects.mk
+USER_OBJS :=
+
+LIBS := 
+PROJ := 
+
+O_SRCS := 
+C_SRCS := 
+S_SRCS := 
+S_UPPER_SRCS := 
+OBJ_SRCS := 
+ASM_SRCS := 
+PREPROCESSING_SRCS := 
+OBJS := 
+OBJS_AS_ARGS := 
+C_DEPS := 
+C_DEPS_AS_ARGS := 
+EXECUTABLES := 
+OUTPUT_FILE_PATH :=
+OUTPUT_FILE_PATH_AS_ARGS :=
+AVR_APP_PATH :=$$$AVR_APP_PATH$$$
+QUOTE := "
+ADDITIONAL_DEPENDENCIES:=
+OUTPUT_FILE_DEP:=
+LIB_DEP:=
+LINKER_SCRIPT_DEP:=
+
+# Every subdirectory with source files must be described here
+SUBDIRS :=  \
+../APP/ATM_Terminal \
+../ECUAL/Button \
+../ECUAL/DCFan \
+../ECUAL/EEPROM \
+../ECUAL/Keypad \
+../ECUAL/LCD \
+../ECUAL/Sensor \
+../MCAL \
+../MCAL/DIO \
+../MCAL/ADC \
+../ECUAL \
+../MCAL/I2C \
+../MCAL/EXT_Int \
+../MCAL/SPI \
+../MCAL/UART \
+../APP
+
+
+# Add inputs and outputs from these tool invocations to the build variables 
+C_SRCS +=  \
+../APP/ATM_Terminal/ATM.c \
+../ECUAL/Button/Button.c \
+../ECUAL/DCFan/DCFan.c \
+../ECUAL/EEPROM/EEPROM.c \
+../ECUAL/Keypad/Keypad.c \
+../ECUAL/LCD/LCD.c \
+../ECUAL/Sensor/LM35.c \
+../main.c \
+../MCAL/DIO/DIO.c \
+../MCAL/ADC/ADC.c \
+../MCAL/EXT_Int/EXT_INT.c \
+../MCAL/I2C/I2C.c \
+../MCAL/SPI/SPI.c \
+../MCAL/UART/UART.c
+
+
+PREPROCESSING_SRCS += 
+
+
+ASM_SRCS += 
+
+
+OBJS +=  \
+APP/ATM_Terminal/ATM.o \
+ECUAL/Button/Button.o \
+ECUAL/DCFan/DCFan.o \
+ECUAL/EEPROM/EEPROM.o \
+ECUAL/Keypad/Keypad.o \
+ECUAL/LCD/LCD.o \
+ECUAL/Sensor/LM35.o \
+main.o \
+MCAL/DIO/DIO.o \
+MCAL/ADC/ADC.o \
+MCAL/EXT_Int/EXT_INT.o \
+MCAL/I2C/I2C.o \
+MCAL/SPI/SPI.o \
+MCAL/UART/UART.o
+
+OBJS_AS_ARGS +=  \
+APP/ATM_Terminal/ATM.o \
+ECUAL/Button/Button.o \
+ECUAL/DCFan/DCFan.o \
+ECUAL/EEPROM/EEPROM.o \
+ECUAL/Keypad/Keypad.o \
+ECUAL/LCD/LCD.o \
+ECUAL/Sensor/LM35.o \
+main.o \
+MCAL/DIO/DIO.o \
+MCAL/ADC/ADC.o \
+MCAL/EXT_Int/EXT_INT.o \
+MCAL/I2C/I2C.o \
+MCAL/SPI/SPI.o \
+MCAL/UART/UART.o
+
+C_DEPS +=  \
+APP/ATM_Terminal/ATM.d \
+ECUAL/Button/Button.d \
+ECUAL/DCFan/DCFan.d \
+ECUAL/EEPROM/EEPROM.d \
+ECUAL/Keypad/Keypad.d \
+ECUAL/LCD/LCD.d \
+ECUAL/Sensor/LM35.d \
+main.d \
+MCAL/DIO/DIO.d \
+MCAL/ADC/ADC.d \
+MCAL/EXT_Int/EXT_INT.d \
+MCAL/I2C/I2C.d \
+MCAL/SPI/SPI.d \
+MCAL/UART/UART.d
+
+C_DEPS_AS_ARGS +=  \
+APP/ATM_Terminal/ATM.d \
+ECUAL/Button/Button.d \
+ECUAL/DCFan/DCFan.d \
+ECUAL/EEPROM/EEPROM.d \
+ECUAL/Keypad/Keypad.d \
+ECUAL/LCD/LCD.d \
+ECUAL/Sensor/LM35.d \
+main.d \
+MCAL/DIO/DIO.d \
+MCAL/ADC/ADC.d \
+MCAL/EXT_Int/EXT_INT.d \
+MCAL/I2C/I2C.d \
+MCAL/SPI/SPI.d \
+MCAL/UART/UART.d
+
+OUTPUT_FILE_PATH +=Terminal.elf
+
+OUTPUT_FILE_PATH_AS_ARGS +=Terminal.elf
+
+ADDITIONAL_DEPENDENCIES:=
+
+OUTPUT_FILE_DEP:= ./makedep.mk
+
+LIB_DEP+= 
+
+LINKER_SCRIPT_DEP+= 
+
+
+# AVR32/GNU C Compiler
+APP/ATM_Terminal/ATM.o: ../APP/ATM_Terminal/ATM.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include" -I"../.." -I"D:\Sprints\Sprint 3\S_AT_MC_11 - Design and Build Simple ATM Machine\Card\Card" -I".."  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+ECUAL/Button/Button.o: ../ECUAL/Button/Button.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include" -I"../.." -I"D:\Sprints\Sprint 3\S_AT_MC_11 - Design and Build Simple ATM Machine\Card\Card" -I".."  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+ECUAL/DCFan/DCFan.o: ../ECUAL/DCFan/DCFan.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include" -I"../.." -I"D:\Sprints\Sprint 3\S_AT_MC_11 - Design and Build Simple ATM Machine\Card\Card" -I".."  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+ECUAL/EEPROM/EEPROM.o: ../ECUAL/EEPROM/EEPROM.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include" -I"../.." -I"D:\Sprints\Sprint 3\S_AT_MC_11 - Design and Build Simple ATM Machine\Card\Card" -I".."  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+ECUAL/Keypad/Keypad.o: ../ECUAL/Keypad/Keypad.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include" -I"../.." -I"D:\Sprints\Sprint 3\S_AT_MC_11 - Design and Build Simple ATM Machine\Card\Card" -I".."  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+ECUAL/LCD/LCD.o: ../ECUAL/LCD/LCD.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include" -I"../.." -I"D:\Sprints\Sprint 3\S_AT_MC_11 - Design and Build Simple ATM Machine\Card\Card" -I".."  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+ECUAL/Sensor/LM35.o: ../ECUAL/Sensor/LM35.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include" -I"../.." -I"D:\Sprints\Sprint 3\S_AT_MC_11 - Design and Build Simple ATM Machine\Card\Card" -I".."  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+./main.o: .././main.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include" -I"../.." -I"D:\Sprints\Sprint 3\S_AT_MC_11 - Design and Build Simple ATM Machine\Card\Card" -I".."  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+MCAL/DIO/DIO.o: ../MCAL/DIO/DIO.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include" -I"../.." -I"D:\Sprints\Sprint 3\S_AT_MC_11 - Design and Build Simple ATM Machine\Card\Card" -I".."  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+MCAL/ADC/ADC.o: ../MCAL/ADC/ADC.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include" -I"../.." -I"D:\Sprints\Sprint 3\S_AT_MC_11 - Design and Build Simple ATM Machine\Card\Card" -I".."  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+MCAL/EXT_Int/EXT_INT.o: ../MCAL/EXT_Int/EXT_INT.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include" -I"../.." -I"D:\Sprints\Sprint 3\S_AT_MC_11 - Design and Build Simple ATM Machine\Card\Card" -I".."  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+MCAL/I2C/I2C.o: ../MCAL/I2C/I2C.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include" -I"../.." -I"D:\Sprints\Sprint 3\S_AT_MC_11 - Design and Build Simple ATM Machine\Card\Card" -I".."  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+MCAL/SPI/SPI.o: ../MCAL/SPI/SPI.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include" -I"../.." -I"D:\Sprints\Sprint 3\S_AT_MC_11 - Design and Build Simple ATM Machine\Card\Card" -I".."  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+MCAL/UART/UART.o: ../MCAL/UART/UART.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include" -I"../.." -I"D:\Sprints\Sprint 3\S_AT_MC_11 - Design and Build Simple ATM Machine\Card\Card" -I".."  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+
+
+
+# AVR32/GNU Preprocessing Assembler
+
+
+
+# AVR32/GNU Assembler
+
+
+
 
 ifneq ($(MAKECMDGOALS),clean)
-ifneq ($(strip $(ASM_DEPS)),)
--include $(ASM_DEPS)
-endif
-ifneq ($(strip $(S_DEPS)),)
--include $(S_DEPS)
-endif
-ifneq ($(strip $(S_UPPER_DEPS)),)
--include $(S_UPPER_DEPS)
-endif
 ifneq ($(strip $(C_DEPS)),)
 -include $(C_DEPS)
 endif
 endif
 
--include ../makefile.defs
-
-OPTIONAL_TOOL_DEPS := \
-$(wildcard ../makefile.defs) \
-$(wildcard ../makefile.init) \
-$(wildcard ../makefile.targets) \
-
-
-BUILD_ARTIFACT_NAME := TERMINAL
-BUILD_ARTIFACT_EXTENSION := elf
-BUILD_ARTIFACT_PREFIX :=
-BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME)$(if $(BUILD_ARTIFACT_EXTENSION),.$(BUILD_ARTIFACT_EXTENSION),)
-
 # Add inputs and outputs from these tool invocations to the build variables 
-LSS += \
-TERMINAL.lss \
-
-SIZEDUMMY += \
-sizedummy \
-
 
 # All Target
-all: TERMINAL.elf secondary-outputs
+all: $(OUTPUT_FILE_PATH) $(ADDITIONAL_DEPENDENCIES)
 
-# Tool invocations
-TERMINAL.elf: $(OBJS) $(USER_OBJS) makefile objects.mk $(OPTIONAL_TOOL_DEPS)
-	@echo 'Building target: $@'
-	@echo 'Invoking: AVR C Linker'
-	avr-gcc -Wl,-Map,TERMINAL.map -mmcu=atmega32 -o "TERMINAL.elf" $(OBJS) $(USER_OBJS) $(LIBS)
-	@echo 'Finished building target: $@'
-	@echo ' '
+$(OUTPUT_FILE_PATH): $(OBJS) $(USER_OBJS) $(OUTPUT_FILE_DEP) $(LIB_DEP) $(LINKER_SCRIPT_DEP)
+	@echo Building target: $@
+	@echo Invoking: AVR/GNU Linker : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE) -o$(OUTPUT_FILE_PATH_AS_ARGS) $(OBJS_AS_ARGS) $(USER_OBJS) $(LIBS) -Wl,-Map="Terminal.map" -Wl,--start-group -Wl,-lm  -Wl,--end-group -Wl,--gc-sections -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32"  
+	@echo Finished building target: $@
+	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O ihex -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures  "Terminal.elf" "Terminal.hex"
+	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -j .eeprom  --set-section-flags=.eeprom=alloc,load --change-section-lma .eeprom=0  --no-change-warnings -O ihex "Terminal.elf" "Terminal.eep" || exit 0
+	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objdump.exe" -h -S "Terminal.elf" > "Terminal.lss"
+	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O srec -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures "Terminal.elf" "Terminal.srec"
+	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-size.exe" "Terminal.elf"
+	
+	
 
-TERMINAL.lss: TERMINAL.elf makefile objects.mk $(OPTIONAL_TOOL_DEPS)
-	@echo 'Invoking: AVR Create Extended Listing'
-	-avr-objdump -h -S TERMINAL.elf  >"TERMINAL.lss"
-	@echo 'Finished building: $@'
-	@echo ' '
 
-sizedummy: TERMINAL.elf makefile objects.mk $(OPTIONAL_TOOL_DEPS)
-	@echo 'Invoking: Print Size'
-	-avr-size --format=avr --mcu=atmega32 TERMINAL.elf
-	@echo 'Finished building: $@'
-	@echo ' '
+
+
 
 # Other Targets
 clean:
-	-$(RM) $(ELFS)$(OBJS)$(ASM_DEPS)$(S_DEPS)$(SIZEDUMMY)$(S_UPPER_DEPS)$(LSS)$(C_DEPS) TERMINAL.elf
-	-@echo ' '
-
-secondary-outputs: $(LSS) $(SIZEDUMMY)
-
-.PHONY: all clean dependents
-
--include ../makefile.targets
+	-$(RM) $(OBJS_AS_ARGS) $(EXECUTABLES)  
+	-$(RM) $(C_DEPS_AS_ARGS)   
+	rm -rf "Terminal.elf" "Terminal.a" "Terminal.hex" "Terminal.lss" "Terminal.eep" "Terminal.map" "Terminal.srec" "Terminal.usersignatures"
+	
