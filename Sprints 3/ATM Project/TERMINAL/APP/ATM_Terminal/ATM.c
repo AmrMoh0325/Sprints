@@ -10,9 +10,8 @@
 #include "ATM.h"
 
 /*- MACROS -------------------------------------------------*/
-#define APP_EEPROM_ADMIN_PASSWORD_ADDRESS						0x010
-//#define APP_EEPROM_CARDS_NO									0x020
-#define APP_EEPROM_MAX_AMOUNT_ADDRESS							0x030
+#define APP_EEPROM_ADMIN_PASSWORD_ADDRESS						(0x010)
+#define APP_EEPROM_MAX_AMOUNT_ADDRESS							(0x030)
 #define APP_EEPROM_PAN_ADDRESS(CARDS_NO)						(0x100 + (0x10 * CARDS_NO))
 #define APP_EEPROM_BALANCE_ADDRESS(CARDS_NO)					(0x500 + (0x10 * CARDS_NO))
 
@@ -24,6 +23,24 @@ static void doubletostr (double num, char* str, int precision);
 static uint8_t gu8BTNFlag = 2;
 static volatile uint8_t u8Flag = LOW;
 
+/************************************************************************************
+* Parameters (in): uint8_t *str1,uint8_t *str2
+* Parameters (out): sint8_t
+* Return value: 0= if strings are identical -- 1=str1>str2 -- -1=str1<str2
+* Description: A function to compare two strings
+************************************************************************************/
+static sint8_t String_compare(uint8_t *str1,uint8_t *str2)
+{
+   uint16_t u16i;
+   //Traverse both strings
+   for(u16i=0;str1[u16i] || str2[u16i];u16i++)
+   {
+      // look for any difference
+      if      (str1[u16i] < str2[u16i])     return -1;
+      else if (str1[u16i] > str2[u16i])     return 1;
+   }
+   return 0;
+}
 
 static void Card(void)
 {
@@ -339,8 +356,7 @@ void APP_Update()
 		/* Sending new line on the terminal by UART */
 		UART_SendData((uint8_t)'\r');
 		/* Checking if the received mode is ADMIN mode */
-		if((au8Mode[0] == 'A') && (au8Mode[1] == 'D') && (au8Mode[2] == 'M') &&
-		   (au8Mode[3] == 'I') && (au8Mode[4] == 'N'))
+		if(!String_compare(au8Mode,(uint8_t *)"ADMIN"))
 		{
 			gu8BTNFlag=1;
 			/* Clearing the LCD screen */
@@ -425,8 +441,7 @@ void APP_Update()
 			u8Flag = LOW;
 		}
 		/* Checking if the received mode is USER mode */
-		else if((au8Mode[0] == 'U') && (au8Mode[1] == 'S') &&
-				(au8Mode[2] == 'E') && (au8Mode[3] == 'R'))
+		else if(!String_compare(au8Mode,(uint8_t *)"USER"))
 		{
 			gu8BTNFlag=2;
 			u8Flag = LOW;

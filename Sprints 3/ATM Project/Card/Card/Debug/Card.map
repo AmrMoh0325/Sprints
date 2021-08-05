@@ -627,27 +627,27 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x226a
+.debug_info     0x00000000     0x2283
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x4e6 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
- .debug_info    0x000004e6      0x650 APP/Card.o
- .debug_info    0x00000b36      0x4f2 ECUAL/EEPROM/EEPROM.o
- .debug_info    0x00001028       0xae main.o
- .debug_info    0x000010d6      0x524 MCAL/DIO/DIO.o
- .debug_info    0x000015fa      0x55a MCAL/I2C/I2C.o
- .debug_info    0x00001b54      0x384 MCAL/SPI/SPI.o
- .debug_info    0x00001ed8      0x392 MCAL/UART/UART.o
+ .debug_info    0x000004e6      0x669 APP/Card.o
+ .debug_info    0x00000b4f      0x4f2 ECUAL/EEPROM/EEPROM.o
+ .debug_info    0x00001041       0xae main.o
+ .debug_info    0x000010ef      0x524 MCAL/DIO/DIO.o
+ .debug_info    0x00001613      0x55a MCAL/I2C/I2C.o
+ .debug_info    0x00001b6d      0x384 MCAL/SPI/SPI.o
+ .debug_info    0x00001ef1      0x392 MCAL/UART/UART.o
 
-.debug_abbrev   0x00000000      0xce2
+.debug_abbrev   0x00000000      0xd03
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x4a3 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
- .debug_abbrev  0x000004a3      0x18f APP/Card.o
- .debug_abbrev  0x00000632      0x109 ECUAL/EEPROM/EEPROM.o
- .debug_abbrev  0x0000073b       0x68 main.o
- .debug_abbrev  0x000007a3       0xdb MCAL/DIO/DIO.o
- .debug_abbrev  0x0000087e      0x1d0 MCAL/I2C/I2C.o
- .debug_abbrev  0x00000a4e      0x124 MCAL/SPI/SPI.o
- .debug_abbrev  0x00000b72      0x170 MCAL/UART/UART.o
+ .debug_abbrev  0x000004a3      0x1b0 APP/Card.o
+ .debug_abbrev  0x00000653      0x109 ECUAL/EEPROM/EEPROM.o
+ .debug_abbrev  0x0000075c       0x68 main.o
+ .debug_abbrev  0x000007c4       0xdb MCAL/DIO/DIO.o
+ .debug_abbrev  0x0000089f      0x1d0 MCAL/I2C/I2C.o
+ .debug_abbrev  0x00000a6f      0x124 MCAL/SPI/SPI.o
+ .debug_abbrev  0x00000b93      0x170 MCAL/UART/UART.o
 
 .debug_line     0x00000000     0x11a1
  *(.debug_line .debug_line.* .debug_line_end)
@@ -673,17 +673,17 @@ END GROUP
 .debug_str      0x00000000      0xac4
  *(.debug_str)
  .debug_str     0x00000000      0x196 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
- .debug_str     0x00000196      0x29b APP/Card.o
-                                0x2d5 (size before relaxing)
- .debug_str     0x00000431      0x186 ECUAL/EEPROM/EEPROM.o
+ .debug_str     0x00000196      0x2a0 APP/Card.o
+                                0x2da (size before relaxing)
+ .debug_str     0x00000436      0x186 ECUAL/EEPROM/EEPROM.o
                                 0x2f2 (size before relaxing)
- .debug_str     0x000005b7       0x11 main.o
+ .debug_str     0x000005bc       0x11 main.o
                                 0x170 (size before relaxing)
- .debug_str     0x000005c8      0x228 MCAL/DIO/DIO.o
+ .debug_str     0x000005cd      0x228 MCAL/DIO/DIO.o
                                 0x3ec (size before relaxing)
- .debug_str     0x000007f0      0x159 MCAL/I2C/I2C.o
+ .debug_str     0x000007f5      0x159 MCAL/I2C/I2C.o
                                 0x392 (size before relaxing)
- .debug_str     0x00000949       0x64 MCAL/SPI/SPI.o
+ .debug_str     0x0000094e       0x5f MCAL/SPI/SPI.o
                                 0x248 (size before relaxing)
  .debug_str     0x000009ad      0x117 MCAL/UART/UART.o
                                 0x34d (size before relaxing)

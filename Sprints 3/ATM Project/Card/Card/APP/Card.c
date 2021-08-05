@@ -15,6 +15,7 @@
 #define PIN_SIZE				4
 #define NAME_SIZE				15
 #define SPI_FRAME_SIZE		15
+#define BUFFER_SIZE        20
 
 #define PAN_LOC		0
 #define PIN_LOC		PAN_LOC+PAN_SIZE+1
@@ -80,10 +81,10 @@ static void Frame_Assemble(uint8_t * PAN, uint8_t * PIN, uint8_t * Frame)
 ************************************************************************************/
 static void Programming_Mode (void)
 {
-   static uint8_t au8uartBuffer[20]={0};
+   static uint8_t au8uartBuffer[BUFFER_SIZE]={0};
    //DISABLE_UART_Interrupt
    UART_RX_Disable_Interrupt();
-   if (initialized == 1)
+   if (initialized == HIGH)
    {
       //uart get string
       UART_ReceiveString(au8uartBuffer,20);
@@ -125,7 +126,7 @@ static void Programming_Mode (void)
 ************************************************************************************/
 static void GetCardData(void)
 {
-   uint8_t Programming_Flag=1;
+   uint8_t Programming_Flag=HIGH;
    //while the data in the EEPROM is still corrupted
    while (Programming_Flag)
    {
@@ -144,12 +145,12 @@ static void GetCardData(void)
             //enter EEPROM programming mode
             Programming_Mode();
             //enable programming mode
-            Programming_Flag=1;
+            Programming_Flag=HIGH;
             //escape check sequence
             break;
          }
          //disable programming flag to end EEPROM programming
-         Programming_Flag=0;
+         Programming_Flag=LOW;
       }
    }
 }
@@ -165,7 +166,7 @@ static void GetCardData(void)
 ************************************************************************************/
 void APP_Init(void)
 {
-   initialized=0;
+   initialized=LOW;
    //initialize UART
    UART_Init();
    //Enable UART_Interrupt
@@ -181,7 +182,7 @@ void APP_Init(void)
    //assemble the card frame to be sent to the atm
    Frame_Assemble(PAN,PIN,SPIFrame);
    
-   initialized=1;
+   initialized=HIGH;
    //start global interrupt
    sei();
 }
