@@ -29,11 +29,11 @@ static volatile uint8_t u8Flag = LOW;
 * Return value: 0= if strings are identical -- 1=str1>str2 -- -1=str1<str2
 * Description: A function to compare two strings
 ************************************************************************************/
-static sint8_t String_compare(uint8_t *str1,uint8_t *str2)
+static sint8_t String_compare(uint8_t *str1,uint8_t *str2,uint16_t num)
 {
    uint16_t u16i;
    //Traverse both strings
-   for(u16i=0;str1[u16i] || str2[u16i];u16i++)
+   for(u16i=0;((str1[u16i] || str2[u16i]) && (u16i<num));u16i++)
    {
       // look for any difference
       if      (str1[u16i] < str2[u16i])     return -1;
@@ -93,9 +93,7 @@ static void Card(void)
 				/* Reading the stored PAN from EEPROM */
 				EEPROM_ReadString(0x100 + (0x10 * u8LoopIndex), 9, au8PAN);
 				/* Checking if the PAN of the card is similar to the stored PAN in EEPROM */
-				if((au8CardData[0] == au8PAN[0]) && (au8CardData[1] == au8PAN[1]) && (au8CardData[2] == au8PAN[2]) &&
-				   (au8CardData[3] == au8PAN[3]) && (au8CardData[4] == au8PAN[4]) && (au8CardData[5] == au8PAN[5]) &&
-				   (au8CardData[6] == au8PAN[6]) && (au8CardData[7] == au8PAN[7]) && (au8CardData[8] == au8PAN[8]))
+				if(!String_compare(au8CardData,au8PAN,9))
 				{
 					break;
 				}
@@ -130,8 +128,7 @@ static void Card(void)
 				/* Displaying '*' on the LCD screen */
 				LCD_DisplayChar('*');
 				/* Checking if the PIN of the card is similar to the entered PIN from the keypad */
-				if((au8CardData[10] == au8KeypadPIN[0]) && (au8CardData[11] == au8KeypadPIN[1]) &&
-				   (au8CardData[12] == au8KeypadPIN[2]) && (au8CardData[13] == au8KeypadPIN[3]))
+				if(!String_compare(au8CardData+10,au8KeypadPIN,4))
 				{
 					/* Clearing the LCD screen */
 					LCD_Clear();
@@ -356,7 +353,7 @@ void APP_Update()
 		/* Sending new line on the terminal by UART */
 		UART_SendData((uint8_t)'\r');
 		/* Checking if the received mode is ADMIN mode */
-		if(!String_compare(au8Mode,(uint8_t *)"ADMIN"))
+		if(!String_compare(au8Mode,(uint8_t *)"ADMIN",5))
 		{
 			gu8BTNFlag=1;
 			/* Clearing the LCD screen */
@@ -441,7 +438,7 @@ void APP_Update()
 			u8Flag = LOW;
 		}
 		/* Checking if the received mode is USER mode */
-		else if(!String_compare(au8Mode,(uint8_t *)"USER"))
+		else if(!String_compare(au8Mode,(uint8_t *)"USER",4))
 		{
 			gu8BTNFlag=2;
 			u8Flag = LOW;
