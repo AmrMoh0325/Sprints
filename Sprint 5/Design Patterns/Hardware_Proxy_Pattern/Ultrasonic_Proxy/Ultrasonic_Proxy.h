@@ -1,9 +1,10 @@
-/*
- * Ultrasonic_Proxy.h
- *
- *  Created on: Aug 25, 2021
- *      Author: DELLL
- */
+/*****************************************************************************
+* Task       : Design Patterns
+* File Name  : Ultrasonic_Proxy.h
+* Description: Header file for the Ultrasonic Proxy in the HW proxy design pattern
+* Author     : Mohamed Ehab (Team 2)
+* Date       : 23/8/2021
+******************************************************************************/
 
 #ifndef HW_PROXY_HANDLER_ULTRASONIC_PROXY_ULTRASONIC_PROXY_H_
 #define HW_PROXY_HANDLER_ULTRASONIC_PROXY_ULTRASONIC_PROXY_H_

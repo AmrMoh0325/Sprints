@@ -1,3 +1,11 @@
+/*****************************************************************************
+* Task       : Design Patterns
+* File Name  : ButtonClient.h
+* Description: Header file for the button debouncing design pattern
+* Author     : Mohamed Samy (Team 2)
+* Date       : 23/8/2021
+******************************************************************************/
+
 #ifndef BUTTONCLIENT_H_
 #define BUTTONCLIENT_H_
 

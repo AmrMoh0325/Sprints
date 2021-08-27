@@ -1,3 +1,11 @@
+/*****************************************************************************
+* Task       : Design Patterns
+* File Name  : ButtonClient.c
+* Description: Source file for the button debouncing design pattern
+* Author     : Mohamed Samy (Team 2)
+* Date       : 23/8/2021
+******************************************************************************/
+
 #include "ButtonClient.h"
 
 

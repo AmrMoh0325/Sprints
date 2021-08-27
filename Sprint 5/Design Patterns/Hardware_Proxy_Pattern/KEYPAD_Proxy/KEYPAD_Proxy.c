@@ -1,9 +1,10 @@
-/*
- * KEYPAD_Proxy.c
- *
- *  Created on: Aug 23, 2021
- *      Author: DELLL
- */
+/*****************************************************************************
+* Task       : Design Patterns
+* File Name  : KEYPAD_Proxy.c
+* Description: Proxy file for the Keypad in the HW proxy design pattern
+* Author     : Mohamed Ehab (Team 2)
+* Date       : 23/8/2021
+******************************************************************************/
 
 
 #include "KEYPAD_Proxy.h"

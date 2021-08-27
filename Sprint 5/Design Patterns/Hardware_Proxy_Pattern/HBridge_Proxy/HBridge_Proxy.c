@@ -1,9 +1,11 @@
-/*
- * HBridge_Proxy.c
- *
- *  Created on: Aug 23, 2021
- *      Author: DELLL
- */
+/*****************************************************************************
+* Task       : Design Patterns
+* File Name  : HBridge_Proxy.c
+* Description: Proxy file for the HBridge in the HW proxy design pattern
+* Author     : Mohamed Ehab (Team 2)
+* Date       : 23/8/2021
+******************************************************************************/
+
 
 #include "HBridge_Proxy.h"
 
