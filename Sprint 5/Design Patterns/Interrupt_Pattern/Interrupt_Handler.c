@@ -2,7 +2,7 @@
 * Module     : Interrupt_Handler
 * File Name  : Interrupt_Handler.c
 * Description: Source file for the Interrupt_Handler Pattern
-* Author     : Kariman Karam
+* Author     : Kariman Karam (Team 2)
 * Date       : Aug 23, 2021
 ******************************************************************************/
 

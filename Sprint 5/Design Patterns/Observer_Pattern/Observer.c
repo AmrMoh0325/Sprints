@@ -2,7 +2,7 @@
 * Task       : Design Patterns
 * File Name  : Observer.c
 * Description: Source file for the observer design pattern
-* Author     : Amr Mohamed
+* Author     : Amr Mohamed (Team 2)
 * Date       : 23/8/2021
 ******************************************************************************/
 

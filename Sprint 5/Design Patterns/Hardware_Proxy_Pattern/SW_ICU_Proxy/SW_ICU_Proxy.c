@@ -1,9 +1,10 @@
-/*
- * SW_ICU_Proxy.c
- *
- *  Created on: Aug 25, 2021
- *      Author: DELLL
- */
+/*****************************************************************************
+* Task       : Design Patterns
+* File Name  : SW_ICU_Proxy.c
+* Description: Proxy file for the SW_ICU in the HW proxy design pattern
+* Author     : Mohamed Ehab (Team 2)
+* Date       : 23/8/2021
+******************************************************************************/
 
 #include "SW_ICU_Proxy.h"
 

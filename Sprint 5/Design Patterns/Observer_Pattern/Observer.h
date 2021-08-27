@@ -2,7 +2,7 @@
 * Task       : Design Patterns
 * File Name  : Observer.h
 * Description: Header file for the observer design pattern
-* Author     : Amr Mohamed
+* Author     : Amr Mohamed (Team 2)
 * Date       : 23/8/2021
 ******************************************************************************/
 

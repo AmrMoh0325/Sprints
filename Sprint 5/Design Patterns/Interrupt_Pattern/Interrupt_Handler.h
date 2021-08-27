@@ -1,9 +1,11 @@
-/*
- * Interrupt_Handler.h
- *
- *  Created on: Aug 22, 2021
- *      Author: Kariman
- */
+/*****************************************************************************
+* Module     : Interrupt_Handler
+* File Name  : Interrupt_Handler.h
+* Description: Header file for the Interrupt_Handler Pattern
+* Author     : Kariman Karam (Team 2)
+* Date       : Aug 23, 2021
+******************************************************************************/
+
 
 #ifndef PLATFORM_INTERRUPT_PATTERN_INTERRUPT_HANDLER_H_
 #define PLATFORM_INTERRUPT_PATTERN_INTERRUPT_HANDLER_H_

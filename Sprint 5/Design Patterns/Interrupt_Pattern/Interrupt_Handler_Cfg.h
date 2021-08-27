@@ -1,7 +1,7 @@
 /*****************************************************************************
 * Module     : Interrupt_Handler
 * File Name  : Interrupt_Handler_Cfg.h
-* Description: Header file for the Interrupt_Handler Pattern
+* Description: Configuration file for the Interrupt_Handler Pattern
 * Author     : Kariman Karam
 * Date       : Aug 23, 2021
 ******************************************************************************/
