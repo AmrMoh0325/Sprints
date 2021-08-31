@@ -55,7 +55,7 @@ int main(void)
          //Enable Timer overflow interrupt
          T0_OV_InterruptEnable();
          //set up the delay function using timer
-         T0_Start(100,led_Toggle);
+         T0_Start(1000000,led_Toggle);
          //loop on the button until it is released
          while (u8button1_flag==BTN1_PRESSED)
          {
