@@ -23,11 +23,11 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   9 .debug_frame  00000344  00000000  00000000  00003554  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000935  00000000  00000000  00003898  2**0
+ 10 .debug_str    00000974  00000000  00000000  00003898  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00000ba6  00000000  00000000  000041cd  2**0
+ 11 .debug_loc    00000ba6  00000000  00000000  0000420c  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 000000e0  00000000  00000000  00004d73  2**0
+ 12 .debug_ranges 000000e0  00000000  00000000  00004db2  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -169,12 +169,12 @@ int main(void)
          T0_OV_InterruptEnable();
   ea:	0e 94 b9 02 	call	0x572	; 0x572 <T0_OV_InterruptEnable>
          //set up the delay function using timer
-         T0_Start(1000000,led_Toggle);
+         T0_Start(100,led_Toggle);
   ee:	09 e4       	ldi	r16, 0x49	; 73
   f0:	10 e0       	ldi	r17, 0x00	; 0
-  f2:	20 e4       	ldi	r18, 0x40	; 64
-  f4:	32 e4       	ldi	r19, 0x42	; 66
-  f6:	4f e0       	ldi	r20, 0x0F	; 15
+  f2:	24 e6       	ldi	r18, 0x64	; 100
+  f4:	30 e0       	ldi	r19, 0x00	; 0
+  f6:	40 e0       	ldi	r20, 0x00	; 0
   f8:	50 e0       	ldi	r21, 0x00	; 0
   fa:	60 e0       	ldi	r22, 0x00	; 0
   fc:	70 e0       	ldi	r23, 0x00	; 0
@@ -194,7 +194,7 @@ int main(void)
          //Enable Timer overflow interrupt
          T0_OV_InterruptEnable();
          //set up the delay function using timer
-         T0_Start(1000000,led_Toggle);
+         T0_Start(100,led_Toggle);
          //loop on the button until it is released
          while (u8button1_flag==BTN1_PRESSED)
  114:	89 81       	ldd	r24, Y+1	; 0x01
@@ -235,36 +235,17 @@ int main(void)
  138:	c9 cf       	rjmp	.-110    	; 0xcc <main+0x2c>
 
 0000013a <DIO_Init>:
-enuErrorStatus_t DIO_Init(void)
-{
-   uint8_t u8i;
-   uint8_t u8port,u8pin;
-   //traverse the array of pins the user have used
-   for (u8i=0;u8i<DIO_MC_PINS;u8i++)
  13a:	80 e0       	ldi	r24, 0x00	; 0
  13c:	97 c0       	rjmp	.+302    	; 0x26c <DIO_Init+0x132>
-   {
-      //calculate the port and pin number for each pin
-      u8port=u8i / DIO_PINS_NO;
  13e:	98 2f       	mov	r25, r24
  140:	96 95       	lsr	r25
  142:	96 95       	lsr	r25
  144:	96 95       	lsr	r25
-      u8pin=u8i % DIO_PINS_NO;
  146:	28 2f       	mov	r18, r24
  148:	27 70       	andi	r18, 0x07	; 7
-      
-      //if port number is invalid
-      if (u8port>=DIO_PORT_NO)
  14a:	94 30       	cpi	r25, 0x04	; 4
  14c:	08 f0       	brcs	.+2      	; 0x150 <DIO_Init+0x16>
  14e:	93 c0       	rjmp	.+294    	; 0x276 <DIO_Init+0x13c>
-         //return FAIL
-         return 0;
-      }
-      
-      //decide which port are we working with
-      switch (u8port)
  150:	91 30       	cpi	r25, 0x01	; 1
  152:	49 f1       	breq	.+82     	; 0x1a6 <DIO_Init+0x6c>
  154:	38 f0       	brcs	.+14     	; 0x164 <DIO_Init+0x2a>
@@ -275,10 +256,6 @@ enuErrorStatus_t DIO_Init(void)
  15e:	09 f4       	brne	.+2      	; 0x162 <DIO_Init+0x28>
  160:	64 c0       	rjmp	.+200    	; 0x22a <DIO_Init+0xf0>
  162:	83 c0       	rjmp	.+262    	; 0x26a <DIO_Init+0x130>
-      {
-         case M_PORTA:
-            //clear the pin bit in the DDRx and PORTx registers of each port  
-            CLR_BIT(DDRA_R,u8pin);
  164:	6a b3       	in	r22, 0x1a	; 26
  166:	41 e0       	ldi	r20, 0x01	; 1
  168:	50 e0       	ldi	r21, 0x00	; 0
@@ -294,12 +271,9 @@ enuErrorStatus_t DIO_Init(void)
  17c:	46 2f       	mov	r20, r22
  17e:	49 23       	and	r20, r25
  180:	4a bb       	out	0x1a, r20	; 26
-            CLR_BIT(PORTA_R,u8pin);
  182:	4b b3       	in	r20, 0x1b	; 27
  184:	94 23       	and	r25, r20
  186:	9b bb       	out	0x1b, r25	; 27
-            //if the pin is set as output
-            if(DIOConfigParameters[u8i]==OUTPUT)
  188:	e8 2f       	mov	r30, r24
  18a:	f0 e0       	ldi	r31, 0x00	; 0
  18c:	e0 5a       	subi	r30, 0xA0	; 160
@@ -307,29 +281,14 @@ enuErrorStatus_t DIO_Init(void)
  190:	90 81       	ld	r25, Z
  192:	91 11       	cpse	r25, r1
  194:	04 c0       	rjmp	.+8      	; 0x19e <DIO_Init+0x64>
-            {
-               //set its equivalent bit in the DDRx register
-               SET_BIT(DDRA_R,u8pin);
  196:	9a b3       	in	r25, 0x1a	; 26
  198:	29 2b       	or	r18, r25
  19a:	2a bb       	out	0x1a, r18	; 26
  19c:	66 c0       	rjmp	.+204    	; 0x26a <DIO_Init+0x130>
-            {
-               //if the pin is set as input, check if its pullup resistor will be used
-               if (DIOConfigParameters[u8i]==INPLUP);
-               {
-                  //if so, set it's equivalent bit in the PORTx register
-                  SET_BIT(PORTA_R,u8pin);
  19e:	9b b3       	in	r25, 0x1b	; 27
  1a0:	29 2b       	or	r18, r25
  1a2:	2b bb       	out	0x1b, r18	; 27
  1a4:	62 c0       	rjmp	.+196    	; 0x26a <DIO_Init+0x130>
-            }
-         break;
-
-         case M_PORTB:
-            //clear the pin bit in the DDRx and PORTx registers of each port  
-            CLR_BIT(DDRB_R,u8pin);
  1a6:	67 b3       	in	r22, 0x17	; 23
  1a8:	41 e0       	ldi	r20, 0x01	; 1
  1aa:	50 e0       	ldi	r21, 0x00	; 0
@@ -345,12 +304,9 @@ enuErrorStatus_t DIO_Init(void)
  1be:	46 2f       	mov	r20, r22
  1c0:	49 23       	and	r20, r25
  1c2:	47 bb       	out	0x17, r20	; 23
-            CLR_BIT(PORTB_R,u8pin);
  1c4:	48 b3       	in	r20, 0x18	; 24
  1c6:	94 23       	and	r25, r20
  1c8:	98 bb       	out	0x18, r25	; 24
-            //if the pin is set as output
-            if(DIOConfigParameters[u8i]==OUTPUT)
  1ca:	e8 2f       	mov	r30, r24
  1cc:	f0 e0       	ldi	r31, 0x00	; 0
  1ce:	e0 5a       	subi	r30, 0xA0	; 160
@@ -358,29 +314,14 @@ enuErrorStatus_t DIO_Init(void)
  1d2:	90 81       	ld	r25, Z
  1d4:	91 11       	cpse	r25, r1
  1d6:	04 c0       	rjmp	.+8      	; 0x1e0 <DIO_Init+0xa6>
-            {
-               //set its equivalent bit in the DDRx register
-               SET_BIT(DDRB_R,u8pin);
  1d8:	97 b3       	in	r25, 0x17	; 23
  1da:	29 2b       	or	r18, r25
  1dc:	27 bb       	out	0x17, r18	; 23
  1de:	45 c0       	rjmp	.+138    	; 0x26a <DIO_Init+0x130>
-            {
-               //if the pin is set as input, check if its pullup resistor will be used
-               if (DIOConfigParameters[u8i]==INPLUP);
-               {
-                  //if so, set it's equivalent bit in the PORTx register
-                  SET_BIT(PORTB_R,u8pin);
  1e0:	98 b3       	in	r25, 0x18	; 24
  1e2:	29 2b       	or	r18, r25
  1e4:	28 bb       	out	0x18, r18	; 24
  1e6:	41 c0       	rjmp	.+130    	; 0x26a <DIO_Init+0x130>
-            }
-         break;
-
-         case M_PORTC:
-            //clear the pin bit in the DDRx and PORTx registers of each port  
-            CLR_BIT(DDRC_R,u8pin);
  1e8:	64 b3       	in	r22, 0x14	; 20
  1ea:	41 e0       	ldi	r20, 0x01	; 1
  1ec:	50 e0       	ldi	r21, 0x00	; 0
@@ -396,12 +337,9 @@ enuErrorStatus_t DIO_Init(void)
  200:	46 2f       	mov	r20, r22
  202:	49 23       	and	r20, r25
  204:	44 bb       	out	0x14, r20	; 20
-            CLR_BIT(PORTC_R,u8pin);
  206:	45 b3       	in	r20, 0x15	; 21
  208:	94 23       	and	r25, r20
  20a:	95 bb       	out	0x15, r25	; 21
-            //if the pin is set as output
-            if(DIOConfigParameters[u8i]==OUTPUT)
  20c:	e8 2f       	mov	r30, r24
  20e:	f0 e0       	ldi	r31, 0x00	; 0
  210:	e0 5a       	subi	r30, 0xA0	; 160
@@ -409,29 +347,14 @@ enuErrorStatus_t DIO_Init(void)
  214:	90 81       	ld	r25, Z
  216:	91 11       	cpse	r25, r1
  218:	04 c0       	rjmp	.+8      	; 0x222 <DIO_Init+0xe8>
-            {
-               //set its equivalent bit in the DDRx register
-               SET_BIT(DDRC_R,u8pin);
  21a:	94 b3       	in	r25, 0x14	; 20
  21c:	29 2b       	or	r18, r25
  21e:	24 bb       	out	0x14, r18	; 20
  220:	24 c0       	rjmp	.+72     	; 0x26a <DIO_Init+0x130>
-            {
-               //if the pin is set as input, check if its pullup resistor will be used
-               if (DIOConfigParameters[u8i] == INPLUP);
-               {
-                  //if so, set it's equivalent bit in the PORTx register
-                  SET_BIT(PORTC_R,u8pin);
  222:	95 b3       	in	r25, 0x15	; 21
  224:	29 2b       	or	r18, r25
  226:	25 bb       	out	0x15, r18	; 21
  228:	20 c0       	rjmp	.+64     	; 0x26a <DIO_Init+0x130>
-            }
-         break;
-
-         case M_PORTD:
-            //clear the pin bit in the DDRx and PORTx registers of each port  
-            CLR_BIT(DDRD_R,u8pin);
  22a:	61 b3       	in	r22, 0x11	; 17
  22c:	41 e0       	ldi	r20, 0x01	; 1
  22e:	50 e0       	ldi	r21, 0x00	; 0
@@ -447,12 +370,9 @@ enuErrorStatus_t DIO_Init(void)
  242:	46 2f       	mov	r20, r22
  244:	49 23       	and	r20, r25
  246:	41 bb       	out	0x11, r20	; 17
-            CLR_BIT(PORTD_R,u8pin);
  248:	42 b3       	in	r20, 0x12	; 18
  24a:	94 23       	and	r25, r20
  24c:	92 bb       	out	0x12, r25	; 18
-            //if the pin is set as output
-            if(DIOConfigParameters[u8i]==OUTPUT)
  24e:	e8 2f       	mov	r30, r24
  250:	f0 e0       	ldi	r31, 0x00	; 0
  252:	e0 5a       	subi	r30, 0xA0	; 160
@@ -460,72 +380,29 @@ enuErrorStatus_t DIO_Init(void)
  256:	90 81       	ld	r25, Z
  258:	91 11       	cpse	r25, r1
  25a:	04 c0       	rjmp	.+8      	; 0x264 <DIO_Init+0x12a>
-            {
-               //set its equivalent bit in the DDRx register
-               SET_BIT(DDRD_R,u8pin);
  25c:	91 b3       	in	r25, 0x11	; 17
  25e:	29 2b       	or	r18, r25
  260:	21 bb       	out	0x11, r18	; 17
  262:	03 c0       	rjmp	.+6      	; 0x26a <DIO_Init+0x130>
-            {
-               //if the pin is set as input, check if its pullup resistor will be used
-               if (DIOConfigParameters[u8i]==INPLUP);
-               {
-                  //if so, set it's equivalent bit in the PORTx register
-                  SET_BIT(PORTD_R,u8pin);
  264:	92 b3       	in	r25, 0x12	; 18
  266:	29 2b       	or	r18, r25
  268:	22 bb       	out	0x12, r18	; 18
-enuErrorStatus_t DIO_Init(void)
-{
-   uint8_t u8i;
-   uint8_t u8port,u8pin;
-   //traverse the array of pins the user have used
-   for (u8i=0;u8i<DIO_MC_PINS;u8i++)
  26a:	8f 5f       	subi	r24, 0xFF	; 255
  26c:	80 32       	cpi	r24, 0x20	; 32
  26e:	08 f4       	brcc	.+2      	; 0x272 <DIO_Init+0x138>
  270:	66 cf       	rjmp	.-308    	; 0x13e <DIO_Init+0x4>
-            }
-         break;         
-      }    
-   }
-   //return success status
-   return SUCCESS;
  272:	81 e0       	ldi	r24, 0x01	; 1
  274:	08 95       	ret
-      
-      //if port number is invalid
-      if (u8port>=DIO_PORT_NO)
-      {
-         //return FAIL
-         return 0;
  276:	80 e0       	ldi	r24, 0x00	; 0
-         break;         
-      }    
-   }
-   //return success status
-   return SUCCESS;
-}
  278:	08 95       	ret
 
 0000027a <DIO_Write>:
-************************************************************************************/
-enuErrorStatus_t DIO_Write(enuDIOPinNo_t PinId, uint8_t u8Data)
-{
-   uint8_t u8port,u8pin;
-   //calculate the port and pin number of the selected object
-   u8port=PinId / DIO_PINS_NO;
  27a:	98 2f       	mov	r25, r24
  27c:	96 95       	lsr	r25
  27e:	96 95       	lsr	r25
  280:	96 95       	lsr	r25
-   u8pin =PinId % DIO_PINS_NO;
  282:	28 2f       	mov	r18, r24
  284:	27 70       	andi	r18, 0x07	; 7
-   
-   //if port number is invalid or the pin is set as input 
-   if(u8port >= DIO_PORT_NO || DIOConfigParameters[PinId] != OUTPUT)
  286:	94 30       	cpi	r25, 0x04	; 4
  288:	08 f0       	brcs	.+2      	; 0x28c <DIO_Write+0x12>
  28a:	5c c0       	rjmp	.+184    	; 0x344 <DIO_Write+0xca>
@@ -536,12 +413,6 @@ enuErrorStatus_t DIO_Write(enuDIOPinNo_t PinId, uint8_t u8Data)
  294:	80 81       	ld	r24, Z
  296:	81 11       	cpse	r24, r1
  298:	57 c0       	rjmp	.+174    	; 0x348 <DIO_Write+0xce>
-   }
-   
-   else
-   {
-      //select the calculated port 
-      switch(u8port)
  29a:	91 30       	cpi	r25, 0x01	; 1
  29c:	d1 f0       	breq	.+52     	; 0x2d2 <DIO_Write+0x58>
  29e:	28 f0       	brcs	.+10     	; 0x2aa <DIO_Write+0x30>
@@ -550,10 +421,6 @@ enuErrorStatus_t DIO_Write(enuDIOPinNo_t PinId, uint8_t u8Data)
  2a4:	93 30       	cpi	r25, 0x03	; 3
  2a6:	d9 f1       	breq	.+118    	; 0x31e <DIO_Write+0xa4>
  2a8:	51 c0       	rjmp	.+162    	; 0x34c <DIO_Write+0xd2>
-      {
-         case M_PORTA:
-            //clear the pin's equivalent bit in the PORTx Register
-            CLR_BIT(PORTA_R,u8pin);
  2aa:	3b b3       	in	r19, 0x1b	; 27
  2ac:	81 e0       	ldi	r24, 0x01	; 1
  2ae:	90 e0       	ldi	r25, 0x00	; 0
@@ -566,31 +433,14 @@ enuErrorStatus_t DIO_Write(enuDIOPinNo_t PinId, uint8_t u8Data)
  2bc:	20 95       	com	r18
  2be:	23 23       	and	r18, r19
  2c0:	2b bb       	out	0x1b, r18	; 27
-            //if we want to apply 5V to the pin
-            if (u8Data)
  2c2:	66 23       	and	r22, r22
  2c4:	09 f4       	brne	.+2      	; 0x2c8 <DIO_Write+0x4e>
  2c6:	44 c0       	rjmp	.+136    	; 0x350 <DIO_Write+0xd6>
-            {
-               //set the pin's equivalent bit in the PORTx Register
-               SET_BIT(PORTA_R,u8pin);
  2c8:	9b b3       	in	r25, 0x1b	; 27
  2ca:	89 2b       	or	r24, r25
  2cc:	8b bb       	out	0x1b, r24	; 27
-            }
-         break;
-      }
-   }
-   //return success status
-   return SUCCESS;
  2ce:	81 e0       	ldi	r24, 0x01	; 1
  2d0:	08 95       	ret
-            }
-         break;
-
-         case M_PORTB:
-            //clear the pin's equivalent bit in the PORTx Register
-            CLR_BIT(PORTB_R,u8pin);
  2d2:	38 b3       	in	r19, 0x18	; 24
  2d4:	81 e0       	ldi	r24, 0x01	; 1
  2d6:	90 e0       	ldi	r25, 0x00	; 0
@@ -603,30 +453,13 @@ enuErrorStatus_t DIO_Write(enuDIOPinNo_t PinId, uint8_t u8Data)
  2e4:	20 95       	com	r18
  2e6:	23 23       	and	r18, r19
  2e8:	28 bb       	out	0x18, r18	; 24
-            //if we want to apply 5V to the pin
-            if (u8Data)
  2ea:	66 23       	and	r22, r22
  2ec:	99 f1       	breq	.+102    	; 0x354 <DIO_Write+0xda>
-            {
-               //set the pin's equivalent bit in the PORTx Register
-               SET_BIT(PORTB_R,u8pin);
  2ee:	98 b3       	in	r25, 0x18	; 24
  2f0:	89 2b       	or	r24, r25
  2f2:	88 bb       	out	0x18, r24	; 24
-            }
-         break;
-      }
-   }
-   //return success status
-   return SUCCESS;
  2f4:	81 e0       	ldi	r24, 0x01	; 1
  2f6:	08 95       	ret
-            }
-         break;
-
-         case M_PORTC:
-            //clear the pin's equivalent bit in the PORTx Register
-            CLR_BIT(PORTC_R,u8pin);
  2f8:	35 b3       	in	r19, 0x15	; 21
  2fa:	81 e0       	ldi	r24, 0x01	; 1
  2fc:	90 e0       	ldi	r25, 0x00	; 0
@@ -639,30 +472,13 @@ enuErrorStatus_t DIO_Write(enuDIOPinNo_t PinId, uint8_t u8Data)
  30a:	20 95       	com	r18
  30c:	23 23       	and	r18, r19
  30e:	25 bb       	out	0x15, r18	; 21
-            //if we want to apply 5V to the pin
-            if (u8Data)
  310:	66 23       	and	r22, r22
  312:	11 f1       	breq	.+68     	; 0x358 <DIO_Write+0xde>
-            {
-               //set the pin's equivalent bit in the PORTx Register
-               SET_BIT(PORTC_R,u8pin);
  314:	95 b3       	in	r25, 0x15	; 21
  316:	89 2b       	or	r24, r25
  318:	85 bb       	out	0x15, r24	; 21
-            }
-         break;
-      }
-   }
-   //return success status
-   return SUCCESS;
  31a:	81 e0       	ldi	r24, 0x01	; 1
  31c:	08 95       	ret
-            }
-         break;
-
-         case M_PORTD:
-            //clear the pin's equivalent bit in the PORTx Register
-            CLR_BIT(PORTD_R,u8pin);
  31e:	32 b3       	in	r19, 0x12	; 18
  320:	81 e0       	ldi	r24, 0x01	; 1
  322:	90 e0       	ldi	r25, 0x00	; 0
@@ -675,40 +491,17 @@ enuErrorStatus_t DIO_Write(enuDIOPinNo_t PinId, uint8_t u8Data)
  330:	20 95       	com	r18
  332:	23 23       	and	r18, r19
  334:	22 bb       	out	0x12, r18	; 18
-            //if we want to apply 5V to the pin
-            if (u8Data)
  336:	66 23       	and	r22, r22
  338:	89 f0       	breq	.+34     	; 0x35c <DIO_Write+0xe2>
-            {
-               //set the pin's equivalent bit in the PORTx Register
-               SET_BIT(PORTD_R,u8pin);
  33a:	92 b3       	in	r25, 0x12	; 18
  33c:	89 2b       	or	r24, r25
  33e:	82 bb       	out	0x12, r24	; 18
-            }
-         break;
-      }
-   }
-   //return success status
-   return SUCCESS;
  340:	81 e0       	ldi	r24, 0x01	; 1
  342:	08 95       	ret
-   
-   //if port number is invalid or the pin is set as input 
-   if(u8port >= DIO_PORT_NO || DIOConfigParameters[PinId] != OUTPUT)
-   {
-      //return error status
-      return ERROR;
  344:	80 e0       	ldi	r24, 0x00	; 0
  346:	08 95       	ret
  348:	80 e0       	ldi	r24, 0x00	; 0
  34a:	08 95       	ret
-            }
-         break;
-      }
-   }
-   //return success status
-   return SUCCESS;
  34c:	81 e0       	ldi	r24, 0x01	; 1
  34e:	08 95       	ret
  350:	81 e0       	ldi	r24, 0x01	; 1
@@ -718,25 +511,15 @@ enuErrorStatus_t DIO_Write(enuDIOPinNo_t PinId, uint8_t u8Data)
  358:	81 e0       	ldi	r24, 0x01	; 1
  35a:	08 95       	ret
  35c:	81 e0       	ldi	r24, 0x01	; 1
-}
  35e:	08 95       	ret
 
 00000360 <DIO_Read>:
-************************************************************************************/
-enuErrorStatus_t DIO_Read(enuDIOPinNo_t PinId, uint8_t* pu8Data)
-{
-   uint8_t u8port,u8pin;
-   //calculate the port and pin number of the selected pin
-   u8port=PinId / DIO_PINS_NO;
  360:	98 2f       	mov	r25, r24
  362:	96 95       	lsr	r25
  364:	96 95       	lsr	r25
  366:	96 95       	lsr	r25
-   u8pin =PinId % DIO_PINS_NO;
  368:	28 2f       	mov	r18, r24
  36a:	27 70       	andi	r18, 0x07	; 7
-   //if port number is invalid or the pin is set as output or the result holder's address is NULL
-   if(u8port >= DIO_PORT_NO || DIOConfigParameters[PinId] == OUTPUT  || pu8Data == NULLPTR)
  36c:	94 30       	cpi	r25, 0x04	; 4
  36e:	08 f0       	brcs	.+2      	; 0x372 <DIO_Read+0x12>
  370:	42 c0       	rjmp	.+132    	; 0x3f6 <DIO_Read+0x96>
@@ -750,12 +533,6 @@ enuErrorStatus_t DIO_Read(enuDIOPinNo_t PinId, uint8_t* pu8Data)
  380:	61 15       	cp	r22, r1
  382:	71 05       	cpc	r23, r1
  384:	e1 f1       	breq	.+120    	; 0x3fe <DIO_Read+0x9e>
-      return ERROR;
-   }
-   else
-   {
-      //select the calculated port 
-      switch(u8port)
  386:	91 30       	cpi	r25, 0x01	; 1
  388:	91 f0       	breq	.+36     	; 0x3ae <DIO_Read+0x4e>
  38a:	28 f0       	brcs	.+10     	; 0x396 <DIO_Read+0x36>
@@ -764,10 +541,6 @@ enuErrorStatus_t DIO_Read(enuDIOPinNo_t PinId, uint8_t* pu8Data)
  390:	93 30       	cpi	r25, 0x03	; 3
  392:	29 f1       	breq	.+74     	; 0x3de <DIO_Read+0x7e>
  394:	36 c0       	rjmp	.+108    	; 0x402 <__EEPROM_REGION_LENGTH__+0x2>
-      {
-         case M_PORTA:
-            //get the state of the pin in the selected port and store it in the provided value holder
-            *pu8Data=GET_BIT(PINA_R,u8pin);
  396:	89 b3       	in	r24, 0x19	; 25
  398:	90 e0       	ldi	r25, 0x00	; 0
  39a:	02 c0       	rjmp	.+4      	; 0x3a0 <DIO_Read+0x40>
@@ -778,24 +551,8 @@ enuErrorStatus_t DIO_Read(enuDIOPinNo_t PinId, uint8_t* pu8Data)
  3a4:	81 70       	andi	r24, 0x01	; 1
  3a6:	fb 01       	movw	r30, r22
  3a8:	80 83       	st	Z, r24
-            *pu8Data=GET_BIT(PIND_R,u8pin);
-         break;
-      }
-   }
-   //return success state
-   return SUCCESS;
  3aa:	81 e0       	ldi	r24, 0x01	; 1
-      switch(u8port)
-      {
-         case M_PORTA:
-            //get the state of the pin in the selected port and store it in the provided value holder
-            *pu8Data=GET_BIT(PINA_R,u8pin);
-         break;
  3ac:	08 95       	ret
-           
-         case M_PORTB:
-            //get the state of the pin in the selected port and store it in the provided value holder
-            *pu8Data=GET_BIT(PINB_R,u8pin);
  3ae:	86 b3       	in	r24, 0x16	; 22
  3b0:	90 e0       	ldi	r25, 0x00	; 0
  3b2:	02 c0       	rjmp	.+4      	; 0x3b8 <DIO_Read+0x58>
@@ -806,24 +563,8 @@ enuErrorStatus_t DIO_Read(enuDIOPinNo_t PinId, uint8_t* pu8Data)
  3bc:	81 70       	andi	r24, 0x01	; 1
  3be:	fb 01       	movw	r30, r22
  3c0:	80 83       	st	Z, r24
-            *pu8Data=GET_BIT(PIND_R,u8pin);
-         break;
-      }
-   }
-   //return success state
-   return SUCCESS;
  3c2:	81 e0       	ldi	r24, 0x01	; 1
-         break;
-           
-         case M_PORTB:
-            //get the state of the pin in the selected port and store it in the provided value holder
-            *pu8Data=GET_BIT(PINB_R,u8pin);
-         break;
  3c4:	08 95       	ret
-
-         case M_PORTC:
-            //get the state of the pin in the selected port and store it in the provided value holder
-            *pu8Data=GET_BIT(PINC_R,u8pin);
  3c6:	83 b3       	in	r24, 0x13	; 19
  3c8:	90 e0       	ldi	r25, 0x00	; 0
  3ca:	02 c0       	rjmp	.+4      	; 0x3d0 <DIO_Read+0x70>
@@ -834,24 +575,8 @@ enuErrorStatus_t DIO_Read(enuDIOPinNo_t PinId, uint8_t* pu8Data)
  3d4:	81 70       	andi	r24, 0x01	; 1
  3d6:	fb 01       	movw	r30, r22
  3d8:	80 83       	st	Z, r24
-            *pu8Data=GET_BIT(PIND_R,u8pin);
-         break;
-      }
-   }
-   //return success state
-   return SUCCESS;
  3da:	81 e0       	ldi	r24, 0x01	; 1
-         break;
-
-         case M_PORTC:
-            //get the state of the pin in the selected port and store it in the provided value holder
-            *pu8Data=GET_BIT(PINC_R,u8pin);
-         break;
  3dc:	08 95       	ret
-
-         case M_PORTD:
-            //get the state of the pin in the selected port and store it in the provided value holder
-            *pu8Data=GET_BIT(PIND_R,u8pin);
  3de:	80 b3       	in	r24, 0x10	; 16
  3e0:	90 e0       	ldi	r25, 0x00	; 0
  3e2:	02 c0       	rjmp	.+4      	; 0x3e8 <DIO_Read+0x88>
@@ -862,58 +587,24 @@ enuErrorStatus_t DIO_Read(enuDIOPinNo_t PinId, uint8_t* pu8Data)
  3ec:	81 70       	andi	r24, 0x01	; 1
  3ee:	fb 01       	movw	r30, r22
  3f0:	80 83       	st	Z, r24
-         break;
-      }
-   }
-   //return success state
-   return SUCCESS;
  3f2:	81 e0       	ldi	r24, 0x01	; 1
-         break;
-
-         case M_PORTD:
-            //get the state of the pin in the selected port and store it in the provided value holder
-            *pu8Data=GET_BIT(PIND_R,u8pin);
-         break;
  3f4:	08 95       	ret
-   u8pin =PinId % DIO_PINS_NO;
-   //if port number is invalid or the pin is set as output or the result holder's address is NULL
-   if(u8port >= DIO_PORT_NO || DIOConfigParameters[PinId] == OUTPUT  || pu8Data == NULLPTR)
-   {
-      //return error status
-      return ERROR;
  3f6:	80 e0       	ldi	r24, 0x00	; 0
  3f8:	08 95       	ret
  3fa:	80 e0       	ldi	r24, 0x00	; 0
  3fc:	08 95       	ret
  3fe:	80 e0       	ldi	r24, 0x00	; 0
  400:	08 95       	ret
-            *pu8Data=GET_BIT(PIND_R,u8pin);
-         break;
-      }
-   }
-   //return success state
-   return SUCCESS;
  402:	81 e0       	ldi	r24, 0x01	; 1
-}
  404:	08 95       	ret
 
 00000406 <DIO_Toggle>:
-************************************************************************************/
-enuErrorStatus_t DIO_Toggle(enuDIOPinNo_t PinId)
-{
-   uint8_t u8port,u8pin;
-   //calculate the port and pin number of the selected object
-   u8port=PinId / DIO_PINS_NO;
  406:	98 2f       	mov	r25, r24
  408:	96 95       	lsr	r25
  40a:	96 95       	lsr	r25
  40c:	96 95       	lsr	r25
-   u8pin =PinId % DIO_PINS_NO;
  40e:	28 2f       	mov	r18, r24
  410:	27 70       	andi	r18, 0x07	; 7
-   
-   //if port number is invalid or the pin is set as input
-   if(u8port >= DIO_PORT_NO || DIOConfigParameters[PinId] != OUTPUT)
  412:	94 30       	cpi	r25, 0x04	; 4
  414:	08 f0       	brcs	.+2      	; 0x418 <DIO_Toggle+0x12>
  416:	3f c0       	rjmp	.+126    	; 0x496 <DIO_Toggle+0x90>
@@ -924,12 +615,6 @@ enuErrorStatus_t DIO_Toggle(enuDIOPinNo_t PinId)
  420:	80 81       	ld	r24, Z
  422:	81 11       	cpse	r24, r1
  424:	3a c0       	rjmp	.+116    	; 0x49a <DIO_Toggle+0x94>
-      return ERROR;
-   }
-   else
-   {
-      //select the calculated port 
-      switch(u8port)
  426:	91 30       	cpi	r25, 0x01	; 1
  428:	91 f0       	breq	.+36     	; 0x44e <DIO_Toggle+0x48>
  42a:	28 f0       	brcs	.+10     	; 0x436 <DIO_Toggle+0x30>
@@ -938,10 +623,6 @@ enuErrorStatus_t DIO_Toggle(enuDIOPinNo_t PinId)
  430:	93 30       	cpi	r25, 0x03	; 3
  432:	29 f1       	breq	.+74     	; 0x47e <DIO_Toggle+0x78>
  434:	34 c0       	rjmp	.+104    	; 0x49e <DIO_Toggle+0x98>
-      {
-         case M_PORTA:
-            //toggle the current value of the pin in the PORTx Register
-            TOG_BIT(PORTA_R,u8pin);
  436:	3b b3       	in	r19, 0x1b	; 27
  438:	81 e0       	ldi	r24, 0x01	; 1
  43a:	90 e0       	ldi	r25, 0x00	; 0
@@ -952,24 +633,8 @@ enuErrorStatus_t DIO_Toggle(enuDIOPinNo_t PinId)
  444:	e2 f7       	brpl	.-8      	; 0x43e <DIO_Toggle+0x38>
  446:	83 27       	eor	r24, r19
  448:	8b bb       	out	0x1b, r24	; 27
-            TOG_BIT(PORTD_R,u8pin);
-         break;
-      }
-   }
-   //return success status
-   return SUCCESS;
  44a:	81 e0       	ldi	r24, 0x01	; 1
-      switch(u8port)
-      {
-         case M_PORTA:
-            //toggle the current value of the pin in the PORTx Register
-            TOG_BIT(PORTA_R,u8pin);
-         break;
  44c:	08 95       	ret
-
-         case M_PORTB:
-            //toggle the current value of the pin in the PORTx Register
-            TOG_BIT(PORTB_R,u8pin);
  44e:	38 b3       	in	r19, 0x18	; 24
  450:	81 e0       	ldi	r24, 0x01	; 1
  452:	90 e0       	ldi	r25, 0x00	; 0
@@ -980,24 +645,8 @@ enuErrorStatus_t DIO_Toggle(enuDIOPinNo_t PinId)
  45c:	e2 f7       	brpl	.-8      	; 0x456 <DIO_Toggle+0x50>
  45e:	83 27       	eor	r24, r19
  460:	88 bb       	out	0x18, r24	; 24
-            TOG_BIT(PORTD_R,u8pin);
-         break;
-      }
-   }
-   //return success status
-   return SUCCESS;
  462:	81 e0       	ldi	r24, 0x01	; 1
-         break;
-
-         case M_PORTB:
-            //toggle the current value of the pin in the PORTx Register
-            TOG_BIT(PORTB_R,u8pin);
-         break;
  464:	08 95       	ret
-
-         case M_PORTC:
-            //toggle the current value of the pin in the PORTx Register
-            TOG_BIT(PORTC_R,u8pin);
  466:	35 b3       	in	r19, 0x15	; 21
  468:	81 e0       	ldi	r24, 0x01	; 1
  46a:	90 e0       	ldi	r25, 0x00	; 0
@@ -1008,24 +657,8 @@ enuErrorStatus_t DIO_Toggle(enuDIOPinNo_t PinId)
  474:	e2 f7       	brpl	.-8      	; 0x46e <DIO_Toggle+0x68>
  476:	83 27       	eor	r24, r19
  478:	85 bb       	out	0x15, r24	; 21
-            TOG_BIT(PORTD_R,u8pin);
-         break;
-      }
-   }
-   //return success status
-   return SUCCESS;
  47a:	81 e0       	ldi	r24, 0x01	; 1
-         break;
-
-         case M_PORTC:
-            //toggle the current value of the pin in the PORTx Register
-            TOG_BIT(PORTC_R,u8pin);
-         break;
  47c:	08 95       	ret
-
-         case M_PORTD:
-            //toggle the current value of the pin in the PORTx Register
-            TOG_BIT(PORTD_R,u8pin);
  47e:	32 b3       	in	r19, 0x12	; 18
  480:	81 e0       	ldi	r24, 0x01	; 1
  482:	90 e0       	ldi	r25, 0x00	; 0
@@ -1036,37 +669,13 @@ enuErrorStatus_t DIO_Toggle(enuDIOPinNo_t PinId)
  48c:	e2 f7       	brpl	.-8      	; 0x486 <DIO_Toggle+0x80>
  48e:	83 27       	eor	r24, r19
  490:	82 bb       	out	0x12, r24	; 18
-         break;
-      }
-   }
-   //return success status
-   return SUCCESS;
  492:	81 e0       	ldi	r24, 0x01	; 1
-         break;
-
-         case M_PORTD:
-            //toggle the current value of the pin in the PORTx Register
-            TOG_BIT(PORTD_R,u8pin);
-         break;
  494:	08 95       	ret
-   
-   //if port number is invalid or the pin is set as input
-   if(u8port >= DIO_PORT_NO || DIOConfigParameters[PinId] != OUTPUT)
-   {
-      //return error status
-      return ERROR;
  496:	80 e0       	ldi	r24, 0x00	; 0
  498:	08 95       	ret
  49a:	80 e0       	ldi	r24, 0x00	; 0
  49c:	08 95       	ret
-            TOG_BIT(PORTD_R,u8pin);
-         break;
-      }
-   }
-   //return success status
-   return SUCCESS;
  49e:	81 e0       	ldi	r24, 0x01	; 1
-}
  4a0:	08 95       	ret
 
 000004a2 <T0_Init>:
