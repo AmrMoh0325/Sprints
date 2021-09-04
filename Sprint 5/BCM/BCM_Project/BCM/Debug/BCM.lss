@@ -23,11 +23,11 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   9 .debug_frame  000004c4  00000000  00000000  000042e4  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    000009f2  00000000  00000000  000047a8  2**0
+ 10 .debug_str    000009b7  00000000  00000000  000047a8  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00000ba0  00000000  00000000  0000519a  2**0
+ 11 .debug_loc    00000ba0  00000000  00000000  0000515f  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000188  00000000  00000000  00005d3a  2**0
+ 12 .debug_ranges 00000188  00000000  00000000  00005cff  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -901,6 +901,12 @@ int main(void)
  40e:	fd cf       	rjmp	.-6      	; 0x40a <__EEPROM_REGION_LENGTH__+0xa>
 
 00000410 <DIO_Init>:
+			*pu8_Data = GET_BIT(PIND_R,(astrDIOConfigParameters[u8_GroupId].enuPinNo - 24));
+		}//end else if
+
+		return E_OK;
+	}//end else
+}//end DIO_Read
  410:	20 e0       	ldi	r18, 0x00	; 0
  412:	81 c1       	rjmp	.+770    	; 0x716 <DIO_Init+0x306>
  414:	82 2f       	mov	r24, r18
@@ -1295,6 +1301,12 @@ int main(void)
  71e:	08 95       	ret
 
 00000720 <DIO_toggle>:
+* Return Value    : enuErrorStatus_t - For error handling if the user input an invalid parameter
+* Description     : A function to toggle the selected DIO pin
+*************************************************************************************************/
+enuErrorStatus_t DIO_toggle(uint8_t u8_GroupId)
+{
+	if((astrDIOConfigParameters[u8_GroupId].enuPinNo >= 0) && (astrDIOConfigParameters[u8_GroupId].enuPinNo < 8))	//if porta
  720:	90 e0       	ldi	r25, 0x00	; 0
  722:	fc 01       	movw	r30, r24
  724:	ee 0f       	add	r30, r30
@@ -1307,6 +1319,8 @@ int main(void)
  732:	80 81       	ld	r24, Z
  734:	88 30       	cpi	r24, 0x08	; 8
  736:	68 f4       	brcc	.+26     	; 0x752 <DIO_toggle+0x32>
+	{
+		TOGGLE_BIT(PORTA_R, astrDIOConfigParameters[u8_GroupId].enuPinNo);
  738:	4b b3       	in	r20, 0x1b	; 27
  73a:	21 e0       	ldi	r18, 0x01	; 1
  73c:	30 e0       	ldi	r19, 0x00	; 0
@@ -1320,10 +1334,14 @@ int main(void)
  74c:	84 27       	eor	r24, r20
  74e:	8b bb       	out	0x1b, r24	; 27
  750:	38 c0       	rjmp	.+112    	; 0x7c2 <DIO_toggle+0xa2>
+	}//end if
+	else if((astrDIOConfigParameters[u8_GroupId].enuPinNo >= 8) && (astrDIOConfigParameters[u8_GroupId].enuPinNo < 16))	//if portb
  752:	98 ef       	ldi	r25, 0xF8	; 248
  754:	98 0f       	add	r25, r24
  756:	98 30       	cpi	r25, 0x08	; 8
  758:	78 f4       	brcc	.+30     	; 0x778 <DIO_toggle+0x58>
+	{
+		TOGGLE_BIT(PORTB_R,(astrDIOConfigParameters[u8_GroupId].enuPinNo - 8));
  75a:	48 b3       	in	r20, 0x18	; 24
  75c:	90 e0       	ldi	r25, 0x00	; 0
  75e:	08 97       	sbiw	r24, 0x08	; 8
@@ -1339,10 +1357,14 @@ int main(void)
  772:	84 27       	eor	r24, r20
  774:	88 bb       	out	0x18, r24	; 24
  776:	25 c0       	rjmp	.+74     	; 0x7c2 <DIO_toggle+0xa2>
+	}//end else if
+	else if((astrDIOConfigParameters[u8_GroupId].enuPinNo >= 16) && (astrDIOConfigParameters[u8_GroupId].enuPinNo < 24))	//if portc
  778:	90 ef       	ldi	r25, 0xF0	; 240
  77a:	98 0f       	add	r25, r24
  77c:	98 30       	cpi	r25, 0x08	; 8
  77e:	78 f4       	brcc	.+30     	; 0x79e <DIO_toggle+0x7e>
+	{
+		TOGGLE_BIT(PORTC_R,(astrDIOConfigParameters[u8_GroupId].enuPinNo - 16));
  780:	45 b3       	in	r20, 0x15	; 21
  782:	90 e0       	ldi	r25, 0x00	; 0
  784:	40 97       	sbiw	r24, 0x10	; 16
@@ -1358,10 +1380,14 @@ int main(void)
  798:	84 27       	eor	r24, r20
  79a:	85 bb       	out	0x15, r24	; 21
  79c:	12 c0       	rjmp	.+36     	; 0x7c2 <DIO_toggle+0xa2>
+	}//end else if
+	else if((astrDIOConfigParameters[u8_GroupId].enuPinNo >= 24) && (astrDIOConfigParameters[u8_GroupId].enuPinNo < 32))	//if portd
  79e:	98 ee       	ldi	r25, 0xE8	; 232
  7a0:	98 0f       	add	r25, r24
  7a2:	98 30       	cpi	r25, 0x08	; 8
  7a4:	70 f4       	brcc	.+28     	; 0x7c2 <DIO_toggle+0xa2>
+	{
+		TOGGLE_BIT(PORTD_R,(astrDIOConfigParameters[u8_GroupId].enuPinNo - 24));
  7a6:	42 b3       	in	r20, 0x12	; 18
  7a8:	90 e0       	ldi	r25, 0x00	; 0
  7aa:	48 97       	sbiw	r24, 0x18	; 24
@@ -1376,52 +1402,115 @@ int main(void)
  7bc:	cb 01       	movw	r24, r22
  7be:	84 27       	eor	r24, r20
  7c0:	82 bb       	out	0x12, r24	; 18
+	}//end else if
+
+	return E_OK;
+}//end DIO_toggle
  7c2:	81 e0       	ldi	r24, 0x01	; 1
  7c4:	08 95       	ret
 
 000007c6 <TWI_init>:
+#include "I2C.h"
+
+void TWI_init(void)
+{
+    /* Bit Rate: 400.000 kbps using zero pre-scaler TWPS=00 and F_CPU=8Mhz */
+    TWBR_R = 0x02;
  7c6:	82 e0       	ldi	r24, 0x02	; 2
  7c8:	80 b9       	out	0x00, r24	; 0
+	TWSR_R = 0x00;
  7ca:	11 b8       	out	0x01, r1	; 1
+	
+    /* Two Wire Bus address my address if any master device want to call me: 0x1 (used in case this MC is a slave device)
+       General Call Recognition: Off */
+    TWAR_R = 0b00000010; // my address = 0x01 :)
  7cc:	82 b9       	out	0x02, r24	; 2
+	
+    TWCR_R = (1<<TWEN_B); /* enable TWI */
  7ce:	84 e0       	ldi	r24, 0x04	; 4
  7d0:	86 bf       	out	0x36, r24	; 54
  7d2:	08 95       	ret
 
 000007d4 <TWI_start>:
+    /* 
+	 * Clear the TWINT flag before sending the start bit TWINT=1
+	 * send the start bit by TWSTA=1
+	 * Enable TWI Module TWEN=1 
+	 */
+    TWCR_R = (1 << TWINT_B) | (1 << TWSTA_B) | (1 << TWEN_B);
  7d4:	84 ea       	ldi	r24, 0xA4	; 164
  7d6:	86 bf       	out	0x36, r24	; 54
+    
+    /* Wait for TWINT flag set in TWCR Register (start bit is send successfully) */
+    while(!GET_BIT(TWCR_R, TWINT_B));
  7d8:	06 b6       	in	r0, 0x36	; 54
  7da:	07 fe       	sbrs	r0, 7
  7dc:	fd cf       	rjmp	.-6      	; 0x7d8 <TWI_start+0x4>
+}
  7de:	08 95       	ret
 
 000007e0 <TWI_stop>:
+    /* 
+	 * Clear the TWINT flag before sending the stop bit TWINT=1
+	 * send the stop bit by TWSTO=1
+	 * Enable TWI Module TWEN=1 
+	 */
+    TWCR_R = (1 << TWINT_B) | (1 << TWSTO_B) | (1 << TWEN_B);
  7e0:	84 e9       	ldi	r24, 0x94	; 148
  7e2:	86 bf       	out	0x36, r24	; 54
  7e4:	08 95       	ret
 
 000007e6 <TWI_write>:
+}
+
+void TWI_write(uint8_t u8Data)
+{
+    /* Put data On TWI data Register */
+    TWDR_R = u8Data;
  7e6:	83 b9       	out	0x03, r24	; 3
+    /* 
+	 * Clear the TWINT flag before sending the data TWINT=1
+	 * Enable TWI Module TWEN=1 
+	 */ 
+    TWCR_R = (1 << TWINT_B) | (1 << TWEN_B);
  7e8:	84 e8       	ldi	r24, 0x84	; 132
  7ea:	86 bf       	out	0x36, r24	; 54
+    /* Wait for TWINT flag set in TWCR Register(data is send successfully) */
+    while(!GET_BIT(TWCR_R, TWINT_B));
  7ec:	06 b6       	in	r0, 0x36	; 54
  7ee:	07 fe       	sbrs	r0, 7
  7f0:	fd cf       	rjmp	.-6      	; 0x7ec <TWI_write+0x6>
+}
  7f2:	08 95       	ret
 
 000007f4 <TWI_readWithACK>:
+	/* 
+	 * Clear the TWINT flag before reading the data TWINT=1
+	 * Enable sending ACK after reading or receiving data TWEA=1
+	 * Enable TWI Module TWEN=1 
+	 */ 
+    TWCR_R = (1 << TWINT_B) | (1 << TWEN_B) | (1 << TWEA_B);
  7f4:	24 ec       	ldi	r18, 0xC4	; 196
  7f6:	26 bf       	out	0x36, r18	; 54
+    /* Wait for TWINT flag set in TWCR Register (data received successfully) */
+    while(!GET_BIT(TWCR_R, TWINT_B));
  7f8:	06 b6       	in	r0, 0x36	; 54
  7fa:	07 fe       	sbrs	r0, 7
  7fc:	fd cf       	rjmp	.-6      	; 0x7f8 <TWI_readWithACK+0x4>
+    /* Read Data */
+    *pu8Data = TWDR_R;
  7fe:	23 b1       	in	r18, 0x03	; 3
  800:	fc 01       	movw	r30, r24
  802:	20 83       	st	Z, r18
  804:	08 95       	ret
 
 00000806 <SPI_initMaster>:
+* Description     : A function to initialize SPT
+************************************************************************************************/
+void SPI_init(void)
+{
+#if(SPI_CFG == MASTER)
+	SPI_initMaster();
  806:	0e 94 08 02 	call	0x410	; 0x410 <DIO_Init>
  80a:	80 e5       	ldi	r24, 0x50	; 80
  80c:	8d b9       	out	0x0d, r24	; 13
@@ -1434,20 +1523,41 @@ int main(void)
  818:	08 95       	ret
 
 0000081a <SPI_sendData>:
+* Description     : A function to send Byte via SPI
+************************************************************************************************/
+void SPI_sendData(const uint8_t u8Data)
+{
+
+	SPDR_R = u8Data;	/*send data*/
  81a:	8f b9       	out	0x0f, r24	; 15
+	while(!GET_BIT(SPSR_R, SPIF_B));	/*wait until transfer is complete (SPIF=1)*/
  81c:	77 9b       	sbis	0x0e, 7	; 14
  81e:	fe cf       	rjmp	.-4      	; 0x81c <SPI_sendData+0x2>
+}
  820:	08 95       	ret
 
 00000822 <SPI_receiveData>:
+* Description     : A function to receive Byte via SPI
+************************************************************************************************/
+void SPI_receiveData(uint8_t* pu8Data)
+{
+
+	while(!GET_BIT(SPSR_R,SPIF_B));	/*wait until receive is complete (SPIF=1)*/
  822:	77 9b       	sbis	0x0e, 7	; 14
  824:	fe cf       	rjmp	.-4      	; 0x822 <SPI_receiveData>
+	*pu8Data = SPDR_R;	/*return the received data*/
  826:	2f b1       	in	r18, 0x0f	; 15
  828:	fc 01       	movw	r30, r24
  82a:	20 83       	st	Z, r18
  82c:	08 95       	ret
 
 0000082e <UART_Init>:
+enuErrorStatus_t UART_RX_Disable_Interrupt(void)
+{
+	//clear appropriate bit to disable interrupt
+	CLEAR_BIT(UCSRB_R,RXCIE_B);
+	return E_OK;
+}
  82e:	10 bc       	out	0x20, r1	; 32
  830:	83 e3       	ldi	r24, 0x33	; 51
  832:	89 b9       	out	0x09, r24	; 9
@@ -1525,16 +1635,41 @@ int main(void)
  8c0:	08 95       	ret
 
 000008c2 <UART_RX_SetCallBack>:
+* Description: A function to enable setup callback funtion for RX complete interrupt
+************************************************************************************/
+enuErrorStatus_t UART_RX_SetCallBack(void(*local_fptr)(void))
+{
+	//check if the sent pointer points to a valid position
+	if (local_fptr== NULLPTR)     return E_ERROR;
  8c2:	00 97       	sbiw	r24, 0x00	; 0
  8c4:	31 f0       	breq	.+12     	; 0x8d2 <UART_RX_SetCallBack+0x10>
+	//if so, store the pointer address in the global pointer to function
+	RXC_Callback=local_fptr;
  8c6:	90 93 70 00 	sts	0x0070, r25	; 0x800070 <RXC_Callback+0x1>
  8ca:	80 93 6f 00 	sts	0x006F, r24	; 0x80006f <RXC_Callback>
+	return E_OK;
  8ce:	81 e0       	ldi	r24, 0x01	; 1
  8d0:	08 95       	ret
+* Description: A function to enable setup callback funtion for RX complete interrupt
+************************************************************************************/
+enuErrorStatus_t UART_RX_SetCallBack(void(*local_fptr)(void))
+{
+	//check if the sent pointer points to a valid position
+	if (local_fptr== NULLPTR)     return E_ERROR;
  8d2:	80 e0       	ldi	r24, 0x00	; 0
+	//if so, store the pointer address in the global pointer to function
+	RXC_Callback=local_fptr;
+	return E_OK;
+}
  8d4:	08 95       	ret
 
 000008d6 <__vector_13>:
+
+
+/* ISRs----------------------------------------------------------*/
+
+ISR(UART_RX_vect)
+{
  8d6:	1f 92       	push	r1
  8d8:	0f 92       	push	r0
  8da:	0f b6       	in	r0, 0x3f	; 63
@@ -1552,11 +1687,18 @@ int main(void)
  8f2:	bf 93       	push	r27
  8f4:	ef 93       	push	r30
  8f6:	ff 93       	push	r31
+	//if the global pointer to function points to a valid position
+	if (RXC_Callback!=NULLPTR)
  8f8:	e0 91 6f 00 	lds	r30, 0x006F	; 0x80006f <RXC_Callback>
  8fc:	f0 91 70 00 	lds	r31, 0x0070	; 0x800070 <RXC_Callback+0x1>
  900:	30 97       	sbiw	r30, 0x00	; 0
  902:	09 f0       	breq	.+2      	; 0x906 <__vector_13+0x30>
+	{
+		//call the function
+		RXC_Callback();
  904:	09 95       	icall
+	}
+}
  906:	ff 91       	pop	r31
  908:	ef 91       	pop	r30
  90a:	bf 91       	pop	r27
@@ -1576,6 +1718,8 @@ int main(void)
  926:	18 95       	reti
 
 00000928 <__vector_15>:
+ISR(UART_TX_vect)
+{
  928:	1f 92       	push	r1
  92a:	0f 92       	push	r0
  92c:	0f b6       	in	r0, 0x3f	; 63
@@ -1593,11 +1737,18 @@ int main(void)
  944:	bf 93       	push	r27
  946:	ef 93       	push	r30
  948:	ff 93       	push	r31
+	//if the global pointer to function points to a valid position
+	if (TXC_Callback!=NULLPTR)
  94a:	e0 91 6d 00 	lds	r30, 0x006D	; 0x80006d <TXC_Callback>
  94e:	f0 91 6e 00 	lds	r31, 0x006E	; 0x80006e <TXC_Callback+0x1>
  952:	30 97       	sbiw	r30, 0x00	; 0
  954:	09 f0       	breq	.+2      	; 0x958 <__vector_15+0x30>
+	{
+		//call the function
+		TXC_Callback();
  956:	09 95       	icall
+	}
+}
  958:	ff 91       	pop	r31
  95a:	ef 91       	pop	r30
  95c:	bf 91       	pop	r27
